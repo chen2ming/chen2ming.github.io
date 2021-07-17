@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | Hexo</title>
+  <title>闭包 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/index.html">
+  <meta name="description" content="闭包是基于词法作用域书写代码时所产生的自然结果  闭包的产生：函数在被定义的地方之外被执行就会产生闭包！！！ 12345678910function foo() &amp;#123;    var a &#x3D; 2;    function bar()&amp;#123;        console.log(a);    &amp;#125;    return bar;&amp;#125;var bza &#x3D; foo();baz(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包">
+<meta property="og:url" content="http://example.com/2021/07/17/%E9%97%AD%E5%8C%85/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="闭包是基于词法作用域书写代码时所产生的自然结果  闭包的产生：函数在被定义的地方之外被执行就会产生闭包！！！ 12345678910function foo() &amp;#123;    var a &#x3D; 2;    function bar()&amp;#123;        console.log(a);    &amp;#125;    return bar;&amp;#125;var bza &#x3D; foo();baz(">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-17T05:21:01.464Z">
+<meta property="article:modified_time" content="2021-07-17T05:28:49.189Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -144,74 +149,111 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-闭包" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/this%E8%AF%8D%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-07-17T05:22:11.626Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/this%E8%AF%8D%E6%B3%95/">this词法</a>
+    <h1 class="article-title" itemprop="name">
+      闭包
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/%E9%97%AD%E5%8C%85/" class="archive-article-date">
+        
+        <a href="/2021/07/17/%E9%97%AD%E5%8C%85/" class="archive-article-date">
   	<time datetime="2021-07-17T05:21:01.464Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/%E9%97%AD%E5%8C%85/">闭包</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>闭包是基于词法作用域书写代码时所产生的自然结果</p>
+</blockquote>
+<p>闭包的产生：<br>函数在被定义的地方之外被执行就会产生闭包！！！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">    var a = 2;</span><br><span class="line">    function bar()&#123;</span><br><span class="line">        console.log(a);</span><br><span class="line">    &#125;</span><br><span class="line">    return bar;</span><br><span class="line">&#125;</span><br><span class="line">var bza = foo();</span><br><span class="line"></span><br><span class="line">baz(); // 2  这就是闭包！</span><br></pre></td></tr></table></figure>
+<p>通常情况下foo执行之后整个内部作用域都会被销毁，因为引擎会销毁不再使用的空间来释放内存空间。</p>
+<p>然而闭包会阻止这一情况的发生，会让作用域依然存在，因为bar函数还在使用foo这个作用域，需要给bar在任何时候执行提供支持。所以foo的作用域不会被销毁，bar依然持有对该作用域的引用，这个引用就是闭包！</p>
+<p>==无论通过何种手段将内部函数传递到所在的词法作用域以外，他都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包。==</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function wait(message)&#123;</span><br><span class="line">    setTimeout( function timer() &#123;</span><br><span class="line">        console.log(message);</span><br><span class="line">    &#125;,1000)</span><br><span class="line">&#125;</span><br><span class="line">wait(&#x27;hello&#x27;)</span><br></pre></td></tr></table></figure>
+<p>wait执行1000毫秒以后，他的内部作用域并不会消失，还能保持message的引用。</p>
+<p>==只要是使用了回调函数，实际上就是在使用闭包。==</p>
+<h3 id="闭包和循环"><a href="#闭包和循环" class="headerlink" title="闭包和循环"></a>闭包和循环</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for(var i = 1;i &lt;= 5; i++;)&#123;</span><br><span class="line">    setTimeout(function timer() &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;,1*1000)</span><br><span class="line">&#125;</span><br><span class="line">// 每秒一次输出五个6</span><br></pre></td></tr></table></figure>
+<p>这个循环终止的条件是6.条件首次成立的时候i === 6<br>，因此输出的显示是循环结束时i的值。<br>因为这里所用的i，是同一个作用域下的i，所有的函数共享一个i。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(var i = 1;i &lt;= 5; i++;)&#123;</span><br><span class="line">    (function() &#123;</span><br><span class="line">        setTimeout(function timer() &#123;</span><br><span class="line">            console.log(i);</span><br><span class="line">        &#125;,1*1000)</span><br><span class="line">    &#125;();</span><br><span class="line">&#125;</span><br><span class="line">//这样也不行</span><br></pre></td></tr></table></figure>
+<p>因为我们的IIFE的作用域是空的，我们使用的依然是外层的i，他要包含一点实质的内容才能够我们使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(var i = 1;i &lt;= 5; i++;)&#123;</span><br><span class="line">    (function(j) &#123;</span><br><span class="line">        setTimeout(function timer() &#123;</span><br><span class="line">            console.log(j);</span><br><span class="line">        &#125;,j*1000)</span><br><span class="line">    &#125;(i);</span><br><span class="line">&#125;</span><br><span class="line">// 这样就达到我们预期的目的，每秒一个，一次输出1-5</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<h3 id="重返块作用域"><a href="#重返块作用域" class="headerlink" title="重返块作用域"></a>重返块作用域</h3><p>前面说let可以劫持块级作用域，，并且在这个块级作用域中声明一个变量。看下面代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for(var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">    let j = i;</span><br><span class="line">    setTimeout(function timer() &#123;</span><br><span class="line">        console.log(j);</span><br><span class="line">    &#125;,j*1000)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>还可以更完善</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">    setTimeout(function timer() &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;,i*1000)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">    var a = &#x27;cool&#x27;;</span><br><span class="line">    var b = [1,2,3];</span><br><span class="line">    function bar() &#123;</span><br><span class="line">        console.log(a);</span><br><span class="line">    &#125;</span><br><span class="line">    function baz() &#123;</span><br><span class="line">        console.log(b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里并没有明显的闭包，只有两个私有数据变量a和b，以及bar和baz两个内部函数，他们的词法作用域就是闭包，<br>也就是foo（）的内部作用域。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function CoolModule() &#123;</span><br><span class="line">    var something = &#x27;cool&#x27;;</span><br><span class="line">    var another = [1,2,3];</span><br><span class="line">    function doSomething() &#123;</span><br><span class="line">        console.log(something));</span><br><span class="line">    &#125;</span><br><span class="line">    function doAnother() &#123;</span><br><span class="line">        console.log(another.join(&quot;!&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;</span><br><span class="line">        doSomething: doSomething,</span><br><span class="line">        doAnother: doAnother,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">var foo = CoolModule;</span><br><span class="line">foo.doSomething(); // cool</span><br><span class="line">foo.doAnother(); // 1!2!3</span><br></pre></td></tr></table></figure>
+<p>首先，CoolModule() 只是一个函数，必须通过调用它来创建一个模块实例，如果不执行外部函数，内部作用域和闭包都无法被创建。</p>
+<p>其次，CoolModule() 返回一个用对象字面量语法来表示的对象，这个返回的对象中含有内部函数，而不是内部数据变量的引用。我们保持内部数据变量是隐藏且私有状态。</p>
+<p>这个对象类型的返回值最终被赋值给外部变量foo，然后我们就可以通过它来访问API中的属性方法。 </p>
+<blockquote>
+<p>模块模式必须具有两个条件</p>
+</blockquote>
+<ol>
+<li>必须有外部的封闭函数，该函数必须至少被调用一次。（每次调用都会创建一个新的模块实例）</li>
+<li>封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态。</li>
+</ol>
+<p>一个具有函数属性的对象本身并不是真正的模块。从方便观察角度来看，一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。</p>
+<p>改进上面的代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var foo = (function CoolModule() &#123;</span><br><span class="line">    var something = &#x27;cool&#x27;;</span><br><span class="line">    var another = [1,2,3];</span><br><span class="line">    function doSomething() &#123;</span><br><span class="line">        console.log(something));</span><br><span class="line">    &#125;</span><br><span class="line">    function doAnother() &#123;</span><br><span class="line">        console.log(another.join(&quot;!&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;</span><br><span class="line">        doSomething: doSomething,</span><br><span class="line">        doAnother: doAnother,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">foo.doSomething(); // cool</span><br><span class="line">foo.doAnother(); // 1!2!3</span><br></pre></td></tr></table></figure>
+
+<p>模块是普通函数，因此也可以传参。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function CoolModule(id) &#123;</span><br><span class="line">    function doSomething() &#123;</span><br><span class="line">        console.log(id);</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;</span><br><span class="line">        doSomething: doSomething,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">var foo = CoolModule(&#x27;foo&#x27;);</span><br><span class="line">foo.doSomething(); // foo</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>模块另一个简单但又强大的用法是命名将要作为公共API返回的对象。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var foo = (function Cool(id)&#123;</span><br><span class="line">    function change() &#123;</span><br><span class="line">        publicAPI.identify = identify2;</span><br><span class="line">    &#125;;</span><br><span class="line">    function identify1() &#123;</span><br><span class="line">        console.log(id);</span><br><span class="line">    &#125;;</span><br><span class="line">    function identify2() &#123;</span><br><span class="line">        console.log(id.toUppeCase());</span><br><span class="line">    &#125;;</span><br><span class="line">    var publicAPI = &#123;</span><br><span class="line">        change: change,</span><br><span class="line">        identify: identify1</span><br><span class="line">    &#125;</span><br><span class="line">    return publicAPI;</span><br><span class="line">&#125;)(&#x27;foo module&#x27;);</span><br><span class="line"></span><br><span class="line">foo.identify(); // foo module</span><br><span class="line">foo.change();</span><br><span class="line">foo.identify(); // FOO MODULE</span><br></pre></td></tr></table></figure>
+<p>通过模块在实例的内部保留的公共API对象的内部引用，可以从内部对模块实例进行修改，包括添加或删除方法，以及修改他们的值。</p>
+<h2 id="现代的模块机制"><a href="#现代的模块机制" class="headerlink" title="现代的模块机制"></a>现代的模块机制</h2><p>创建一个模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var MyModules = (function Manager()&#123;</span><br><span class="line">    // 存储方法</span><br><span class="line">    var modules = &#123;&#125;;</span><br><span class="line">    </span><br><span class="line">    // 添加方法</span><br><span class="line">    function define(name,deps,impl)&#123;</span><br><span class="line">        for(var i = 0;i &lt; deps.length; i++) &#123;</span><br><span class="line">            deps[i] = modules[deps[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        modules[name] = impl.apply(impl,deps);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 根据名字获取方法</span><br><span class="line">    function get(name) &#123;</span><br><span class="line">        return modules[name];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 返回内部函数（方法）</span><br><span class="line">    return &#123;</span><br><span class="line">        define: define,</span><br><span class="line">        get: get</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>Function.apply(obj,args)方法能接收两个参数</p>
+<p>obj：这个对象将代替Function类里this对象</p>
+<p>args：这个是数组，它将作为参数传给Function(args–&gt;arguments)</p>
+<p>使用它来定义模块：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">MyModules.define(&quot;bar&quot;,[], function() &#123;</span><br><span class="line">    function hello(who) &#123;</span><br><span class="line">        return &quot;let me introduce:&quot; + who;</span><br><span class="line">    &#125;</span><br><span class="line">    retrun &#123;</span><br><span class="line">        hello : hello</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">MyModules.define(&quot;foo&quot;,[&#x27;bar&#x27;], function(bar) &#123;</span><br><span class="line">    var hungry = &#x27;hippo&#x27;;</span><br><span class="line">    function awesome(who) &#123;</span><br><span class="line">        console.log(bar.hello(hungry).toUpperCase());</span><br><span class="line">    &#125;</span><br><span class="line">    retrun &#123;</span><br><span class="line">        awesome : awesome</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var bar = MyModules.get(&#x27;bar&#x27;);</span><br><span class="line">var foo = MyModules.get(&#x27;foo&#x27;);</span><br><span class="line"></span><br><span class="line">console.log(bar.hello(&#x27;hippo&#x27;));// let me introduce: hippo</span><br><span class="line"></span><br><span class="line">foo.awesome(); // 大写的</span><br></pre></td></tr></table></figure>
+
+<p>foo 和 bar 都是通过一个返回的公共的API的函数来定义的。foo 甚至接受 bar 的实例作为依赖参数，并且相应地使用它。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,95 +265,115 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/07/17/%E9%97%AD%E5%8C%85/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/" class="archive-article-date">
-  	<time datetime="2021-07-17T04:10:37.960Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/07/17/this%E8%AF%8D%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          this词法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">函数中的作用域</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/">函数中的作用域</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="archive-article-date">
-  	<time datetime="2021-07-17T04:08:53.931Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域是什么-词法作用域</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -334,8 +396,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | Hexo</title>
+  <title>函数中的作用域 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/index.html">
+  <meta name="description" content="函数中的作用域js有基于函数的作用域，每声明一个函数都会为其自身创建一个气泡，可以在附属气泡里获取外层的变量，但是不能从外层气泡中获取附属气泡种的变量 隐藏内部实现 暴露在外面的写法，很不安全  12345678910function foo(a) &amp;#123;    b &#x3D; a + fff(a * 2);    console.log(b * 3);&amp;#125;function fff(a) &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数中的作用域">
+<meta property="og:url" content="http://example.com/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="函数中的作用域js有基于函数的作用域，每声明一个函数都会为其自身创建一个气泡，可以在附属气泡里获取外层的变量，但是不能从外层气泡中获取附属气泡种的变量 隐藏内部实现 暴露在外面的写法，很不安全  12345678910function foo(a) &amp;#123;    b &#x3D; a + fff(a * 2);    console.log(b * 3);&amp;#125;function fff(a) &amp;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-17T04:10:37.960Z">
+<meta property="article:modified_time" content="2021-07-17T05:03:26.646Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -144,112 +149,142 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-函数作用域、作用域快" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/this%E8%AF%8D%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-07-17T05:22:11.626Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/this%E8%AF%8D%E6%B3%95/">this词法</a>
+    <h1 class="article-title" itemprop="name">
+      函数中的作用域
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/%E9%97%AD%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2021-07-17T05:21:01.464Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/%E9%97%AD%E5%8C%85/">闭包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/" class="archive-article-date">
+        
+        <a href="/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/" class="archive-article-date">
   	<time datetime="2021-07-17T04:10:37.960Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/">函数中的作用域</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="函数中的作用域"><a href="#函数中的作用域" class="headerlink" title="函数中的作用域"></a>函数中的作用域</h2><p>js有基于函数的作用域，每声明一个函数都会为其自身创建一个气泡，可以在附属气泡里获取外层的变量，但是不能从外层气泡中获取附属气泡种的变量</p>
+<h2 id="隐藏内部实现"><a href="#隐藏内部实现" class="headerlink" title="隐藏内部实现"></a>隐藏内部实现</h2><blockquote>
+<p>暴露在外面的写法，很不安全</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function foo(a) &#123;</span><br><span class="line">    b = a + fff(a * 2);</span><br><span class="line">    console.log(b * 3);</span><br><span class="line">&#125;</span><br><span class="line">function fff(a) &#123;</span><br><span class="line">    return a - 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var b;</span><br><span class="line">foo(2) // 15</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<blockquote>
+<p>隐藏的写法</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function foo(a) &#123;</span><br><span class="line">    function fff(a) &#123;</span><br><span class="line">        return a - 1;</span><br><span class="line">    &#125;</span><br><span class="line">    var b;</span><br><span class="line">    b = a + fff(a * 2);</span><br><span class="line">    console.log(b * 3);</span><br><span class="line">&#125;</span><br><span class="line">foo(2) // 15</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>规避冲突，<br>可以避免同名标识符之间的冲突，避免被覆盖</p>
+</blockquote>
+<p>方法：</p>
+<ol>
+<li>全局命名空间，在全局声明一个独特的变量，通常是一个对象，所有需要暴露给外界的功能都会成为这个对象的属性，而不是将自己的标识符暴露在顶级的词法作用域种。</li>
+<li>模块管理，从众多模块中挑选一个来使用，任何库都无需将标识符加入到全局作用域中。</li>
+</ol>
+<h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><p>在任意代码片段外部添加包装函数都可以将内部的变量和函数定义‘隐藏’起来，外部作用域无法访问包装函数内部的任何内容</p>
+<p>通过定义一个函数来达到是变量在函数作用域之内，虽然可以解决问题，但是并不理想，因为这个函数名称本身污染了所在的作用域，其次是必须通过显式的调用这个函数才能运行其中的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function foo()&#123;</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">&#125;)();</span><br><span class="line">console.log( a ); // 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这样函数会被当作函数表达式而不是一个标准的函数声明来处理。– 如果function是声明中的第一个第一个词，那么就是函数声明，否则就是函数表达式。</p>
+<p>函数表达式和函数声明最大的区别是它们的名称标识符将会绑定在何处。  foo只能在所代表的位置中被访问，外部不行。</p>
+<h2 id="匿名和具名"><a href="#匿名和具名" class="headerlink" title="匿名和具名"></a>匿名和具名</h2><blockquote>
+<p>匿名函数表达式</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout( function()&#123;</span><br><span class="line">    console.log(&#x27;aaa&#x27;);</span><br><span class="line">&#125;,1000);</span><br></pre></td></tr></table></figure>
+<p>fun没有标识符，函数声明则是不可以省略函数名称</p>
+<ol>
+<li>匿名函数在栈追踪中不会显示出有意义的函数名称，使得调用很困难。</li>
+<li>如果没有函数名，需要引用的时候就只能使用已经过期的arguments.callee引用，比如在递归中</li>
+<li>匿名函数省略了对于代码的可读性/可理解性很重要的函数名</li>
+</ol>
+<p>行内函数表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout( function timeoutHandler()&#123;</span><br><span class="line">    console.log(&#x27;aaa&#x27;);</span><br><span class="line">&#125;,1000);</span><br></pre></td></tr></table></figure>
+
+<h2 id="立即执行函数表达式"><a href="#立即执行函数表达式" class="headerlink" title="立即执行函数表达式"></a>立即执行函数表达式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function foo()&#123;</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">&#125;)();</span><br><span class="line">console.log( a ); // 2</span><br></pre></td></tr></table></figure>
+<p>第一个（）将函数变成了表达式，第二个（）执行了这个函数</p>
+<blockquote>
+<p>IIFE代表立即执行函数表达式</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function IIFE()&#123; //传统的形式</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">&#125;)();</span><br><span class="line">console.log( a ); // 2</span><br></pre></td></tr></table></figure>
+<p>==以上两种写法功能上是一样的==</p>
+<p>用途：</p>
+<p>可以传参数进去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function IIFE(global)&#123; //传统的形式</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">    console.log( global.a ); // 3</span><br><span class="line">&#125;)(window);</span><br><span class="line">console.log( a ); // 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h2><p>除了函数能产生一个作用域气泡，for循环，if，with,try/catch等都会产生一个作用域气泡。</p>
+<p>块作用域指的是变量和函数不仅可以属于所处的作用域，也可以属于某个代码块，通常指{..}的内部</p>
+<blockquote>
+<p>var</p>
+</blockquote>
+<p>其实val一个变量无论在什么地方，都会提升到全局变量，把它写在作用域内部，只是为了风格更易读而伪装出的形式上的块作用域，如果使用这种，要确保在其他地方没有重复的使用同名的变量。</p>
+<blockquote>
+<p>let</p>
+</blockquote>
+<p>ES6引入了关键字let，可以将变量绑定到所在的任意作用域中，为其声明的变量隐式的劫持了所在的块作用域。</p>
+<p>let进行声明的不会在代码在块作用域中进行提升，声明的代码在运行前，声明并不‘存在’。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    console.log(a); // ReferenceError(没有找到)</span><br><span class="line">    let a = 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>let 声明附属于一个新的作用域而不是当前函数作用域（也不属于全局作用域）</p>
+<blockquote>
+<p>const</p>
+</blockquote>
+<p>同样可以用来创建块作用域变量，但其值是固定的，之后的任何试图修改值的操作都会引起错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var foo = true;</span><br><span class="line">if(foo)&#123;</span><br><span class="line">    var a = 2;</span><br><span class="line">    const b = 3;</span><br><span class="line">    a = 4; // 正确</span><br><span class="line">    b = 6; // 错误</span><br><span class="line">&#125;</span><br><span class="line">console.log(a) // 4</span><br><span class="line">console.log(b) // ReferenceError</span><br></pre></td></tr></table></figure>
+<p>任何声明在某个作用域内部的变量，都将附属于这个作用域</p>
+<h2 id="小思考"><a href="#小思考" class="headerlink" title="小思考"></a>小思考</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 2;</span><br><span class="line">val a;</span><br><span class="line">console.log(a);//2</span><br></pre></td></tr></table></figure>
+<p>输出2的原因是：声明会提升，也就是先声明再赋值，在执行查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.log(a); // undefind</span><br><span class="line">var a = 2;</span><br><span class="line"></span><br><span class="line">// 执行顺序</span><br><span class="line"></span><br><span class="line">val a;</span><br><span class="line">console.log(a); // undefind</span><br><span class="line">a = 2;</span><br></pre></td></tr></table></figure>
+<p>原因：函数声明会提升，然后执行查询，此时是没有赋值的，所以是undefind</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo(); // 不是ReferenceError，而是TypeEerror</span><br><span class="line"></span><br><span class="line">var foo = funcyion bar() &#123;</span><br><span class="line">    //...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>原因：函数表达式不会被提升</p>
+<blockquote>
+<p>函数优先</p>
+</blockquote>
+<p>函数声明和变量声明都会被提升，但是一个值得注意的细节是函数会被首先提升，然后才是变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo(); //1</span><br><span class="line">var foo;</span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;</span><br><span class="line">foo = function() &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出的是1而不是2是因为函数声明先被提升到上面，然后在执行。var foo 尽管出现在function foo… 之前，但是他是重复声明会被忽略。</p>
+<blockquote>
+<p>后面的声明会覆盖掉前面的声明</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">foo(); //3</span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;</span><br><span class="line">var foo = function() &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;</span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -261,57 +296,128 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/17/%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="archive-article-date">
-  	<time datetime="2021-07-17T04:08:53.931Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/07/17/%E9%97%AD%E5%8C%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          闭包
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/17/%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">作用域是什么-词法作用域</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/17/%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/">作用域是什么-词法作用域</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">函数中的作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">隐藏内部实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.</span> <span class="toc-text">函数作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%92%8C%E5%85%B7%E5%90%8D"><span class="toc-number">4.</span> <span class="toc-text">匿名和具名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">立即执行函数表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.</span> <span class="toc-text">块作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%80%9D%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">小思考</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -334,8 +440,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
