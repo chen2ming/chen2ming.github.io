@@ -14,11 +14,11 @@
 <meta property="og:url" content="http://example.com/2021/07/17/%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%BF%AB/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="函数中的作用域js有基于函数的作用域，每声明一个函数都会为其自身创建一个气泡，可以在附属气泡里获取外层的变量，但是不能从外层气泡中获取附属气泡种的变量 隐藏内部实现 暴露在外面的写法，很不安全  12345678910function foo(a) &amp;#123;    b &#x3D; a + fff(a * 2);    console.log(b * 3);&amp;#125;function fff(a) &amp;">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-17T04:10:37.960Z">
-<meta property="article:modified_time" content="2021-07-17T05:03:26.646Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="js">
+<meta property="article:modified_time" content="2021-07-17T05:51:59.116Z">
+<meta property="article:author" content="陈铭">
+<meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -48,10 +48,10 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/source/img/toux.jpg" class="js-avatar">
+			<img src="/img/toux.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/"></a></h1>
+		  <h1 class="header-author"><a href="/">陈铭</a></h1>
 		</hgroup>
 		
 
@@ -104,10 +104,10 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/source/img/toux.jpg" class="js-avatar">
+				<img src="/img/toux.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author"></h1>
+			  <h1 class="header-author js-header-author">陈铭</h1>
 			</hgroup>
 			
 			
@@ -173,12 +173,12 @@
 <h2 id="隐藏内部实现"><a href="#隐藏内部实现" class="headerlink" title="隐藏内部实现"></a>隐藏内部实现</h2><blockquote>
 <p>暴露在外面的写法，很不安全</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function foo(a) &#123;</span><br><span class="line">    b = a + fff(a * 2);</span><br><span class="line">    console.log(b * 3);</span><br><span class="line">&#125;</span><br><span class="line">function fff(a) &#123;</span><br><span class="line">    return a - 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var b;</span><br><span class="line">foo(2) // 15</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    b = a + fff(a * <span class="number">2</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(b * <span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fff</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b;</span><br><span class="line">foo(<span class="number">2</span>) <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>隐藏的写法</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function foo(a) &#123;</span><br><span class="line">    function fff(a) &#123;</span><br><span class="line">        return a - 1;</span><br><span class="line">    &#125;</span><br><span class="line">    var b;</span><br><span class="line">    b = a + fff(a * 2);</span><br><span class="line">    console.log(b * 3);</span><br><span class="line">&#125;</span><br><span class="line">foo(2) // 15</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fff</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> b;</span><br><span class="line">    b = a + fff(a * <span class="number">2</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(b * <span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">2</span>) <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>规避冲突，<br>可以避免同名标识符之间的冲突，避免被覆盖</p>
@@ -190,13 +190,13 @@
 </ol>
 <h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><p>在任意代码片段外部添加包装函数都可以将内部的变量和函数定义‘隐藏’起来，外部作用域无法访问包装函数内部的任何内容</p>
 <p>通过定义一个函数来达到是变量在函数作用域之内，虽然可以解决问题，但是并不理想，因为这个函数名称本身污染了所在的作用域，其次是必须通过显式的调用这个函数才能运行其中的代码。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function foo()&#123;</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">&#125;)();</span><br><span class="line">console.log( a ); // 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// 3</span></span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>这样函数会被当作函数表达式而不是一个标准的函数声明来处理。– 如果function是声明中的第一个第一个词，那么就是函数声明，否则就是函数表达式。</p>
 <p>函数表达式和函数声明最大的区别是它们的名称标识符将会绑定在何处。  foo只能在所代表的位置中被访问，外部不行。</p>
 <h2 id="匿名和具名"><a href="#匿名和具名" class="headerlink" title="匿名和具名"></a>匿名和具名</h2><blockquote>
 <p>匿名函数表达式</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout( function()&#123;</span><br><span class="line">    console.log(&#x27;aaa&#x27;);</span><br><span class="line">&#125;,1000);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;aaa&#x27;</span>);</span><br><span class="line">&#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 <p>fun没有标识符，函数声明则是不可以省略函数名称</p>
 <ol>
 <li>匿名函数在栈追踪中不会显示出有意义的函数名称，使得调用很困难。</li>
@@ -204,18 +204,18 @@
 <li>匿名函数省略了对于代码的可读性/可理解性很重要的函数名</li>
 </ol>
 <p>行内函数表达式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout( function timeoutHandler()&#123;</span><br><span class="line">    console.log(&#x27;aaa&#x27;);</span><br><span class="line">&#125;,1000);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span> <span class="title">timeoutHandler</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;aaa&#x27;</span>);</span><br><span class="line">&#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 
-<h2 id="立即执行函数表达式"><a href="#立即执行函数表达式" class="headerlink" title="立即执行函数表达式"></a>立即执行函数表达式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function foo()&#123;</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">&#125;)();</span><br><span class="line">console.log( a ); // 2</span><br></pre></td></tr></table></figure>
+<h2 id="立即执行函数表达式"><a href="#立即执行函数表达式" class="headerlink" title="立即执行函数表达式"></a>立即执行函数表达式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// 3</span></span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 <p>第一个（）将函数变成了表达式，第二个（）执行了这个函数</p>
 <blockquote>
 <p>IIFE代表立即执行函数表达式</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function IIFE()&#123; //传统的形式</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">&#125;)();</span><br><span class="line">console.log( a ); // 2</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>)</span>&#123; <span class="comment">//传统的形式</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// 3</span></span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 <p>==以上两种写法功能上是一样的==</p>
 <p>用途：</p>
 <p>可以传参数进去</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function IIFE(global)&#123; //传统的形式</span><br><span class="line">    var a = 3;</span><br><span class="line">    console.log( a ); // 3</span><br><span class="line">    console.log( global.a ); // 3</span><br><span class="line">&#125;)(window);</span><br><span class="line">console.log( a ); // 2</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"><span class="built_in">global</span></span>)</span>&#123; <span class="comment">//传统的形式</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// 3</span></span><br><span class="line">    <span class="built_in">console</span>.log( <span class="built_in">global</span>.a ); <span class="comment">// 3</span></span><br><span class="line">&#125;)(<span class="built_in">window</span>);</span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h2><p>除了函数能产生一个作用域气泡，for循环，if，with,try/catch等都会产生一个作用域气泡。</p>
 <p>块作用域指的是变量和函数不仅可以属于所处的作用域，也可以属于某个代码块，通常指{..}的内部</p>
@@ -228,30 +228,30 @@
 </blockquote>
 <p>ES6引入了关键字let，可以将变量绑定到所在的任意作用域中，为其声明的变量隐式的劫持了所在的块作用域。</p>
 <p>let进行声明的不会在代码在块作用域中进行提升，声明的代码在运行前，声明并不‘存在’。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    console.log(a); // ReferenceError(没有找到)</span><br><span class="line">    let a = 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// ReferenceError(没有找到)</span></span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>let 声明附属于一个新的作用域而不是当前函数作用域（也不属于全局作用域）</p>
 <blockquote>
 <p>const</p>
 </blockquote>
 <p>同样可以用来创建块作用域变量，但其值是固定的，之后的任何试图修改值的操作都会引起错误。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var foo = true;</span><br><span class="line">if(foo)&#123;</span><br><span class="line">    var a = 2;</span><br><span class="line">    const b = 3;</span><br><span class="line">    a = 4; // 正确</span><br><span class="line">    b = 6; // 错误</span><br><span class="line">&#125;</span><br><span class="line">console.log(a) // 4</span><br><span class="line">console.log(b) // ReferenceError</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span>(foo)&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">const</span> b = <span class="number">3</span>;</span><br><span class="line">    a = <span class="number">4</span>; <span class="comment">// 正确</span></span><br><span class="line">    b = <span class="number">6</span>; <span class="comment">// 错误</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// ReferenceError</span></span><br></pre></td></tr></table></figure>
 <p>任何声明在某个作用域内部的变量，都将附属于这个作用域</p>
-<h2 id="小思考"><a href="#小思考" class="headerlink" title="小思考"></a>小思考</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 2;</span><br><span class="line">val a;</span><br><span class="line">console.log(a);//2</span><br></pre></td></tr></table></figure>
+<h2 id="小思考"><a href="#小思考" class="headerlink" title="小思考"></a>小思考</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span>;</span><br><span class="line">val a;</span><br><span class="line"><span class="built_in">console</span>.log(a);<span class="comment">//2</span></span><br></pre></td></tr></table></figure>
 <p>输出2的原因是：声明会提升，也就是先声明再赋值，在执行查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.log(a); // undefind</span><br><span class="line">var a = 2;</span><br><span class="line"></span><br><span class="line">// 执行顺序</span><br><span class="line"></span><br><span class="line">val a;</span><br><span class="line">console.log(a); // undefind</span><br><span class="line">a = 2;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// undefind</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行顺序</span></span><br><span class="line"></span><br><span class="line">val a;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// undefind</span></span><br><span class="line">a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
 <p>原因：函数声明会提升，然后执行查询，此时是没有赋值的，所以是undefind</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo(); // 不是ReferenceError，而是TypeEerror</span><br><span class="line"></span><br><span class="line">var foo = funcyion bar() &#123;</span><br><span class="line">    //...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 不是ReferenceError，而是TypeEerror</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = funcyion <span class="function"><span class="title">bar</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>原因：函数表达式不会被提升</p>
 <blockquote>
 <p>函数优先</p>
 </blockquote>
 <p>函数声明和变量声明都会被提升，但是一个值得注意的细节是函数会被首先提升，然后才是变量。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo(); //1</span><br><span class="line">var foo;</span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;</span><br><span class="line">foo = function() &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">//1</span></span><br><span class="line"><span class="keyword">var</span> foo;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出的是1而不是2是因为函数声明先被提升到上面，然后在执行。var foo 尽管出现在function foo… 之前，但是他是重复声明会被忽略。</p>
 <blockquote>
 <p>后面的声明会覆盖掉前面的声明</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">foo(); //3</span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;</span><br><span class="line">var foo = function() &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;</span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">//3</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -290,7 +290,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
         		</li>
       		
 		</ul>
@@ -391,19 +391,6 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">函数中的作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">隐藏内部实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.</span> <span class="toc-text">函数作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%92%8C%E5%85%B7%E5%90%8D"><span class="toc-number">4.</span> <span class="toc-text">匿名和具名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">立即执行函数表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">6.</span> <span class="toc-text">块作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%80%9D%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">小思考</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -427,7 +414,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 John Doe
+    		&copy; 2021 陈铭
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -510,10 +497,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
               </li>
             
@@ -566,27 +549,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+              <a href="https://blogs.chenghuizi.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>江橙博客</a>
             </li>
           
         </ul>
@@ -597,7 +560,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">学习&lt;br&gt;&lt;br&gt;永无止境&lt;br&gt;今天你学习了吗</div>
   	  	
     	</section>
     
