@@ -1,6 +1,7 @@
 ---
 title: markdown 写法备注
 tag: markdown
+type: 文档
 ---
 
 > 标题
