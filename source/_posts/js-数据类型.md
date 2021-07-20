@@ -12,7 +12,7 @@ ECMAScript包括两个不同类型的值：基本数据类型和引用数据类�
 基本数据类型指的是简单的数据段，引用数据类型指的是有多个值构成的对象。
 当我们把变量赋值给一个变量时，解析器首先要确认的就是这个值是基本类型值还是引用类型值。
 
-### 常见的基本数据类型
+## 常见的基本数据类型
 
 Number、String 、Boolean、Null和Undefined。基本数据类型是按值访问的，因为可以直接操作保存在变量中的实际值。示例：
 　　var a = 10;
@@ -23,19 +23,41 @@ Number、String 、Boolean、Null和Undefined。基本数据类型是按值访�
 　　b只是保存了a复制的一个副本。所以，b的改变，对a没有影响。
 
 
-### 引用类型数据
+## 引用类型数据
   也就是对象类型Object type，比如：Object 、Array 、Function 、Data等。
 　　javascript的引用数据类型是保存在堆内存中的对象。
 　　与其他语言的不同是，你不可以直接访问堆内存空间中的位置和操作堆内存空间。只能操作对象在栈内存中的引用地址。
 　　所以，引用类型数据在栈内存中保存的实际上是对象在堆内存中的引用地址。通过这个引用地址可以快速查找到保存中堆内存中的对象。
-　　var obj1 = new Object();
-　　var obj2 = obj1;
-　　obj2.name = "我有名字了";
-　　console.log(obj1.name); // 我有名字了
+```JavaScript
+var obj1 = new Object();
+var obj2 = obj1;
+obj2.name = "我有名字了";
+console.log(obj1.name); // 我有名字了
+```
 　　说明这两个引用数据类型指向了同一个堆内存对象。obj1赋值给onj2，实际上这个堆内存对象在栈内存的引用地址复制了一份给了obj2，
 　　但是实际上他们共同指向了同一个堆内存对象。实际上改变的是堆内存对象。
+## 查看一个值的是数据类型
+>js中变量是没有数据类型的，只有值才有。变量可以持有任何数据类型的值。
 
-> 总结区别
+typeof 用来查看变量的类型会返回一字符串：
+```JavaScript
+typeof 1; // "number"
+typeof '1'; // "string"
+typeof undefined; // "undefined"
+typeof true; // "boolean"
+typeof {a:1}; // "object"
+typeod Symbol(); //'symbo'
+typeof null; // 'object'
+```
+>null 使用typeof 返回的类型是object，所以查看是不是null是需要用复合条件来检测
+```JavaScript
+var a = null
+(!a && typeof a ==="object"); //true
+
+JSON.stringify(a) === 'null'
+```
+
+## 总结区别
 
 ### 声明变量时不同的内存分配：　
 　　1）原始值：存储在栈（stack）中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。

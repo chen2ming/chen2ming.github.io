@@ -61,7 +61,7 @@ highlight:
   hljs: false
 
 prismjs:
-  enable: false
+  enable: true
   preprocess: true
   line_number: true
   tab_replace: ''
@@ -109,7 +109,6 @@ ignore:
 ## Themes: https://hexo.io/themes/
 # git clone https://github.com/jerryc127/hexo-theme-butterfly.git themes/Butterfly
 theme: butterfly
-# theme: yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -117,3 +116,4 @@ deploy:
   type: git
   repo: https://github.com/chen2ming/chen2ming.github.io.git
   branch: master
+
