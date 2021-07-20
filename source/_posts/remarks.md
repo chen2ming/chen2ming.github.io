@@ -2,6 +2,8 @@
 title: markdown 写法备注
 tag: markdown
 type: 文档
+top_img: /imgs/diaoyu5.jpeg
+cover: /imgs/diaoyu5.jpeg
 ---
 
 > 标题

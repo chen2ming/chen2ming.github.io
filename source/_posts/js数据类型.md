@@ -2,6 +2,8 @@
 title: js数据类型
 tag: javaScript
 type: javaScript
+top_img: /imgs/diaoyu4.jpeg
+cover: /imgs/diaoyu4.jpeg
 ---
 
 > 基本数据类型、引用数据类型
