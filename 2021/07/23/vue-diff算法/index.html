@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>diff算法 | chenMing</title><meta name="keywords" content="vue2.0"><meta name="author" content="chenMing"><meta name="copyright" content="chenMing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="创建节点 删除节点 更新节点  patch在Vue中，把 DOM-Diff过程叫做patch过程。patch,意为“补丁”，即指对旧的VNode修补，打补丁从而得到新的VNode，非常形象哈。那不管叫什么，其本质都是把对比新旧两份VNode的过程。我们在下面研究patch过程的时候，一定把握住这样一个思想：所谓旧的VNode(即oldVNode)就是数据变化之前视图所对应的虚拟DOM节点，而新的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="diff算法">
+<meta property="og:url" content="http://example.com/2021/07/23/vue-diff%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="chenMing">
+<meta property="og:description" content="创建节点 删除节点 更新节点  patch在Vue中，把 DOM-Diff过程叫做patch过程。patch,意为“补丁”，即指对旧的VNode修补，打补丁从而得到新的VNode，非常形象哈。那不管叫什么，其本质都是把对比新旧两份VNode的过程。我们在下面研究patch过程的时候，一定把握住这样一个思想：所谓旧的VNode(即oldVNode)就是数据变化之前视图所对应的虚拟DOM节点，而新的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/6.jpg">
+<meta property="article:published_time" content="2021-07-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-21T06:31:12.934Z">
+<meta property="article:author" content="chenMing">
+<meta property="article:tag" content="vue2.0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/6.jpg"><link rel="shortcut icon" href="/img/toux.jpg"><link rel="canonical" href="http://example.com/2021/07/23/vue-diff%E7%AE%97%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'diff算法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-21 14:31:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="chenMing" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/toux.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 友链朋友圈</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">chenMing</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 友链朋友圈</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">diff算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-22T16:00:00.000Z" title="发表于 2021-07-23 00:00:00">2021-07-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-21T06:31:12.934Z" title="更新于 2021-07-21 14:31:12">2021-07-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="diff算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><ul>
+<li>创建节点</li>
+<li>删除节点</li>
+<li>更新节点</li>
+</ul>
+<h1 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h1><p>在Vue中，把 DOM-Diff过程叫做patch过程。patch,意为“补丁”，即指对旧的VNode修补，打补丁从而得到新的VNode，非常形象哈。那不管叫什么，其本质都是把对比新旧两份VNode的过程。我们在下面研究patch过程的时候，一定把握住这样一个思想：所谓旧的VNode(即oldVNode)就是数据变化之前视图所对应的虚拟DOM节点，而新的VNode是数据变化之后将要渲染的新的视图所对应的虚拟DOM节点，所以我们要以生成的新的VNode为基准，对比旧的oldVNode，如果新的VNode上有的节点而旧的oldVNode上没有，那么就在旧的oldVNode上加上去；如果新的VNode上没有的节点而旧的oldVNode上有，那么就在旧的oldVNode上去掉；如果某些节点在新的VNode和旧的oldVNode上都有，那么就以新的VNode为准，更新旧的oldVNode，从而让新旧VNode相同。<br><strong>总体来说就是以新的标准，多的加上去，少的删掉，将老的改成新的</strong></p>
+<h2 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h2><ul>
+<li>判断是否为元素节点只需判断该VNode节点是否有tag标签即可。如果有tag属性即认为是元素节点，则调用createElement方法创建元素节点，通常元素节点还会有子节点，那就递归遍历创建所有子节点，将所有子节点创建好之后insert插入到当前元素节点里面，最后把当前元素节点插入到DOM中。</li>
+<li>判断是否为注释节点，只需判断VNode的isComment属性是否为true即可，若为true则为注释节点，则调用createComment方法创建注释节点，再插入到DOM中。</li>
+<li>如果既不是元素节点，也不是注释节点，那就认为是文本节点，则调用createTextNode方法创建文本节点，再插入到DOM中。<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 源码位置: &#x2F;src&#x2F;core&#x2F;vdom&#x2F;patch.js
+function createElm (vnode, parentElm, refElm) &#123;
+    const data &#x3D; vnode.data
+    const children &#x3D; vnode.children
+    const tag &#x3D; vnode.tag
+    if (isDef(tag)) &#123;
+      	vnode.elm &#x3D; nodeOps.createElement(tag, vnode)   &#x2F;&#x2F; 创建元素节点
+        createChildren(vnode, children, insertedVnodeQueue) &#x2F;&#x2F; 创建元素节点的子节点
+        insert(parentElm, vnode.elm, refElm)       &#x2F;&#x2F; 插入到DOM中
+    &#125; else if (isTrue(vnode.isComment)) &#123;
+      vnode.elm &#x3D; nodeOps.createComment(vnode.text)  &#x2F;&#x2F; 创建注释节点
+      insert(parentElm, vnode.elm, refElm)           &#x2F;&#x2F; 插入到DOM中
+    &#125; else &#123;
+      vnode.elm &#x3D; nodeOps.createTextNode(vnode.text)  &#x2F;&#x2F; 创建文本节点
+      insert(parentElm, vnode.elm, refElm)           &#x2F;&#x2F; 插入到DOM中
+    &#125;
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h2><p>如果某些节点再新的VNode中没有而在旧的oldVNode中有，那么就需要把这些节点从旧的oldVNode中删除。删除节点非常简单，只需在要删除节点的父元素上调用removeChild方法即可。源码如下：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function removeNode (el) &#123;
+    const parent &#x3D; nodeOps.parentNode(el)  &#x2F;&#x2F; 获取父节点
+    if (isDef(parent)) &#123;
+      nodeOps.removeChild(parent, el)  &#x2F;&#x2F; 调用父节点的removeChild方法
+    &#125;
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="更新节点"><a href="#更新节点" class="headerlink" title="更新节点"></a>更新节点</h2><p>更新节点就是当某些节点在新的VNode和旧的oldVNode中都有时，我们就需要细致比较一下，找出不一样的地方进行更新。</p>
+<ul>
+<li><p>如果VNode和oldVNode均为静态节点,我们说了，静态节点无论数据发生任何变化都与它无关，所以都为静态节点的话则直接跳过，无需处理。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;p&gt;我是不会变化的文字&lt;&#x2F;p&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>如果VNode是文本节点<br>如果VNode是文本节点即表示这个节点内只包含纯文本，那么只需看oldVNode是否也是文本节点，如果是，那就比较两个文本是否不同，如果不同则把oldVNode里的文本改成跟VNode的文本一样。如果oldVNode不是文本节点，那么不论它是什么，直接调用setTextNode方法把它改成文本节点，并且文本内容跟VNode相同。</p>
+</li>
+<li><p>如果VNode是元素节点<br>如果VNode是元素节点，则又细分以下两种情况</p>
+<ul>
+<li>该节点包含子节点<br>如果新的节点内包含了子节点，那么此时要看旧的节点是否包含子节点，如果旧的节点里也包含了子节点，那就需要递归对比更新子节点；如果旧的节点里不包含子节点，那么这个旧节点有可能是空节点或者是文本节点，如果旧的节点是空节点就把新的节点里的子节点创建一份然后插入到旧的节点里面，如果旧的节点是文本节点，则把文本清空，然后把新的节点里的子节点创建一份然后插入到旧的节点里面。</li>
+<li>该节点不包含子节点<br>如果该节点不包含子节点，同时它又不是文本节点，那就说明该节点是个空节点，那就好办了，不管旧节点之前里面都有啥，直接清空即可。<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 更新节点
+function patchVnode (oldVnode, vnode, insertedVnodeQueue, removeOnly) &#123;
+  &#x2F;&#x2F; vnode与oldVnode是否完全一样？若是，退出程序
+  if (oldVnode &#x3D;&#x3D;&#x3D; vnode) &#123;
+    return
+  &#125;
+  const elm &#x3D; vnode.elm &#x3D; oldVnode.elm
+
+  &#x2F;&#x2F; vnode与oldVnode是否都是静态节点？若是，退出程序
+  if (isTrue(vnode.isStatic) &amp;&amp;
+    isTrue(oldVnode.isStatic) &amp;&amp;
+    vnode.key &#x3D;&#x3D;&#x3D; oldVnode.key &amp;&amp;
+    (isTrue(vnode.isCloned) || isTrue(vnode.isOnce))
+  ) &#123;
+    return
+  &#125;
+
+  const oldCh &#x3D; oldVnode.children
+  const ch &#x3D; vnode.children
+  &#x2F;&#x2F; vnode有text属性？若没有：
+  if (isUndef(vnode.text)) &#123;
+    &#x2F;&#x2F; vnode的子节点与oldVnode的子节点是否都存在？
+    if (isDef(oldCh) &amp;&amp; isDef(ch)) &#123;
+      &#x2F;&#x2F; 若都存在，判断子节点是否相同，不同则更新子节点
+      if (oldCh !&#x3D;&#x3D; ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)
+    &#125;
+    &#x2F;&#x2F; 若只有vnode的子节点存在
+    else if (isDef(ch)) &#123;
+      &#x2F;**
+       * 判断oldVnode是否有文本？
+       * 若没有，则把vnode的子节点添加到真实DOM中
+       * 若有，则清空Dom中的文本，再把vnode的子节点添加到真实DOM中
+       *&#x2F;
+      if (isDef(oldVnode.text)) nodeOps.setTextContent(elm, &#39;&#39;)
+      addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)
+    &#125;
+    &#x2F;&#x2F; 若只有oldnode的子节点存在
+    else if (isDef(oldCh)) &#123;
+      &#x2F;&#x2F; 清空DOM中的子节点
+      removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+    &#125;
+    &#x2F;&#x2F; 若vnode和oldnode都没有子节点，但是oldnode中有文本
+    else if (isDef(oldVnode.text)) &#123;
+      &#x2F;&#x2F; 清空oldnode文本
+      nodeOps.setTextContent(elm, &#39;&#39;)
+    &#125;
+    &#x2F;&#x2F; 上面两个判断一句话概括就是，如果vnode中既没有text，也没有子节点，那么对应的oldnode中有什么就清空什么
+  &#125;
+  &#x2F;&#x2F; 若有，vnode的text属性与oldVnode的text属性是否相同？
+  else if (oldVnode.text !&#x3D;&#x3D; vnode.text) &#123;
+    &#x2F;&#x2F; 若不相同：则用vnode的text替换真实DOM的文本
+    nodeOps.setTextContent(elm, vnode.text)
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<img src="/imgs/vue2.png" alt="Image text"></li>
+</ul>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Vue中的DOM-Diff算法：patch过程。<br>patch过程干了三件事，分别是：创建节点，删除节点，更新节点。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">chenMing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/07/23/vue-diff%E7%AE%97%E6%B3%95/">http://example.com/2021/07/23/vue-diff%E7%AE%97%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">chenMing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/vue2-0/">vue2.0</a></div><div class="post_share"><div class="social-share" data-image="/imgs/6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/23/vue-%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91/"><img class="prev-cover" src="/imgs/5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">vue模板编译</div></div></a></div><div class="next-post pull-right"><a href="/2021/07/22/vue-%E8%99%9A%E6%8B%9Fdom/"><img class="next-cover" src="/imgs/4.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vue虚拟dom</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/07/21/vue-双向绑定原理/" title="vue双向绑定原理"><img class="cover" src="/imgs/7.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-21</div><div class="title">vue双向绑定原理</div></div></a></div><div><a href="/2021/07/22/vue-虚拟dom/" title="vue虚拟dom"><img class="cover" src="/imgs/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-22</div><div class="title">vue虚拟dom</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/toux.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">chenMing</div><div class="author-info__description">技术博客</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chen2ming"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">今天你学习了吗？今天你快乐了吗？</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#patch"><span class="toc-number">1.</span> <span class="toc-text">patch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">创建节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">删除节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%8A%82%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">更新节点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/23/vue-%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91/" title="vue模板编译"><img src="/imgs/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue模板编译"/></a><div class="content"><a class="title" href="/2021/07/23/vue-%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91/" title="vue模板编译">vue模板编译</a><time datetime="2021-07-22T16:00:00.000Z" title="发表于 2021-07-23 00:00:00">2021-07-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/23/vue-diff%E7%AE%97%E6%B3%95/" title="diff算法"><img src="/imgs/6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="diff算法"/></a><div class="content"><a class="title" href="/2021/07/23/vue-diff%E7%AE%97%E6%B3%95/" title="diff算法">diff算法</a><time datetime="2021-07-22T16:00:00.000Z" title="发表于 2021-07-23 00:00:00">2021-07-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/22/vue-%E8%99%9A%E6%8B%9Fdom/" title="vue虚拟dom"><img src="/imgs/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue虚拟dom"/></a><div class="content"><a class="title" href="/2021/07/22/vue-%E8%99%9A%E6%8B%9Fdom/" title="vue虚拟dom">vue虚拟dom</a><time datetime="2021-07-21T16:00:00.000Z" title="发表于 2021-07-22 00:00:00">2021-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/21/async%E3%80%81await/" title="async、await"><img src="/imgs/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="async、await"/></a><div class="content"><a class="title" href="/2021/07/21/async%E3%80%81await/" title="async、await">async、await</a><time datetime="2021-07-20T16:00:00.000Z" title="发表于 2021-07-21 00:00:00">2021-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/21/vue-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/" title="vue双向绑定原理"><img src="/imgs/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue双向绑定原理"/></a><div class="content"><a class="title" href="/2021/07/21/vue-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/" title="vue双向绑定原理">vue双向绑定原理</a><time datetime="2021-07-20T16:00:00.000Z" title="发表于 2021-07-21 00:00:00">2021-07-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By chenMing</div><div class="footer_custom_text"><div>嗨，欢迎来到我的博客，希望能帮助到您！</div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
