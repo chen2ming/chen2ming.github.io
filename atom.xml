@@ -110,6 +110,29 @@
   </entry>
   
   <entry>
+    <title>浏览器渲染</title>
+    <link href="http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/"/>
+    <id>http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/</id>
+    <published>2021-07-20T16:00:00.000Z</published>
+    <updated>2021-07-21T02:13:18.222Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="整体我觉得分为两个部分"><a href="#整体我觉得分为两个部分" class="headerlink" title="整体我觉得分为两个部分"></a>整体我觉得分为两个部分</h1><p>获取html文件的过程<br>渲染过程</p><h2 id="获取html文件的过程"><a href="#获取html文件的过程" class="headerlink" title="获取html文件的过程"></a>获取html文件的过程</h2><p>浏览器的地址栏输入URL并按下回车。<br>浏览器查找当前URL是否存在缓存，并比较缓存是否过期。<br>DNS解析URL对应的IP。<br>根据IP建立TCP连接（三次握手）。<br>HTTP发起请求。<br>服务器处理请求，浏览器接收HTTP响应。<br>渲染页面，构建DOM树。<br>关闭TCP连接（四次挥手）。</p><h2 id="渲染过程"><a href="#渲染过程" class="headerlink" title="渲染过程"></a>渲染过程</h2><p>1、当用户输入一个URL时，浏览器就会向服务器发出一个请求，请求URL对应的资源<br>2、接受到服务器的响应内容后，浏览器的HTML解析器，会将HTML文件解析成一棵DOM树，DOM树的构建是一个深度遍历的过程，当前节点的所有子节点都构建完成以后，才会去构建当前节点的下一个兄弟节点。<br>3、将CSS解析成CSSOM树（CSS Rule Tree）<br>4、根据DOM树和CSSOM树，来构建Render Tree（渲染树）,注意渲染树，并不等于DOM树，因为一些像head或display:none的东西，就没有必要放在渲染树中了。<br>5、有了Render Tree，浏览器已经能知道网页中有哪些节点，各个节点的CSS定义，以及它们的从属关系，下一步操作就是Layout,顾名思义，就是计算出每个节点在屏幕中的位置。<br>6、Layout后，浏览器已经知道哪些节点要显示，每个节点的CSS属性是什么，每个节点在屏幕中的位置是哪里，就进入了最后一步painting,按照算出来的规则，通过显卡，把内容画到屏幕上。</p><blockquote><p>这里还要说两个概念，一个是Reflow，另一个是Repaint。这两个不是一回事。<br>Repaint（重绘） ——改变某个元素的背景色、文字颜色、边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变。<br>Reflow（重排） ——元件的几何尺寸变了，我们需要重新验证并计算Render Tree。是Render Tree的一部分或全部发生了变化。</p></blockquote><p><img src="/imgs/http.png" alt="Image text"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;整体我觉得分为两个部分&quot;&gt;&lt;a href=&quot;#整体我觉得分为两个部分&quot; class=&quot;headerlink&quot; title=&quot;整体我觉得分为两个部分&quot;&gt;&lt;/a&gt;整体我觉得分为两个部分&lt;/h1&gt;&lt;p&gt;获取html文件的过程&lt;br&gt;渲染过程&lt;/p&gt;
+&lt;h2 id=&quot;获取</summary>
+      
+    
+    
+    
+    
+    <category term="http" scheme="http://example.com/tags/http/"/>
+    
+  </entry>
+  
+  <entry>
     <title>vue双向绑定原理</title>
     <link href="http://example.com/2021/07/21/vue-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/"/>
     <id>http://example.com/2021/07/21/vue-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/</id>
@@ -131,29 +154,6 @@
     
     
     <category term="vue2.0" scheme="http://example.com/tags/vue2-0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浏览器渲染</title>
-    <link href="http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/"/>
-    <id>http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/</id>
-    <published>2021-07-20T16:00:00.000Z</published>
-    <updated>2021-07-21T02:13:18.222Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="整体我觉得分为两个部分"><a href="#整体我觉得分为两个部分" class="headerlink" title="整体我觉得分为两个部分"></a>整体我觉得分为两个部分</h1><p>获取html文件的过程<br>渲染过程</p><h2 id="获取html文件的过程"><a href="#获取html文件的过程" class="headerlink" title="获取html文件的过程"></a>获取html文件的过程</h2><p>浏览器的地址栏输入URL并按下回车。<br>浏览器查找当前URL是否存在缓存，并比较缓存是否过期。<br>DNS解析URL对应的IP。<br>根据IP建立TCP连接（三次握手）。<br>HTTP发起请求。<br>服务器处理请求，浏览器接收HTTP响应。<br>渲染页面，构建DOM树。<br>关闭TCP连接（四次挥手）。</p><h2 id="渲染过程"><a href="#渲染过程" class="headerlink" title="渲染过程"></a>渲染过程</h2><p>1、当用户输入一个URL时，浏览器就会向服务器发出一个请求，请求URL对应的资源<br>2、接受到服务器的响应内容后，浏览器的HTML解析器，会将HTML文件解析成一棵DOM树，DOM树的构建是一个深度遍历的过程，当前节点的所有子节点都构建完成以后，才会去构建当前节点的下一个兄弟节点。<br>3、将CSS解析成CSSOM树（CSS Rule Tree）<br>4、根据DOM树和CSSOM树，来构建Render Tree（渲染树）,注意渲染树，并不等于DOM树，因为一些像head或display:none的东西，就没有必要放在渲染树中了。<br>5、有了Render Tree，浏览器已经能知道网页中有哪些节点，各个节点的CSS定义，以及它们的从属关系，下一步操作就是Layout,顾名思义，就是计算出每个节点在屏幕中的位置。<br>6、Layout后，浏览器已经知道哪些节点要显示，每个节点的CSS属性是什么，每个节点在屏幕中的位置是哪里，就进入了最后一步painting,按照算出来的规则，通过显卡，把内容画到屏幕上。</p><blockquote><p>这里还要说两个概念，一个是Reflow，另一个是Repaint。这两个不是一回事。<br>Repaint（重绘） ——改变某个元素的背景色、文字颜色、边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变。<br>Reflow（重排） ——元件的几何尺寸变了，我们需要重新验证并计算Render Tree。是Render Tree的一部分或全部发生了变化。</p></blockquote><p><img src="/imgs/http.png" alt="Image text"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;整体我觉得分为两个部分&quot;&gt;&lt;a href=&quot;#整体我觉得分为两个部分&quot; class=&quot;headerlink&quot; title=&quot;整体我觉得分为两个部分&quot;&gt;&lt;/a&gt;整体我觉得分为两个部分&lt;/h1&gt;&lt;p&gt;获取html文件的过程&lt;br&gt;渲染过程&lt;/p&gt;
-&lt;h2 id=&quot;获取</summary>
-      
-    
-    
-    
-    
-    <category term="http" scheme="http://example.com/tags/http/"/>
     
   </entry>
   
@@ -274,28 +274,6 @@
   </entry>
   
   <entry>
-    <title>浅拷贝与深拷贝</title>
-    <link href="http://example.com/2021/07/17/js-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/"/>
-    <id>http://example.com/2021/07/17/js-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</id>
-    <published>2021-07-16T16:00:00.000Z</published>
-    <updated>2021-07-21T01:15:15.628Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的"><a href="#浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的" class="headerlink" title="浅拷贝与深拷贝 (深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的)"></a>浅拷贝与深拷贝 (深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的)</h2><p><strong>浅拷贝只复制指向某个对象的指针而不复制对象本身，新旧对象还是共享同一块内存。</strong><br><strong>但深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象。</strong></p><h2 id="赋值和浅拷贝的区别"><a href="#赋值和浅拷贝的区别" class="headerlink" title="赋值和浅拷贝的区别"></a>赋值和浅拷贝的区别</h2><ul><li>当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在栈中的地址，而不是堆中的数据。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变，其实都是改变的存储空间的内容，因此，两个对象是联动的。</li><li>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。即：默认拷贝构造函数只是对对象进行浅拷贝复制(逐个成员依次拷贝)，即只复制对象空间而不复制资源。</li></ul><h2 id="浅拷贝的实现方式"><a href="#浅拷贝的实现方式" class="headerlink" title="浅拷贝的实现方式"></a>浅拷贝的实现方式</h2><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript"> var obj1 &#x3D; &#123;    &#39;name&#39; : &#39;zhangsan&#39;,    &#39;age&#39; :  &#39;18&#39;,    &#39;language&#39; : [1,[2,3],[4,5]],  &#x2F;&#x2F;Array&#125;; var obj3 &#x3D; shallowCopy(obj1); obj3.name &#x3D; &quot;lisi&quot;; obj3.language[1] &#x3D; [&quot;二&quot;,&quot;三&quot;]; function shallowCopy(src) &#123;    var dst &#x3D; &#123;&#125;;    for (var prop in src) &#123;        if (src.hasOwnProperty(prop)) &#123;            dst[prop] &#x3D; src[prop];        &#125;    &#125;    return dst;&#125;console.log(&#39;obj1&#39;,obj1)console.log(&#39;obj3&#39;,obj3)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>.Object.assign()</strong><br>Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 Object.assign()进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var obj &#x3D; &#123; a: &#123;a: &quot;kobe&quot;, b: 39&#125; &#125;;var initalObj &#x3D; Object.assign(&#123;&#125;, obj);initalObj.a.a &#x3D; &quot;wade&quot;;console.log(obj.a.a); &#x2F;&#x2F;wade<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>  <em>注意：当object只有一层的时候，是深拷贝</em></p><p><strong>Array.prototype.concat()</strong></p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 3, &#123;    username: &#39;kobe&#39;    &#125;];let arr2&#x3D;arr.concat();arr2[2].username &#x3D; &#39;wade&#39;;console.log(arr);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="深拷贝的实现方式"><a href="#深拷贝的实现方式" class="headerlink" title="深拷贝的实现方式"></a>深拷贝的实现方式</h2><p><strong>1.JSON.parse(JSON.stringify())</strong></p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 3, &#123;  username: &#39; kobe&#39;&#125;];let arr4 &#x3D; JSON.parse(JSON.stringify(arr));arr4[2].username &#x3D; &#39;duncan&#39;;console.log(arr, arr4)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><em>原理： 用JSON.stringify将对象转成JSON字符串，再用JSON.parse()把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝。</em><br><strong>这种方法虽然可以实现数组或对象深拷贝,但不能处理函数</strong></p><p><strong>2.手写递归方法</strong></p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">    &#x2F;&#x2F;定义检测数据类型的功能函数function checkedType(target) &#123;  return Object.prototype.toString.call(target).slice(8, -1)&#125;&#x2F;&#x2F;实现深度克隆---对象&#x2F;数组function clone(target) &#123;  &#x2F;&#x2F;判断拷贝的数据类型  &#x2F;&#x2F;初始化变量result 成为最终克隆的数据  let result, targetType &#x3D; checkedType(target)  if (targetType &#x3D;&#x3D;&#x3D; &#39;object&#39;) &#123;    result &#x3D; &#123;&#125;  &#125; else if (targetType &#x3D;&#x3D;&#x3D; &#39;Array&#39;) &#123;    result &#x3D; []  &#125; else &#123;    return target  &#125;  &#x2F;&#x2F;遍历目标数据  for (let i in target) &#123;    &#x2F;&#x2F;获取遍历数据结构的每一项值。    let value &#x3D; target[i]    &#x2F;&#x2F;判断目标结构里的每一值是否存在对象&#x2F;数组    if (checkedType(value) &#x3D;&#x3D;&#x3D; &#39;Object&#39; ||      checkedType(value) &#x3D;&#x3D;&#x3D; &#39;Array&#39;) &#123; &#x2F;&#x2F;对象&#x2F;数组里嵌套了对象&#x2F;数组      &#x2F;&#x2F;继续遍历获取到value值      result[i] &#x3D; clone(value)    &#125; else &#123; &#x2F;&#x2F;获取到value值是基本的数据类型或者是函数。      result[i] &#x3D; value;    &#125;  &#125;  return result&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>3.函数库lodash</strong><br>该函数库也有提供_.cloneDeep用来做 Deep Copy</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var _ &#x3D; require(&#39;lodash&#39;);var obj1 &#x3D; &#123;    a: 1,    b: &#123; f: &#123; g: 1 &#125; &#125;,    c: [1, 2, 3]&#125;;var obj2 &#x3D; _.cloneDeep(obj1);console.log(obj1.b.f &#x3D;&#x3D;&#x3D; obj2.b.f);&#x2F;&#x2F; false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的&quot;&gt;&lt;a href=&quot;#浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的&quot; class=&quot;headerlink&quot; title=&quot;浅拷贝与深拷贝 (深</summary>
-      
-    
-    
-    
-    
-    <category term="javaScript" scheme="http://example.com/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
     <title>markdown 写法备注</title>
     <link href="http://example.com/2021/07/17/remarks/"/>
     <id>http://example.com/2021/07/17/remarks/</id>
@@ -317,6 +295,28 @@
     
     
     <category term="markdown" scheme="http://example.com/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅拷贝与深拷贝</title>
+    <link href="http://example.com/2021/07/17/js-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/"/>
+    <id>http://example.com/2021/07/17/js-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</id>
+    <published>2021-07-16T16:00:00.000Z</published>
+    <updated>2021-07-21T01:15:15.628Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的"><a href="#浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的" class="headerlink" title="浅拷贝与深拷贝 (深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的)"></a>浅拷贝与深拷贝 (深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的)</h2><p><strong>浅拷贝只复制指向某个对象的指针而不复制对象本身，新旧对象还是共享同一块内存。</strong><br><strong>但深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象。</strong></p><h2 id="赋值和浅拷贝的区别"><a href="#赋值和浅拷贝的区别" class="headerlink" title="赋值和浅拷贝的区别"></a>赋值和浅拷贝的区别</h2><ul><li>当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在栈中的地址，而不是堆中的数据。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变，其实都是改变的存储空间的内容，因此，两个对象是联动的。</li><li>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。即：默认拷贝构造函数只是对对象进行浅拷贝复制(逐个成员依次拷贝)，即只复制对象空间而不复制资源。</li></ul><h2 id="浅拷贝的实现方式"><a href="#浅拷贝的实现方式" class="headerlink" title="浅拷贝的实现方式"></a>浅拷贝的实现方式</h2><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript"> var obj1 &#x3D; &#123;    &#39;name&#39; : &#39;zhangsan&#39;,    &#39;age&#39; :  &#39;18&#39;,    &#39;language&#39; : [1,[2,3],[4,5]],  &#x2F;&#x2F;Array&#125;; var obj3 &#x3D; shallowCopy(obj1); obj3.name &#x3D; &quot;lisi&quot;; obj3.language[1] &#x3D; [&quot;二&quot;,&quot;三&quot;]; function shallowCopy(src) &#123;    var dst &#x3D; &#123;&#125;;    for (var prop in src) &#123;        if (src.hasOwnProperty(prop)) &#123;            dst[prop] &#x3D; src[prop];        &#125;    &#125;    return dst;&#125;console.log(&#39;obj1&#39;,obj1)console.log(&#39;obj3&#39;,obj3)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>.Object.assign()</strong><br>Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 Object.assign()进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var obj &#x3D; &#123; a: &#123;a: &quot;kobe&quot;, b: 39&#125; &#125;;var initalObj &#x3D; Object.assign(&#123;&#125;, obj);initalObj.a.a &#x3D; &quot;wade&quot;;console.log(obj.a.a); &#x2F;&#x2F;wade<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>  <em>注意：当object只有一层的时候，是深拷贝</em></p><p><strong>Array.prototype.concat()</strong></p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 3, &#123;    username: &#39;kobe&#39;    &#125;];let arr2&#x3D;arr.concat();arr2[2].username &#x3D; &#39;wade&#39;;console.log(arr);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="深拷贝的实现方式"><a href="#深拷贝的实现方式" class="headerlink" title="深拷贝的实现方式"></a>深拷贝的实现方式</h2><p><strong>1.JSON.parse(JSON.stringify())</strong></p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 3, &#123;  username: &#39; kobe&#39;&#125;];let arr4 &#x3D; JSON.parse(JSON.stringify(arr));arr4[2].username &#x3D; &#39;duncan&#39;;console.log(arr, arr4)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><em>原理： 用JSON.stringify将对象转成JSON字符串，再用JSON.parse()把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝。</em><br><strong>这种方法虽然可以实现数组或对象深拷贝,但不能处理函数</strong></p><p><strong>2.手写递归方法</strong></p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">    &#x2F;&#x2F;定义检测数据类型的功能函数function checkedType(target) &#123;  return Object.prototype.toString.call(target).slice(8, -1)&#125;&#x2F;&#x2F;实现深度克隆---对象&#x2F;数组function clone(target) &#123;  &#x2F;&#x2F;判断拷贝的数据类型  &#x2F;&#x2F;初始化变量result 成为最终克隆的数据  let result, targetType &#x3D; checkedType(target)  if (targetType &#x3D;&#x3D;&#x3D; &#39;object&#39;) &#123;    result &#x3D; &#123;&#125;  &#125; else if (targetType &#x3D;&#x3D;&#x3D; &#39;Array&#39;) &#123;    result &#x3D; []  &#125; else &#123;    return target  &#125;  &#x2F;&#x2F;遍历目标数据  for (let i in target) &#123;    &#x2F;&#x2F;获取遍历数据结构的每一项值。    let value &#x3D; target[i]    &#x2F;&#x2F;判断目标结构里的每一值是否存在对象&#x2F;数组    if (checkedType(value) &#x3D;&#x3D;&#x3D; &#39;Object&#39; ||      checkedType(value) &#x3D;&#x3D;&#x3D; &#39;Array&#39;) &#123; &#x2F;&#x2F;对象&#x2F;数组里嵌套了对象&#x2F;数组      &#x2F;&#x2F;继续遍历获取到value值      result[i] &#x3D; clone(value)    &#125; else &#123; &#x2F;&#x2F;获取到value值是基本的数据类型或者是函数。      result[i] &#x3D; value;    &#125;  &#125;  return result&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>3.函数库lodash</strong><br>该函数库也有提供_.cloneDeep用来做 Deep Copy</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var _ &#x3D; require(&#39;lodash&#39;);var obj1 &#x3D; &#123;    a: 1,    b: &#123; f: &#123; g: 1 &#125; &#125;,    c: [1, 2, 3]&#125;;var obj2 &#x3D; _.cloneDeep(obj1);console.log(obj1.b.f &#x3D;&#x3D;&#x3D; obj2.b.f);&#x2F;&#x2F; false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的&quot;&gt;&lt;a href=&quot;#浅拷贝与深拷贝-深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的&quot; class=&quot;headerlink&quot; title=&quot;浅拷贝与深拷贝 (深</summary>
+      
+    
+    
+    
+    
+    <category term="javaScript" scheme="http://example.com/tags/javaScript/"/>
     
   </entry>
   
