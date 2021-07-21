@@ -1,8 +1,7 @@
 ---
 title: async、await
-tag: async、await
-top_img: /imgs/motuo4.jpeg
-cover: /imgs/motuo4.jpeg
+date: 2021-7-21
+tag: 异步
 ---
 
 ## async 和 await 在干什么

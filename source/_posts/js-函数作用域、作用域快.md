@@ -1,9 +1,8 @@
 ---
 title: 函数中的作用域
+date: 2021-7-18
 tag: javaScript
 type: javaScript
-top_img: /imgs/motuo3.jpeg
-cover: /imgs/motuo3.jpeg
 ---
 
 函数中的作用域

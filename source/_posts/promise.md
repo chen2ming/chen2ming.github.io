@@ -1,8 +1,7 @@
 ---
 title: Promise
-tga: Promise
-top_img: /imgs/motuo5.jpeg
-cover: /imgs/motuo5.jpeg
+date: 2021-7-20
+tga: 异步
 ---
 ## promise是什么？
 1、主要用于异步计算

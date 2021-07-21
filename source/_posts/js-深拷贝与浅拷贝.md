@@ -1,9 +1,8 @@
 ---
 title: 浅拷贝与深拷贝
+date: 2021-7-17
 tag: javaScript
 type: javaScript
-top_img: /imgs/diaoyu2.jpeg
-cover: /imgs/diaoyu2.jpeg
 ---
 
 ## 浅拷贝与深拷贝 (深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的)

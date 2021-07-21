@@ -1,9 +1,8 @@
 ---
 title: 作用域是什么-词法作用域
+date: 2021-7-8
 tag: javaScript
 type: javaScript
-top_img: /imgs/diaoyu3.jpeg
-cover: /imgs/diaoyu3.jpeg
 ---
 
 作用域是什么

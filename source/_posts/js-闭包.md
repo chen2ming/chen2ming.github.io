@@ -1,9 +1,8 @@
 ---
 title: 闭包
+date: 2021-7-19
 tag: javaScript
 type: javaScript
-top_img: /imgs/motuo1.jpeg
-cover: /imgs/motuo1.jpeg
 ---
 
 >闭包是基于词法作用域书写代码时所产生的自然结果

@@ -1,9 +1,8 @@
 ---
 title: this词法
+date: 2021-7-19
 tag: javaScript
 type: javaScript
-top_img: /imgs/diaoyu6.jpeg
-cover: /imgs/diaoyu6.jpeg
 ---
 
 ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。

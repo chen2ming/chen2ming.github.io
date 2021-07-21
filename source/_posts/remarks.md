@@ -1,9 +1,8 @@
 ---
 title: markdown 写法备注
 tag: markdown
+date: 2021-7-17
 type: 文档
-top_img: /imgs/diaoyu5.jpeg
-cover: /imgs/diaoyu5.jpeg
 ---
 
 > 标题
