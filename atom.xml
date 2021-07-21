@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-07-21T02:13:18.222Z</updated>
+  <updated>2021-07-21T01:21:33.349Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,25 +17,24 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>浏览器渲染</title>
-    <link href="http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/"/>
-    <id>http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/</id>
+    <title>async、await</title>
+    <link href="http://example.com/2021/07/21/async%E3%80%81await/"/>
+    <id>http://example.com/2021/07/21/async%E3%80%81await/</id>
     <published>2021-07-20T16:00:00.000Z</published>
-    <updated>2021-07-21T02:13:18.222Z</updated>
+    <updated>2021-07-21T01:21:33.349Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="整体我觉得分为两个部分"><a href="#整体我觉得分为两个部分" class="headerlink" title="整体我觉得分为两个部分"></a>整体我觉得分为两个部分</h1><p>获取html文件的过程<br>渲染过程</p><h2 id="获取html文件的过程"><a href="#获取html文件的过程" class="headerlink" title="获取html文件的过程"></a>获取html文件的过程</h2><p>浏览器的地址栏输入URL并按下回车。<br>浏览器查找当前URL是否存在缓存，并比较缓存是否过期。<br>DNS解析URL对应的IP。<br>根据IP建立TCP连接（三次握手）。<br>HTTP发起请求。<br>服务器处理请求，浏览器接收HTTP响应。<br>渲染页面，构建DOM树。<br>关闭TCP连接（四次挥手）。</p><h2 id="渲染过程"><a href="#渲染过程" class="headerlink" title="渲染过程"></a>渲染过程</h2><p>1、当用户输入一个URL时，浏览器就会向服务器发出一个请求，请求URL对应的资源<br>2、接受到服务器的响应内容后，浏览器的HTML解析器，会将HTML文件解析成一棵DOM树，DOM树的构建是一个深度遍历的过程，当前节点的所有子节点都构建完成以后，才会去构建当前节点的下一个兄弟节点。<br>3、将CSS解析成CSSOM树（CSS Rule Tree）<br>4、根据DOM树和CSSOM树，来构建Render Tree（渲染树）,注意渲染树，并不等于DOM树，因为一些像head或display:none的东西，就没有必要放在渲染树中了。<br>5、有了Render Tree，浏览器已经能知道网页中有哪些节点，各个节点的CSS定义，以及它们的从属关系，下一步操作就是Layout,顾名思义，就是计算出每个节点在屏幕中的位置。<br>6、Layout后，浏览器已经知道哪些节点要显示，每个节点的CSS属性是什么，每个节点在屏幕中的位置是哪里，就进入了最后一步painting,按照算出来的规则，通过显卡，把内容画到屏幕上。</p><blockquote><p>这里还要说两个概念，一个是Reflow，另一个是Repaint。这两个不是一回事。<br>Repaint（重绘） ——改变某个元素的背景色、文字颜色、边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变。<br>Reflow（重排） ——元件的几何尺寸变了，我们需要重新验证并计算Render Tree。是Render Tree的一部分或全部发生了变化。</p></blockquote><p><img src="/imgs/http.png" alt="Image text"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="async-和-await-在干什么"><a href="#async-和-await-在干什么" class="headerlink" title="async 和 await 在干什么"></a>async 和 await 在干什么</h2><p>任意一个名称都是有意义的，先从字面意思来理解。async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。</p><h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>这个问题的关键在于，async 函数是怎么处理它的返回值的！<br>我们当然希望它能直接通过 return 语句返回我们想要的值，但是如果真是这样，似乎就没 await 什么事了。所以，写段代码来试试，看它到底会返回什么：</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async function testAsync() &#123;    return &quot;hello async&quot;;&#125;const result &#x3D; testAsync();console.log(result);  &#x2F;&#x2F; Promise &#123; &#39;hello async&#39; &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>——输出的是一个 Promise 对象。</p><p>所以，async 函数返回的是一个 Promise 对象。从文档中也可以得到这个信息。async 函数（包含函数语句、函数表达式、Lambda表达式）会返回一个 Promise 对象，如果在函数中 return 一个直接量，async 会把这个直接量通过 Promise.resolve() 封装成 Promise 对象。</p><p>Promise.resolve(x) 可以看作是 new Promise(resolve =&gt; resolve(x)) 的简写，可以用于快速封装字面量对象或其他对象，将其封装成 Promise 实例。</p><p>async 函数返回的是一个 Promise 对象，所以在最外层不能用 await 获取其返回值的情况下，我们当然应该用原来的方式：then() 链来处理这个 Promise 对象，就像这样</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">testAsync().then(v &#x3D;&gt; &#123;    console.log(v);    &#x2F;&#x2F; 输出 hello async&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="await"><a href="#await" class="headerlink" title="await"></a>await</h3><p>一般来说，都认为 await 是在等待一个 async 函数完成。不过按语法说明，await 等待的是一个表达式，这个表达式的计算结果是 Promise 对象或者其它值（换句话说，就是没有特殊限定）。</p><p>因为 async 函数返回一个 Promise 对象，所以 await 可以用于等待一个 async 函数的返回值——这也可以说是 await 在等 async 函数，但要清楚，它等的实际是一个返回值。注意到 await 不仅仅用于等 Promise 对象，它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。所以下面这个示例完全可以正确运行</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getSomething() &#123;    return &quot;something&quot;;&#125;async function testAsync() &#123;    return Promise.resolve(&quot;hello async&quot;);&#125;async function test() &#123;    const v1 &#x3D; await getSomething();    const v2 &#x3D; await testAsync();    console.log(v1, v2);&#125;test();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="await-等到了要等的，然后呢"><a href="#await-等到了要等的，然后呢" class="headerlink" title="await 等到了要等的，然后呢"></a>await 等到了要等的，然后呢</h3><p>await 等到了它要等的东西，一个 Promise 对象，或者其它值，然后呢？我不得不先说，await 是个运算符，用于组成表达式，await 表达式的运算结果取决于它等的东西。</p><p>如果它等到的不是一个 Promise 对象，那 await 表达式的运算结果就是它等到的东西。</p><p>如果它等到的是一个 Promise 对象，await 就忙起来了，它会阻塞后面的代码，等着 Promise 对象 resolve，然后得到 resolve 的值，作为 await 表达式的运算结果。</p><blockquote><p>async 函数调用不会造成阻塞，它内部所有的阻塞都被封装在一个 Promise 对象中异步执行。</p></blockquote><h2 id="async-await-gt-promise"><a href="#async-await-gt-promise" class="headerlink" title="async/await -&gt; promise"></a>async/await -&gt; promise</h2><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function step1(n) &#123;    console.log(&#96;step1 with $&#123;n&#125;&#96;);    return takeLongTime(n);&#125;function step2(m, n) &#123;    console.log(&#96;step2 with $&#123;m&#125; and $&#123;n&#125;&#96;);    return takeLongTime(m + n);&#125;function step3(k, m, n) &#123;    console.log(&#96;step3 with $&#123;k&#125;, $&#123;m&#125; and $&#123;n&#125;&#96;);    return takeLongTime(k + m + n);&#125;&#x2F;&#x2F; asyne&#x2F;awaitasync function doIt() &#123;    console.time(&quot;doIt&quot;);    const time1 &#x3D; 300;    const time2 &#x3D; await step1(time1);    const time3 &#x3D; await step2(time1, time2);    const result &#x3D; await step3(time1, time2, time3);    console.log(&#96;result is $&#123;result&#125;&#96;);    console.timeEnd(&quot;doIt&quot;);&#125;doIt();&#x2F;&#x2F; promisefunction doIt() &#123;    console.time(&quot;doIt&quot;);    const time1 &#x3D; 300;    step1(time1)        .then(time2 &#x3D;&gt; &#123;            return step2(time1, time2)                .then(time3 &#x3D;&gt; [time1, time2, time3]);        &#125;)        .then(times &#x3D;&gt; &#123;            const [time1, time2, time3] &#x3D; times;            return step3(time1, time2, time3);        &#125;)        .then(result &#x3D;&gt; &#123;            console.log(&#96;result is $&#123;result&#125;&#96;);            console.timeEnd(&quot;doIt&quot;);        &#125;);&#125;doIt();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>看起来更像是同步操作</p></blockquote>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;整体我觉得分为两个部分&quot;&gt;&lt;a href=&quot;#整体我觉得分为两个部分&quot; class=&quot;headerlink&quot; title=&quot;整体我觉得分为两个部分&quot;&gt;&lt;/a&gt;整体我觉得分为两个部分&lt;/h1&gt;&lt;p&gt;获取html文件的过程&lt;br&gt;渲染过程&lt;/p&gt;
-&lt;h2 id=&quot;获取</summary>
+    <summary type="html">&lt;h2 id=&quot;async-和-await-在干什么&quot;&gt;&lt;a href=&quot;#async-和-await-在干什么&quot; class=&quot;headerlink&quot; title=&quot;async 和 await 在干什么&quot;&gt;&lt;/a&gt;async 和 await 在干什么&lt;/h2&gt;&lt;p&gt;任意一个名称</summary>
       
     
     
     
     
-    <category term="http" scheme="http://example.com/tags/http/"/>
+    <category term="异步" scheme="http://example.com/tags/%E5%BC%82%E6%AD%A5/"/>
     
   </entry>
   
@@ -65,24 +64,25 @@
   </entry>
   
   <entry>
-    <title>async、await</title>
-    <link href="http://example.com/2021/07/21/async%E3%80%81await/"/>
-    <id>http://example.com/2021/07/21/async%E3%80%81await/</id>
+    <title>浏览器渲染</title>
+    <link href="http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/"/>
+    <id>http://example.com/2021/07/21/http-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/</id>
     <published>2021-07-20T16:00:00.000Z</published>
-    <updated>2021-07-21T01:21:33.349Z</updated>
+    <updated>2021-07-21T02:13:18.222Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="async-和-await-在干什么"><a href="#async-和-await-在干什么" class="headerlink" title="async 和 await 在干什么"></a>async 和 await 在干什么</h2><p>任意一个名称都是有意义的，先从字面意思来理解。async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。</p><h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>这个问题的关键在于，async 函数是怎么处理它的返回值的！<br>我们当然希望它能直接通过 return 语句返回我们想要的值，但是如果真是这样，似乎就没 await 什么事了。所以，写段代码来试试，看它到底会返回什么：</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async function testAsync() &#123;    return &quot;hello async&quot;;&#125;const result &#x3D; testAsync();console.log(result);  &#x2F;&#x2F; Promise &#123; &#39;hello async&#39; &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>——输出的是一个 Promise 对象。</p><p>所以，async 函数返回的是一个 Promise 对象。从文档中也可以得到这个信息。async 函数（包含函数语句、函数表达式、Lambda表达式）会返回一个 Promise 对象，如果在函数中 return 一个直接量，async 会把这个直接量通过 Promise.resolve() 封装成 Promise 对象。</p><p>Promise.resolve(x) 可以看作是 new Promise(resolve =&gt; resolve(x)) 的简写，可以用于快速封装字面量对象或其他对象，将其封装成 Promise 实例。</p><p>async 函数返回的是一个 Promise 对象，所以在最外层不能用 await 获取其返回值的情况下，我们当然应该用原来的方式：then() 链来处理这个 Promise 对象，就像这样</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">testAsync().then(v &#x3D;&gt; &#123;    console.log(v);    &#x2F;&#x2F; 输出 hello async&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="await"><a href="#await" class="headerlink" title="await"></a>await</h3><p>一般来说，都认为 await 是在等待一个 async 函数完成。不过按语法说明，await 等待的是一个表达式，这个表达式的计算结果是 Promise 对象或者其它值（换句话说，就是没有特殊限定）。</p><p>因为 async 函数返回一个 Promise 对象，所以 await 可以用于等待一个 async 函数的返回值——这也可以说是 await 在等 async 函数，但要清楚，它等的实际是一个返回值。注意到 await 不仅仅用于等 Promise 对象，它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。所以下面这个示例完全可以正确运行</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getSomething() &#123;    return &quot;something&quot;;&#125;async function testAsync() &#123;    return Promise.resolve(&quot;hello async&quot;);&#125;async function test() &#123;    const v1 &#x3D; await getSomething();    const v2 &#x3D; await testAsync();    console.log(v1, v2);&#125;test();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="await-等到了要等的，然后呢"><a href="#await-等到了要等的，然后呢" class="headerlink" title="await 等到了要等的，然后呢"></a>await 等到了要等的，然后呢</h3><p>await 等到了它要等的东西，一个 Promise 对象，或者其它值，然后呢？我不得不先说，await 是个运算符，用于组成表达式，await 表达式的运算结果取决于它等的东西。</p><p>如果它等到的不是一个 Promise 对象，那 await 表达式的运算结果就是它等到的东西。</p><p>如果它等到的是一个 Promise 对象，await 就忙起来了，它会阻塞后面的代码，等着 Promise 对象 resolve，然后得到 resolve 的值，作为 await 表达式的运算结果。</p><blockquote><p>async 函数调用不会造成阻塞，它内部所有的阻塞都被封装在一个 Promise 对象中异步执行。</p></blockquote><h2 id="async-await-gt-promise"><a href="#async-await-gt-promise" class="headerlink" title="async/await -&gt; promise"></a>async/await -&gt; promise</h2><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function step1(n) &#123;    console.log(&#96;step1 with $&#123;n&#125;&#96;);    return takeLongTime(n);&#125;function step2(m, n) &#123;    console.log(&#96;step2 with $&#123;m&#125; and $&#123;n&#125;&#96;);    return takeLongTime(m + n);&#125;function step3(k, m, n) &#123;    console.log(&#96;step3 with $&#123;k&#125;, $&#123;m&#125; and $&#123;n&#125;&#96;);    return takeLongTime(k + m + n);&#125;&#x2F;&#x2F; asyne&#x2F;awaitasync function doIt() &#123;    console.time(&quot;doIt&quot;);    const time1 &#x3D; 300;    const time2 &#x3D; await step1(time1);    const time3 &#x3D; await step2(time1, time2);    const result &#x3D; await step3(time1, time2, time3);    console.log(&#96;result is $&#123;result&#125;&#96;);    console.timeEnd(&quot;doIt&quot;);&#125;doIt();&#x2F;&#x2F; promisefunction doIt() &#123;    console.time(&quot;doIt&quot;);    const time1 &#x3D; 300;    step1(time1)        .then(time2 &#x3D;&gt; &#123;            return step2(time1, time2)                .then(time3 &#x3D;&gt; [time1, time2, time3]);        &#125;)        .then(times &#x3D;&gt; &#123;            const [time1, time2, time3] &#x3D; times;            return step3(time1, time2, time3);        &#125;)        .then(result &#x3D;&gt; &#123;            console.log(&#96;result is $&#123;result&#125;&#96;);            console.timeEnd(&quot;doIt&quot;);        &#125;);&#125;doIt();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>看起来更像是同步操作</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h1 id="整体我觉得分为两个部分"><a href="#整体我觉得分为两个部分" class="headerlink" title="整体我觉得分为两个部分"></a>整体我觉得分为两个部分</h1><p>获取html文件的过程<br>渲染过程</p><h2 id="获取html文件的过程"><a href="#获取html文件的过程" class="headerlink" title="获取html文件的过程"></a>获取html文件的过程</h2><p>浏览器的地址栏输入URL并按下回车。<br>浏览器查找当前URL是否存在缓存，并比较缓存是否过期。<br>DNS解析URL对应的IP。<br>根据IP建立TCP连接（三次握手）。<br>HTTP发起请求。<br>服务器处理请求，浏览器接收HTTP响应。<br>渲染页面，构建DOM树。<br>关闭TCP连接（四次挥手）。</p><h2 id="渲染过程"><a href="#渲染过程" class="headerlink" title="渲染过程"></a>渲染过程</h2><p>1、当用户输入一个URL时，浏览器就会向服务器发出一个请求，请求URL对应的资源<br>2、接受到服务器的响应内容后，浏览器的HTML解析器，会将HTML文件解析成一棵DOM树，DOM树的构建是一个深度遍历的过程，当前节点的所有子节点都构建完成以后，才会去构建当前节点的下一个兄弟节点。<br>3、将CSS解析成CSSOM树（CSS Rule Tree）<br>4、根据DOM树和CSSOM树，来构建Render Tree（渲染树）,注意渲染树，并不等于DOM树，因为一些像head或display:none的东西，就没有必要放在渲染树中了。<br>5、有了Render Tree，浏览器已经能知道网页中有哪些节点，各个节点的CSS定义，以及它们的从属关系，下一步操作就是Layout,顾名思义，就是计算出每个节点在屏幕中的位置。<br>6、Layout后，浏览器已经知道哪些节点要显示，每个节点的CSS属性是什么，每个节点在屏幕中的位置是哪里，就进入了最后一步painting,按照算出来的规则，通过显卡，把内容画到屏幕上。</p><blockquote><p>这里还要说两个概念，一个是Reflow，另一个是Repaint。这两个不是一回事。<br>Repaint（重绘） ——改变某个元素的背景色、文字颜色、边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变。<br>Reflow（重排） ——元件的几何尺寸变了，我们需要重新验证并计算Render Tree。是Render Tree的一部分或全部发生了变化。</p></blockquote><p><img src="/imgs/http.png" alt="Image text"></p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;async-和-await-在干什么&quot;&gt;&lt;a href=&quot;#async-和-await-在干什么&quot; class=&quot;headerlink&quot; title=&quot;async 和 await 在干什么&quot;&gt;&lt;/a&gt;async 和 await 在干什么&lt;/h2&gt;&lt;p&gt;任意一个名称</summary>
+    <summary type="html">&lt;h1 id=&quot;整体我觉得分为两个部分&quot;&gt;&lt;a href=&quot;#整体我觉得分为两个部分&quot; class=&quot;headerlink&quot; title=&quot;整体我觉得分为两个部分&quot;&gt;&lt;/a&gt;整体我觉得分为两个部分&lt;/h1&gt;&lt;p&gt;获取html文件的过程&lt;br&gt;渲染过程&lt;/p&gt;
+&lt;h2 id=&quot;获取</summary>
       
     
     
     
     
-    <category term="异步" scheme="http://example.com/tags/%E5%BC%82%E6%AD%A5/"/>
+    <category term="http" scheme="http://example.com/tags/http/"/>
     
   </entry>
   
@@ -132,29 +132,6 @@
   </entry>
   
   <entry>
-    <title>this词法</title>
-    <link href="http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/"/>
-    <id>http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/</id>
-    <published>2021-07-18T16:00:00.000Z</published>
-    <updated>2021-07-21T01:15:15.628Z</updated>
-    
-    <content type="html"><![CDATA[<p>ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var obj &#x3D; &#123;    count: 0,    cool: function coolFn() &#123;        if(this.count &lt; 1) &#123;            setTimeout(() &#x3D;&gt; &#123;                this.count++;                console.log(&#39;awesome?&#39;);            &#125;,1000);        &#125;    &#125;&#125;obj.cool();&#x2F;&#x2F;awesome?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这个箭头函数中的this直接是cool()的this绑定（因此调用它并不会出错）</p><p>它将程序员们经常犯的一个错误给标准化了，也就是混淆了this绑定规则和词法作用域规则。</p><p>另一个导致箭头函数不够理想的原因是他不是具名的，而是一个匿名函数。</p><h3 id="误解："><a href="#误解：" class="headerlink" title="误解："></a>误解：</h3><ol><li>人们很容易把this理解成指向函数自身。那么为什么函数要从内部引用函数自身呢？常见的原因是递归（从函数内部调用这个函数）或者可以写在第一次被调用后自己解除绑定事件处理器。</li><li>新手通常会认为，既然把函数看做一个对象，那就可以在调用函数时储存状态。</li></ol><p>call</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo(num) &#123;    console.log(&quot;foo&quot; + num);    this.count ++;&#125;foo.count &#x3D; 0;var i;for(i &#x3D; 0; i &lt; 10; i++)&#123;    if(i &gt; 5) &#123;        &#x2F;&#x2F; 使用call(...) 可以确保this指向函数本身        foo.call(foo, i)    &#125;&#125;&#x2F;&#x2F; foo: 6&#x2F;&#x2F; foo: 7&#x2F;&#x2F; foo: 8&#x2F;&#x2F; foo: 9cnosole.log(foo.count); &#x2F;&#x2F; 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="它的作用域"><a href="#它的作用域" class="headerlink" title="它的作用域"></a>它的作用域</h3><p>还有一种常见的错误是，this指向函数的作用域。这个问题在某中情况下是正确的，但是有时候又是错误的。需要明确的是this在任何情况下都不指向函数的词法作域。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo()&#123;    var a &#x3D; 2;    this.bar(); &#x2F;&#x2F;  能调用到bar也是意外，正常应该通过词法作用域，直接执行&#125;function bar()&#123;    console.log(this.a)&#125;foo();  &#x2F;&#x2F; a not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>==当你想把this和词法作用域的查找混合使用的时候，一定要提醒自己这是无法实现的==</p><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>this不是在写代码时候绑定的而是代码在执行的时候绑定的，它的上下文取决于函数调用时的各种条件。</p><p>this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p><p>==当一个函数被执行时，会创建一个活动记录（有时候也被称之为执行上下文）。这个记录会包含函数在哪里被调用、函数的调用方式、传入参数等信息。this就是这个记录的一个属性，会在函数执行的过程中调用到。==</p><p>this实际上是在函数被调用的时候发生绑定，他指向什么完全取决于函数在哪里被调用。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。&lt;/p&gt;
-&lt;pre class=&quot;line-numbers l</summary>
-      
-    
-    
-    
-    
-    <category term="javaScript" scheme="http://example.com/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
     <title>闭包</title>
     <link href="http://example.com/2021/07/19/js-%E9%97%AD%E5%8C%85/"/>
     <id>http://example.com/2021/07/19/js-%E9%97%AD%E5%8C%85/</id>
@@ -171,6 +148,29 @@
 &lt;/blockquote&gt;
 &lt;p&gt;闭包的产生：&lt;br&gt;函数在被定义的地方之外被执行就会产生闭包！！！&lt;/p&gt;
 &lt;pre class=&quot;line-numbers language-JavaScr</summary>
+      
+    
+    
+    
+    
+    <category term="javaScript" scheme="http://example.com/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>this词法</title>
+    <link href="http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/"/>
+    <id>http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/</id>
+    <published>2021-07-18T16:00:00.000Z</published>
+    <updated>2021-07-21T01:15:15.628Z</updated>
+    
+    <content type="html"><![CDATA[<p>ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var obj &#x3D; &#123;    count: 0,    cool: function coolFn() &#123;        if(this.count &lt; 1) &#123;            setTimeout(() &#x3D;&gt; &#123;                this.count++;                console.log(&#39;awesome?&#39;);            &#125;,1000);        &#125;    &#125;&#125;obj.cool();&#x2F;&#x2F;awesome?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这个箭头函数中的this直接是cool()的this绑定（因此调用它并不会出错）</p><p>它将程序员们经常犯的一个错误给标准化了，也就是混淆了this绑定规则和词法作用域规则。</p><p>另一个导致箭头函数不够理想的原因是他不是具名的，而是一个匿名函数。</p><h3 id="误解："><a href="#误解：" class="headerlink" title="误解："></a>误解：</h3><ol><li>人们很容易把this理解成指向函数自身。那么为什么函数要从内部引用函数自身呢？常见的原因是递归（从函数内部调用这个函数）或者可以写在第一次被调用后自己解除绑定事件处理器。</li><li>新手通常会认为，既然把函数看做一个对象，那就可以在调用函数时储存状态。</li></ol><p>call</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo(num) &#123;    console.log(&quot;foo&quot; + num);    this.count ++;&#125;foo.count &#x3D; 0;var i;for(i &#x3D; 0; i &lt; 10; i++)&#123;    if(i &gt; 5) &#123;        &#x2F;&#x2F; 使用call(...) 可以确保this指向函数本身        foo.call(foo, i)    &#125;&#125;&#x2F;&#x2F; foo: 6&#x2F;&#x2F; foo: 7&#x2F;&#x2F; foo: 8&#x2F;&#x2F; foo: 9cnosole.log(foo.count); &#x2F;&#x2F; 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="它的作用域"><a href="#它的作用域" class="headerlink" title="它的作用域"></a>它的作用域</h3><p>还有一种常见的错误是，this指向函数的作用域。这个问题在某中情况下是正确的，但是有时候又是错误的。需要明确的是this在任何情况下都不指向函数的词法作域。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo()&#123;    var a &#x3D; 2;    this.bar(); &#x2F;&#x2F;  能调用到bar也是意外，正常应该通过词法作用域，直接执行&#125;function bar()&#123;    console.log(this.a)&#125;foo();  &#x2F;&#x2F; a not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>==当你想把this和词法作用域的查找混合使用的时候，一定要提醒自己这是无法实现的==</p><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>this不是在写代码时候绑定的而是代码在执行的时候绑定的，它的上下文取决于函数调用时的各种条件。</p><p>this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p><p>==当一个函数被执行时，会创建一个活动记录（有时候也被称之为执行上下文）。这个记录会包含函数在哪里被调用、函数的调用方式、传入参数等信息。this就是这个记录的一个属性，会在函数执行的过程中调用到。==</p><p>this实际上是在函数被调用的时候发生绑定，他指向什么完全取决于函数在哪里被调用。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。&lt;/p&gt;
+&lt;pre class=&quot;line-numbers l</summary>
       
     
     
