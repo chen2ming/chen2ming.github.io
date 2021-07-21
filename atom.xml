@@ -203,29 +203,6 @@
   </entry>
   
   <entry>
-    <title>this词法</title>
-    <link href="http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/"/>
-    <id>http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/</id>
-    <published>2021-07-18T16:00:00.000Z</published>
-    <updated>2021-07-21T01:15:15.628Z</updated>
-    
-    <content type="html"><![CDATA[<p>ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var obj &#x3D; &#123;    count: 0,    cool: function coolFn() &#123;        if(this.count &lt; 1) &#123;            setTimeout(() &#x3D;&gt; &#123;                this.count++;                console.log(&#39;awesome?&#39;);            &#125;,1000);        &#125;    &#125;&#125;obj.cool();&#x2F;&#x2F;awesome?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这个箭头函数中的this直接是cool()的this绑定（因此调用它并不会出错）</p><p>它将程序员们经常犯的一个错误给标准化了，也就是混淆了this绑定规则和词法作用域规则。</p><p>另一个导致箭头函数不够理想的原因是他不是具名的，而是一个匿名函数。</p><h3 id="误解："><a href="#误解：" class="headerlink" title="误解："></a>误解：</h3><ol><li>人们很容易把this理解成指向函数自身。那么为什么函数要从内部引用函数自身呢？常见的原因是递归（从函数内部调用这个函数）或者可以写在第一次被调用后自己解除绑定事件处理器。</li><li>新手通常会认为，既然把函数看做一个对象，那就可以在调用函数时储存状态。</li></ol><p>call</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo(num) &#123;    console.log(&quot;foo&quot; + num);    this.count ++;&#125;foo.count &#x3D; 0;var i;for(i &#x3D; 0; i &lt; 10; i++)&#123;    if(i &gt; 5) &#123;        &#x2F;&#x2F; 使用call(...) 可以确保this指向函数本身        foo.call(foo, i)    &#125;&#125;&#x2F;&#x2F; foo: 6&#x2F;&#x2F; foo: 7&#x2F;&#x2F; foo: 8&#x2F;&#x2F; foo: 9cnosole.log(foo.count); &#x2F;&#x2F; 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="它的作用域"><a href="#它的作用域" class="headerlink" title="它的作用域"></a>它的作用域</h3><p>还有一种常见的错误是，this指向函数的作用域。这个问题在某中情况下是正确的，但是有时候又是错误的。需要明确的是this在任何情况下都不指向函数的词法作域。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo()&#123;    var a &#x3D; 2;    this.bar(); &#x2F;&#x2F;  能调用到bar也是意外，正常应该通过词法作用域，直接执行&#125;function bar()&#123;    console.log(this.a)&#125;foo();  &#x2F;&#x2F; a not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>==当你想把this和词法作用域的查找混合使用的时候，一定要提醒自己这是无法实现的==</p><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>this不是在写代码时候绑定的而是代码在执行的时候绑定的，它的上下文取决于函数调用时的各种条件。</p><p>this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p><p>==当一个函数被执行时，会创建一个活动记录（有时候也被称之为执行上下文）。这个记录会包含函数在哪里被调用、函数的调用方式、传入参数等信息。this就是这个记录的一个属性，会在函数执行的过程中调用到。==</p><p>this实际上是在函数被调用的时候发生绑定，他指向什么完全取决于函数在哪里被调用。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。&lt;/p&gt;
-&lt;pre class=&quot;line-numbers l</summary>
-      
-    
-    
-    
-    
-    <category term="javaScript" scheme="http://example.com/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
     <title>闭包</title>
     <link href="http://example.com/2021/07/19/js-%E9%97%AD%E5%8C%85/"/>
     <id>http://example.com/2021/07/19/js-%E9%97%AD%E5%8C%85/</id>
@@ -242,6 +219,29 @@
 &lt;/blockquote&gt;
 &lt;p&gt;闭包的产生：&lt;br&gt;函数在被定义的地方之外被执行就会产生闭包！！！&lt;/p&gt;
 &lt;pre class=&quot;line-numbers language-JavaScr</summary>
+      
+    
+    
+    
+    
+    <category term="javaScript" scheme="http://example.com/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>this词法</title>
+    <link href="http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/"/>
+    <id>http://example.com/2021/07/19/js-this%E8%AF%8D%E6%B3%95/</id>
+    <published>2021-07-18T16:00:00.000Z</published>
+    <updated>2021-07-21T01:15:15.628Z</updated>
+    
+    <content type="html"><![CDATA[<p>ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var obj &#x3D; &#123;    count: 0,    cool: function coolFn() &#123;        if(this.count &lt; 1) &#123;            setTimeout(() &#x3D;&gt; &#123;                this.count++;                console.log(&#39;awesome?&#39;);            &#125;,1000);        &#125;    &#125;&#125;obj.cool();&#x2F;&#x2F;awesome?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这个箭头函数中的this直接是cool()的this绑定（因此调用它并不会出错）</p><p>它将程序员们经常犯的一个错误给标准化了，也就是混淆了this绑定规则和词法作用域规则。</p><p>另一个导致箭头函数不够理想的原因是他不是具名的，而是一个匿名函数。</p><h3 id="误解："><a href="#误解：" class="headerlink" title="误解："></a>误解：</h3><ol><li>人们很容易把this理解成指向函数自身。那么为什么函数要从内部引用函数自身呢？常见的原因是递归（从函数内部调用这个函数）或者可以写在第一次被调用后自己解除绑定事件处理器。</li><li>新手通常会认为，既然把函数看做一个对象，那就可以在调用函数时储存状态。</li></ol><p>call</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo(num) &#123;    console.log(&quot;foo&quot; + num);    this.count ++;&#125;foo.count &#x3D; 0;var i;for(i &#x3D; 0; i &lt; 10; i++)&#123;    if(i &gt; 5) &#123;        &#x2F;&#x2F; 使用call(...) 可以确保this指向函数本身        foo.call(foo, i)    &#125;&#125;&#x2F;&#x2F; foo: 6&#x2F;&#x2F; foo: 7&#x2F;&#x2F; foo: 8&#x2F;&#x2F; foo: 9cnosole.log(foo.count); &#x2F;&#x2F; 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="它的作用域"><a href="#它的作用域" class="headerlink" title="它的作用域"></a>它的作用域</h3><p>还有一种常见的错误是，this指向函数的作用域。这个问题在某中情况下是正确的，但是有时候又是错误的。需要明确的是this在任何情况下都不指向函数的词法作域。</p><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function foo()&#123;    var a &#x3D; 2;    this.bar(); &#x2F;&#x2F;  能调用到bar也是意外，正常应该通过词法作用域，直接执行&#125;function bar()&#123;    console.log(this.a)&#125;foo();  &#x2F;&#x2F; a not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>==当你想把this和词法作用域的查找混合使用的时候，一定要提醒自己这是无法实现的==</p><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>this不是在写代码时候绑定的而是代码在执行的时候绑定的，它的上下文取决于函数调用时的各种条件。</p><p>this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p><p>==当一个函数被执行时，会创建一个活动记录（有时候也被称之为执行上下文）。这个记录会包含函数在哪里被调用、函数的调用方式、传入参数等信息。this就是这个记录的一个属性，会在函数执行的过程中调用到。==</p><p>this实际上是在函数被调用的时候发生绑定，他指向什么完全取决于函数在哪里被调用。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。&lt;/p&gt;
+&lt;pre class=&quot;line-numbers l</summary>
       
     
     
