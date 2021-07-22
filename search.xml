@@ -226,25 +226,6 @@
     
     
     <entry>
-      <title>markdown 写法备注</title>
-      <link href="/2021/07/17/remarks/"/>
-      <url>/2021/07/17/remarks/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>标题</p></blockquote><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><blockquote><p>无序列表</p></blockquote><ul><li>1</li></ul><ul><li>2</li></ul><ul><li>3</li></ul><blockquote><p>有序列表</p></blockquote><ol><li>列表  </li><li>列表</li><li>列表</li></ol><blockquote><p>分割线</p></blockquote><hr><hr><blockquote><p>代码块 ```</p></blockquote><blockquote><p>文本样式</p></blockquote><p>  <em>字体倾斜</em>                &gt;        <em>字体倾斜</em><br>  <em>字体倾斜</em><br>  <strong>字体加粗</strong>              &gt;        <strong>字体加粗</strong><br>  <strong>字体加粗</strong><br>  <del>字体删除</del>              &gt;        <del>字体删除</del><br> ! 符号与字体之间不要有空格</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> markdown </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>js数据类型</title>
       <link href="/2021/07/17/js-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
       <url>/2021/07/17/js-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
@@ -256,6 +237,25 @@
         <tags>
             
             <tag> javaScript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>markdown 写法备注</title>
+      <link href="/2021/07/17/remarks/"/>
+      <url>/2021/07/17/remarks/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>标题</p></blockquote><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><blockquote><p>无序列表</p></blockquote><ul><li>1</li></ul><ul><li>2</li></ul><ul><li>3</li></ul><blockquote><p>有序列表</p></blockquote><ol><li>列表  </li><li>列表</li><li>列表</li></ol><blockquote><p>分割线</p></blockquote><hr><hr><blockquote><p>代码块 ```</p></blockquote><blockquote><p>文本样式</p></blockquote><p>  <em>字体倾斜</em>                &gt;        <em>字体倾斜</em><br>  <em>字体倾斜</em><br>  <strong>字体加粗</strong>              &gt;        <strong>字体加粗</strong><br>  <strong>字体加粗</strong><br>  <del>字体删除</del>              &gt;        <del>字体删除</del><br> ! 符号与字体之间不要有空格</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> markdown </tag>
             
         </tags>
       
