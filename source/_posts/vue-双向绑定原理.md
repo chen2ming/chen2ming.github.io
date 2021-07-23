@@ -8,7 +8,7 @@ date: 2021-7-21
 # **object**双向绑定原理
 ## 实现方式
 1. 通过Object.defineProperty()定义一个observer类，将正常的object转换成一个可观测的object，并且加上了_ob_属性，如果读取了会通过触发get，如果改变了会触发set
-```JavaScript
+```javascript
   // 源码位置：src/core/observer/index.js
 
 /**
@@ -68,7 +68,7 @@ function defineReactive (obj,key,val) {
 ```
 
 2. 收集依赖，也就是收集那里用到了这个数据的。具体做法是定义一个dep类，其实就是一个数组，那里用到了就在数据里面push进去。dep里面有几个方法，在observer的get里面depend负责收集依赖（其实就是Watcher），在set里面notify通知所有依赖更新（通知的也是Watcher，最后由Watcher通知视图更新）
-```JavaScript
+```javascript
 // 源码位置：src/core/observer/dep.js
 export default class Dep {
   constructor () {
@@ -110,7 +110,7 @@ export function remove (arr, item) {
 }
 ```
 3. Watcher类，Watcher先把自己设置到全局唯一的指定位置（window.target），然后读取数据。因为读取了数据，所以会触发这个数据的getter。接着，在getter中就会从全局唯一的那个位置读取当前正在读取数据的Watcher，并把这个watcher收集到Dep中去。收集好之后，当数据发生变化时，会向Dep中的每个Watcher发送通知。通过这样的方式，Watcher可以主动去订阅任意一个数据的变化。
-```JavaScript
+```javascript
 export default class Watcher {
   constructor (vm,expOrFn,cb) {
     this.vm = vm;
@@ -177,7 +177,7 @@ Watcher接收到通知后，会向外界发送通知，变化通知到外界后�
 万变不离其宗，虽然对Array型数据设计了新的变化侦测机制，但是其根本思路还是不变的。那就是：还是在获取数据时收集依赖，数据变化时通知依赖更新。
 ## 实现方式
 1. 收集依赖
-```JavaScript
+```javascript
 data(){
   return {
     arr:[1,2,3]
@@ -188,7 +188,7 @@ arr这个数据始终都存在于一个object数据对象中，而且我们也�
 总结一句话就是：**Array型数据还是在getter中收集依赖。**
 
 2. 使Array型数据可观测
-```JavaScript
+```javascript
 let arr = [1,2,3]
 arr.push(4)
 Array.prototype.newPush = function(val){
@@ -202,7 +202,7 @@ arr.newPush(4)
  在Vue中创建了一个数组方法拦截器，它拦截在数组实例与Array.prototype之间，在拦截器内重写了操作数组的一些方法，当数组实例使用操作数组方法时，其实使用的是拦截器中重写的方法，而不再使用Array.prototype上的原生方法
 ![Image text](/imgs/vue1.png)
 
-```JavaScript
+```javascript
 const arrayProto = Array.prototype
 // 创建一个对象作为拦截器
 export const arrayMethods = Object.create(arrayProto)
@@ -237,7 +237,7 @@ methodsToPatch.forEach(function (method) {
 在上面的代码中，首先创建了继承自Array原型的空对象arrayMethods，接着在arrayMethods上使用object.defineProperty方法将那些可以改变数组自身的7个方法遍历逐个进行封装。最后，当我们使用push方法的时候，其实用的是arrayMethods.push，而arrayMethods.push就是封装的新函数mutator，也就后说，实标上执行的是函数mutator，而mutator函数内部执行了original函数，这个original函数就是Array.prototype上对应的原生方法。 那么，接下来我们就可以在mutator函数中做一些其他的事，比如说发送变化通知。
 
 ### 使用拦截器
-```JavaScript
+```javascript
 // 源码位置：/src/core/observer/index.js
 export class Observer {
   constructor (value) {
@@ -280,7 +280,7 @@ function copyAugment (target: Object, src: Object, keys: Array<string>) {
 ```
 
 ### 依赖收集
-```JavaScript
+```javascript
 // 源码位置：/src/core/observer/index.js
 export class Observer {
   constructor (value) {
@@ -297,7 +297,7 @@ export class Observer {
   }
 }
 ```
-```JavaScript
+```javascript
 function defineReactive (obj,key,val) {
   let childOb = observe(val)
   Object.defineProperty(obj, key, {
@@ -342,7 +342,7 @@ export function observe (value, asRootData){
 
 ### 通知依赖
 我们只要能访问到被转化成响应式的数据value即可，因为vaule上的__ob__就是其对应的Observer类实例，有了Observer类实例我们就能访问到它上面的依赖管理器，然后只需调用依赖管理器的dep.notify()方法，让它去通知依赖更新即可
-```JavaScript
+```javascript
 /**
  * Intercept mutating methods and emit events
  */
@@ -360,7 +360,7 @@ methodsToPatch.forEach(function (method) {
 
 ## 不足
 前文中我们说过，对于数组变化侦测是通过拦截器实现的，也就是说只要是通过数组原型上的方法对数组进行操作就都可以侦测到，但是别忘了，我们在日常开发中，还可以通过数组的下标来操作数据，如下
-```JavaScript
+```javascript
 let arr = [1,2,3]
 arr[0] = 5;       // 通过数组下标修改数组中的数据
 arr.length = 0    // 通过修改数组长度清空数组

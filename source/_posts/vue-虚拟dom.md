@@ -6,7 +6,7 @@ date: 2021-7-22
 # 虚拟DOM简介
 ## 什么是虚拟dom
 所谓虚拟DOM，就是用一个JS对象来描述一个DOM节点，像如下示例:
-```JavaScript
+```javascript
 <div class="a" id="b">我是内容</div>
 
 {
@@ -21,7 +21,7 @@ date: 2021-7-22
 ```
 ## 为什么要有虚拟DOM？
 我们知道，Vue是数据驱动视图的，数据发生变化视图就要随之更新，在更新视图的时候难免要操作DOM,而操作真实DOM又是非常耗费性能的，这是因为浏览器的标准就把 DOM 设计的非常复杂，所以一个真正的 DOM 元素是非常庞大的，如下所示：
-```JavaScript
+```javascript
 let div = document.createElement('div')
 let str = ''
 for (const key in div) {
@@ -35,7 +35,7 @@ console.log(str) // 结果是非常长的
 
 ## VNode类
 虚拟DOM就是用JS来描述一个真实的DOM节点。而在Vue中就存在了一个VNode类，通过这个类，我们就可以实例化出不同类型的虚拟DOM节点，源码如下
-```JavaScript
+```javascript
 // 源码位置：src/core/vdom/vnode.js
 
 export default class VNode {

@@ -1,13 +1,13 @@
 ---
 title: this词法
 date: 2021-7-19
-tag: javaScript
-type: javaScript
+tag: javascript
+type: javascript
 ---
 
 ES6添加了一个特殊的词法形式的函数声明，叫做箭头函数，箭头函数在涉及this绑定的行为和普通函数的行为完全不一样，他放弃了所有的普通函数this绑定的规则，取而代之的是用当前的词法作用域覆盖了this原本的值。
 
-```JavaScript
+```javascript
 var obj = {
     count: 0,
     cool: function coolFn() {
@@ -36,7 +36,7 @@ obj.cool();//awesome?
 
 
 call
-```JavaScript
+```javascript
 function foo(num) {
     console.log("foo" + num);
     this.count ++;
@@ -60,7 +60,7 @@ cnosole.log(foo.count); // 4
 ### 它的作用域
 还有一种常见的错误是，this指向函数的作用域。这个问题在某中情况下是正确的，但是有时候又是错误的。需要明确的是this在任何情况下都不指向函数的词法作域。
 
-```JavaScript
+```javascript
 function foo(){
     var a = 2;
     this.bar(); //  能调用到bar也是意外，正常应该通过词法作用域，直接执行

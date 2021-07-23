@@ -1,8 +1,8 @@
 ---
 title: 作用域是什么-词法作用域
 date: 2021-7-8
-tag: javaScript
-type: javaScript
+tag: javascript
+type: javascript
 ---
 
 作用域是什么
@@ -40,7 +40,7 @@ ReferenceError 这个错误是找不到定义的变量
 
 词法欺骗：
 >eval( )
-```JavaScript
+```javascript
 function foo(str, a) {
     eval(str); // 欺骗
     console.log(a, b);
@@ -50,7 +50,7 @@ var b = 2;
 foo('val b = 3;', 1); // 1, 3
 ```
 >with(){}
-```JavaScript
+```javascript
 function foo(obj) {
     with(obj){
         a = 2;
