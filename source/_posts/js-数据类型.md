@@ -1,8 +1,8 @@
 ---
 title: js数据类型
 date: 2021-7-17
-tag: javascript
-type: javascript
+tag: js
+type: js
 ---
 
 > 基本数据类型、引用数据类型
@@ -24,10 +24,10 @@ Number、String 、Boolean、Null和Undefined。基本数据类型是按值访�
 
 ## 引用类型数据
   也就是对象类型Object type，比如：Object 、Array 、Function 、Data等。
-　　javascript的引用数据类型是保存在堆内存中的对象。
+　　js的引用数据类型是保存在堆内存中的对象。
 　　与其他语言的不同是，你不可以直接访问堆内存空间中的位置和操作堆内存空间。只能操作对象在栈内存中的引用地址。
 　　所以，引用类型数据在栈内存中保存的实际上是对象在堆内存中的引用地址。通过这个引用地址可以快速查找到保存中堆内存中的对象。
-```javascript
+```js
 var obj1 = new Object();
 var obj2 = obj1;
 obj2.name = "我有名字了";
@@ -39,7 +39,7 @@ console.log(obj1.name); // 我有名字了
 >js中变量是没有数据类型的，只有值才有。变量可以持有任何数据类型的值。
 
 typeof 用来查看变量的类型会返回一字符串：
-```javascript
+```js
 typeof 1; // "number"
 typeof '1'; // "string"
 typeof undefined; // "undefined"
@@ -49,7 +49,7 @@ typeod Symbol(); //'symbo'
 typeof null; // 'object'
 ```
 >null 使用typeof 返回的类型是object，所以查看是不是null是需要用复合条件来检测
-```javascript
+```js
 var a = null
 (!a && typeof a ==="object"); //true
 
@@ -67,7 +67,7 @@ JSON.stringify(a) === 'null'
 
 ### 不同的内存分配机制也带来了不同的访问机制
 　　　
-　　1）在javascript中是不允许直接访问保存在堆内存中的对象的，所以在访问一个对象时，
+　　1）在js中是不允许直接访问保存在堆内存中的对象的，所以在访问一个对象时，
 　　　　首先得到的是这个对象在堆内存中的地址，然后再按照这个地址去获得这个对象中的值，这就是传说中的按引用访问。
 　　2）而原始类型的值则是可以直接访问到的。
 　　

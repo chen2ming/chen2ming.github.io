@@ -11,7 +11,7 @@ date: 2021-7-24
 另外，文本信息和标签属性信息却又是存在于HTML标签之内的，所以在解析整个模板的时候它的流程应该是这样子的：HTML解析器是主线，先用HTML解析器进行解析整个模板，在解析过程中如果碰到文本内容，那就调用文本解析器来解析文本，如果碰到文本中包含过滤器那就调用过滤器解析器来解析。如下图所示：
 ![Image text](/imgs/vue5.png)
 
-```javascript
+```js
 // 代码位置：/src/complier/parser/index.js
 /**
  * Convert HTML string to AST.

@@ -1,8 +1,8 @@
 ---
 title: 闭包
 date: 2021-7-19
-tag: javascript
-type: javascript
+tag: js
+type: js
 ---
 
 >闭包是基于词法作用域书写代码时所产生的自然结果
@@ -10,7 +10,7 @@ type: javascript
 闭包的产生：
 函数在被定义的地方之外被执行就会产生闭包！！！
 
-```javascript
+```js
 function foo() {
     var a = 2;
     function bar(){
@@ -28,7 +28,7 @@ baz(); // 2  这就是闭包！
 
 ==无论通过何种手段将内部函数传递到所在的词法作用域以外，他都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包。==
 
-```javascript
+```js
 function wait(message){
     setTimeout( function timer() {
         console.log(message);
@@ -42,7 +42,7 @@ wait执行1000毫秒以后，他的内部作用域并不会消失，还能保持
 
 ### 闭包和循环
 
-```javascript
+```js
 for(var i = 1;i <= 5; i++;){
     setTimeout(function timer() {
         console.log(i);
@@ -54,7 +54,7 @@ for(var i = 1;i <= 5; i++;){
 ，因此输出的显示是循环结束时i的值。
 因为这里所用的i，是同一个作用域下的i，所有的函数共享一个i。
 
-```javascript
+```js
 for(var i = 1;i <= 5; i++;){
     (function() {
         setTimeout(function timer() {
@@ -67,7 +67,7 @@ for(var i = 1;i <= 5; i++;){
 因为我们的IIFE的作用域是空的，我们使用的依然是外层的i，他要包含一点实质的内容才能够我们使用。
 
 
-```javascript
+```js
 for(var i = 1;i <= 5; i++;){
     (function(j) {
         setTimeout(function timer() {
@@ -81,7 +81,7 @@ for(var i = 1;i <= 5; i++;){
 ### 重返块作用域
 前面说let可以劫持块级作用域，，并且在这个块级作用域中声明一个变量。看下面代码
 
-```javascript
+```js
 for(var i = 1; i <= 5; i++) {
     let j = i;
     setTimeout(function timer() {
@@ -91,7 +91,7 @@ for(var i = 1; i <= 5; i++) {
 ```
 还可以更完善
 
-```javascript
+```js
 for(let i = 1; i <= 5; i++) {
     setTimeout(function timer() {
         console.log(i);
@@ -100,7 +100,7 @@ for(let i = 1; i <= 5; i++) {
 ```
 
 ### 模块
-```javascript
+```js
 function foo(){
     var a = 'cool';
     var b = [1,2,3];
@@ -114,7 +114,7 @@ function foo(){
 ```
 这里并没有明显的闭包，只有两个私有数据变量a和b，以及bar和baz两个内部函数，他们的词法作用域就是闭包，
 也就是foo（）的内部作用域。
-```javascript
+```js
 function CoolModule() {
     var something = 'cool';
     var another = [1,2,3];
@@ -146,7 +146,7 @@ foo.doAnother(); // 1!2!3
 一个具有函数属性的对象本身并不是真正的模块。从方便观察角度来看，一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。
 
 改进上面的代码
-```javascript
+```js
 var foo = (function CoolModule() {
     var something = 'cool';
     var another = [1,2,3];
@@ -167,7 +167,7 @@ foo.doAnother(); // 1!2!3
 ```
 
 模块是普通函数，因此也可以传参。
-```javascript
+```js
 function CoolModule(id) {
     function doSomething() {
         console.log(id);
@@ -181,7 +181,7 @@ foo.doSomething(); // foo
 ```
 
 >模块另一个简单但又强大的用法是命名将要作为公共API返回的对象。
-```javascript
+```js
 var foo = (function Cool(id){
     function change() {
         publicAPI.identify = identify2;
@@ -208,7 +208,7 @@ foo.identify(); // FOO MODULE
 现代的模块机制
 ---
 创建一个模块
-```javascript
+```js
 var MyModules = (function Manager(){
     // 存储方法
     var modules = {};
@@ -240,7 +240,7 @@ obj：这个对象将代替Function类里this对象
 args：这个是数组，它将作为参数传给Function(args-->arguments)
 
 使用它来定义模块：
-```javascript
+```js
 MyModules.define("bar",[], function() {
     function hello(who) {
         return "let me introduce:" + who;

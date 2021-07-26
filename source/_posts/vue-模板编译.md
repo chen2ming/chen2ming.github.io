@@ -18,7 +18,7 @@ date: 2021-7-23
 + 优化阶段：遍历AST，找出其中的静态节点，并打上标记；
 + 代码生成阶段：将AST转换成渲染函数；
 
-```javascript
+```js
 export const createCompiler = createCompilerCreator(function baseCompile (
   template: string,
   options: CompilerOptions

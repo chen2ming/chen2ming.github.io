@@ -15,7 +15,7 @@ date: 2021-7-23
 + 判断是否为元素节点只需判断该VNode节点是否有tag标签即可。如果有tag属性即认为是元素节点，则调用createElement方法创建元素节点，通常元素节点还会有子节点，那就递归遍历创建所有子节点，将所有子节点创建好之后insert插入到当前元素节点里面，最后把当前元素节点插入到DOM中。
 +判断是否为注释节点，只需判断VNode的isComment属性是否为true即可，若为true则为注释节点，则调用createComment方法创建注释节点，再插入到DOM中。
 + 如果既不是元素节点，也不是注释节点，那就认为是文本节点，则调用createTextNode方法创建文本节点，再插入到DOM中。
-```javascript
+```js
 // 源码位置: /src/core/vdom/patch.js
 function createElm (vnode, parentElm, refElm) {
     const data = vnode.data
@@ -37,7 +37,7 @@ function createElm (vnode, parentElm, refElm) {
 
 ## 删除节点
 如果某些节点再新的VNode中没有而在旧的oldVNode中有，那么就需要把这些节点从旧的oldVNode中删除。删除节点非常简单，只需在要删除节点的父元素上调用removeChild方法即可。源码如下：
-```javascript
+```js
 function removeNode (el) {
     const parent = nodeOps.parentNode(el)  // 获取父节点
     if (isDef(parent)) {
@@ -50,7 +50,7 @@ function removeNode (el) {
 更新节点就是当某些节点在新的VNode和旧的oldVNode中都有时，我们就需要细致比较一下，找出不一样的地方进行更新。
 
 + 如果VNode和oldVNode均为静态节点,我们说了，静态节点无论数据发生任何变化都与它无关，所以都为静态节点的话则直接跳过，无需处理。
-```javascript
+```js
 <p>我是不会变化的文字</p>
 ```
 + 如果VNode是文本节点
@@ -62,7 +62,7 @@ function removeNode (el) {
     如果新的节点内包含了子节点，那么此时要看旧的节点是否包含子节点，如果旧的节点里也包含了子节点，那就需要递归对比更新子节点；如果旧的节点里不包含子节点，那么这个旧节点有可能是空节点或者是文本节点，如果旧的节点是空节点就把新的节点里的子节点创建一份然后插入到旧的节点里面，如果旧的节点是文本节点，则把文本清空，然后把新的节点里的子节点创建一份然后插入到旧的节点里面。
   + 该节点不包含子节点
     如果该节点不包含子节点，同时它又不是文本节点，那就说明该节点是个空节点，那就好办了，不管旧节点之前里面都有啥，直接清空即可。
-```javascript
+```js
 // 更新节点
 function patchVnode (oldVnode, vnode, insertedVnodeQueue, removeOnly) {
   // vnode与oldVnode是否完全一样？若是，退出程序

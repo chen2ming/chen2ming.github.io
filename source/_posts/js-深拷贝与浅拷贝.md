@@ -1,8 +1,8 @@
 ---
 title: 浅拷贝与深拷贝
 date: 2021-7-17
-tag: javascript
-type: javascript
+tag: js
+type: js
 ---
 
 ## 浅拷贝与深拷贝 (深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的)
@@ -19,7 +19,7 @@ type: javascript
 
 ## 浅拷贝的实现方式
 
-```javascript
+```js
  var obj1 = {
     'name' : 'zhangsan',
     'age' :  '18',
@@ -44,7 +44,7 @@ console.log('obj3',obj3)
 **.Object.assign()**
 Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 Object.assign()进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。
 
-```javascript
+```js
 var obj = { a: {a: "kobe", b: 39} };
 var initalObj = Object.assign({}, obj);
 initalObj.a.a = "wade";
@@ -53,7 +53,7 @@ console.log(obj.a.a); //wade
   *注意：当object只有一层的时候，是深拷贝*
 
 **Array.prototype.concat()**
-```javascript
+```js
 let arr = [1, 3, {
     username: 'kobe'
     }];
@@ -65,7 +65,7 @@ console.log(arr);
 ## 深拷贝的实现方式
 
 **1.JSON.parse(JSON.stringify())**
-```javascript
+```js
 let arr = [1, 3, {
   username: ' kobe'
 }];
@@ -77,7 +77,7 @@ console.log(arr, arr4)
 **这种方法虽然可以实现数组或对象深拷贝,但不能处理函数**
 
 **2.手写递归方法**
-```javascript
+```js
     //定义检测数据类型的功能函数
 function checkedType(target) {
   return Object.prototype.toString.call(target).slice(8, -1)
@@ -113,7 +113,7 @@ function clone(target) {
 
 **3.函数库lodash**
 该函数库也有提供_.cloneDeep用来做 Deep Copy
-```javascript
+```js
 var _ = require('lodash');
 var obj1 = {
     a: 1,

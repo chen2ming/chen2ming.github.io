@@ -18,7 +18,7 @@ tga: 异步
 + 稍有不慎就会踏入回调地狱 - 嵌套层次深，不好维护
 
 ## new Promise
-```javascript
+```js
 new Promise(
   function (resolve, reject) {
     // 一段耗时的异步操作
@@ -37,7 +37,7 @@ Promise.all([p1, p2, p3])用于将多个promise实例，包装成一个新的Pro
 数组里可以是Promise对象，也可以是别的值，只有Promise会等待状态改变
 当所有的子Promise都完成，该Promise完成，返回值是全部值得数组
 有任何一个失败，该Promise失败，返回值是第一个失败的子Promise结果
-```javascript
+```js
 //切菜
 function cutUp(){
     console.log('开始切菜。');
@@ -69,7 +69,7 @@ Promise.all([cutUp(), boil()])
 
 ## Promise.race() 它有任意一个完成就算完成
 
-```javascript
+```js
 let p1 = new Promise(resolve => {
     setTimeout(() => {
         resolve('I\`m p1 ')
@@ -88,7 +88,7 @@ Promise.race([p1, p2])
 
 ## 回调地狱和promise对比
 + 回调地狱
-```javascript
+```js
 /***
    第一步：找到北京的id
    第二步：根据北京的id -> 找到北京公司的id
@@ -133,7 +133,7 @@ Promise.race([p1, p2])
  })
 ```
 
-```javascript
+```js
 // Promise 写法
 // 第一步：获取城市列表
 const cityList = new Promise((resolve, reject) => {
