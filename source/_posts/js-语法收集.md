@@ -16,6 +16,32 @@ if(el){
 el = el && query(el);
 if(!el) return
 el = query(el)
+
+// 是否存执行方法  或者读取数据
+let object = {
+  name:'张三',
+  hobby:{
+    a:'钓鱼',
+    b:'滑板'
+  }
+}
+// 意思是如果object存在就取hobby(否则终止),如果hobby存在就取a(否则终止)。当有一个不存在的时候就取|| 后面的默认值
+let a = object?.hobby?.a || '暂无数据'
+
+// || 与 ??
+// ?? 只会过 null 与 undefined
+// || 当数据为 '', 0, null, undefined, false 都会走默认值
+axios.get('/...').then(res => {
+  if(res.code === 200) {
+    this.data = res.data || {}
+  }
+})
+axios.get('/...').then(res => {
+  if(res.code === 200) {
+    this.data = res.data ?? {}
+  }
+})
+
 ```
 # 少用三目运算符
 这个我个人理解是如果判断的东西非常简单，就是用三目(判断有两种情况，对应两种值、或者两个方法)
