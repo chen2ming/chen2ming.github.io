@@ -10,7 +10,15 @@ type: js
 ECMAScript包括两个不同类型的值：基本数据类型和引用数据类型。
 基本数据类型指的是简单的数据段，引用数据类型指的是有多个值构成的对象。
 当我们把变量赋值给一个变量时，解析器首先要确认的就是这个值是基本类型值还是引用类型值。
-
+JavaScript目前有八种内置类型：
+  Number
+  String
+  Boolean
+  Null
+  Undefined
+  Object
+  Symbol
+  BigInt
 ## 常见的基本数据类型
 
 Number、String 、Boolean、Null和Undefined。基本数据类型是按值访问的，因为可以直接操作保存在变量中的实际值。示例：
@@ -49,6 +57,8 @@ typeod Symbol(); //'symbo'
 typeof null; // 'object'
 ```
 >null 使用typeof 返回的类型是object，所以查看是不是null是需要用复合条件来检测
+> **typeof null === 'object'** 是因为js中的数据在底层是以二进制存储，比如null所有存储值都是0，但是底层的判断机制，只要前三位为0，就会判定为object
+
 ```js
 var a = null
 (!a && typeof a ==="object"); //true
