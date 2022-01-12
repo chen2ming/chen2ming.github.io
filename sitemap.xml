@@ -298,6 +298,20 @@
 
   
   <url>
+    <loc>http://example.com/tags/ts/</loc>
+    <lastmod>2022-01-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/%E5%BC%82%E6%AD%A5/</loc>
+    <lastmod>2022-01-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/git/</loc>
     <lastmod>2022-01-12</lastmod>
     <changefreq>daily</changefreq>
@@ -312,13 +326,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E5%BC%82%E6%AD%A5/</loc>
-    <lastmod>2022-01-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/js/</loc>
     <lastmod>2022-01-12</lastmod>
     <changefreq>daily</changefreq>
@@ -326,14 +333,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/markdown/</loc>
+    <loc>http://example.com/tags/react/</loc>
     <lastmod>2022-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/react/</loc>
+    <loc>http://example.com/tags/markdown/</loc>
     <lastmod>2022-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -383,13 +390,6 @@
   
   <url>
     <loc>http://example.com/tags/%E5%89%8D%E7%AB%AF%E8%87%AA%E6%A3%80%E6%B8%85%E5%8D%95/</loc>
-    <lastmod>2022-01-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/ts/</loc>
     <lastmod>2022-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
