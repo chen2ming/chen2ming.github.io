@@ -1,5 +1,5 @@
 ---
-titil: git提交的格式校验
+title: git提交的格式校验
 tag: git
 date: 2021-12-30
 ---

@@ -27,6 +27,7 @@ new Proxy(data,'count',{
 ```
 > Object.defineProperty 要修改 data 中的属性必须要明确的知道 key 值（count）, Proxy 在使用中是读取或者设置data中任意的 key，所以不管是修改已有的属性还是新增属性，都可以实现响应式的要求。
 
+# vue3使用
 * 关于生命周期钩子函数
 | vue2 | vue3 |
 | ---- | ---- |
@@ -73,3 +74,82 @@ watch(() => data.count, (newVal, oldVal) => {
     console.log('oldVal:', oldVal)
 })
 ```
+
+* Option API 与 Composition API
+  - vue 2.x 使用的是Option API 构建组件。一个组件的功能需要通过methods，computed，watch，data等属性和方法，共同处理页面逻辑。存在多个业务功能共同使用一个实例化new vue()
+  这种构建方式在业务逻辑复杂的大项目中，API比较分散，可能会存在分不清哪个方法对应哪个功能。项目的易读性、可复用性相对较差，耦合性较高。
+  - vue 3.x 使用的是Composition API 构建组件。代码是根据逻辑功能来组织的，一个功能所定义的所有api会放在一起 （高内聚，低耦合），我们能快速的定位到这个功能所用到的所有API，提高代码可读性和可维护性
+
+* setup函数是使用Composition API的入口
+  * 在创建组件实例时，在初始组件解析之后调用setup。在生命周期方面，它在beforeCreate钩子之前调用；
+  * 可以返回一个对象，这个对象的属性被合并到渲染上下文，并可以在模板中直接使用
+  * 可以返回一个渲染函数，如下： return () => h(‘div’, [count.value, object.foo])
+  * 接收props对象作为第一个参数，接收来的props对象，props对象是响应式的(reactive), 当传入的新的props对象时会对其进行更新，且可以通过watchEffect或watch监视其变化。
+  props对象不支持解构,解构会导致失去响应性：
+  ```js
+  export default {
+    props: {
+      name: String
+    },
+    setup({ name }) {
+      watchEffect(() => {
+        console.log(`name is: ` + name) // Will not be reactive!
+      })
+    }
+  }
+  ```
+
+  * 接受context对象作为第二个参数，这个对象包含attrs（属性），slots（作用域插槽），emit（事件传播函数）三个属性。（还有expose 函数，实际为4个属性， 可以通过expose 向父级暴露一些子组件的函数、属性等，父组件可以通过ref直接获取到）
+  与 prop 不同，context 是普通对象，不是响应式的，slots 和 attr 的值会在组件更新时而更新，如果需要监听 slots 、‘attr’ 的更新触发的副作用，建议在 setup() 函数中添加 onUpdated 函数监听副作用
+
+  ```js
+  // comp-a.vue
+  {
+    name: 'comp-a',
+    setup(props, { attrs, slots, emit, expose }) {
+      const observed = reactive({
+        a: 1
+      })
+      function setObservedA(value) {
+        observed.a = value
+      }
+      expose({
+        setObservedA
+      })
+      return {
+        observed,
+      }
+    }
+  }
+  // comp-b.vue
+  {
+    template: `
+      <comp-a ref="compa" />
+    `,
+    setup() {
+      const compa = ref(null)
+      onMounted(() => {
+        // comp-a 调用 expose 之后, 父组件 ref 拿到的结果为调用 expose 时的参数。而不再是组件实例了
+        compa.value.setObservedA(2)
+      })
+      return {
+        compa
+      }
+    }
+  }
+  ```
+  * setup() 中的 this 不是当前组件实例，实际打印发现为 undefined ， 不建议 setup() 与 Option API 混用，可能会造成混乱。
+  
+# vue3 中的h函数
+* h函数就是vue中的createElement方法，这个函数作用就是创建虚拟dom对象，通过diff算法，追踪dom变化的
+* createElement函数，它返回的实际上不是一个DOM元素，更准确的名字是：createNodeDescription（直译为——创建节点描述），因为它所包含的信息会告诉vue页面上需要渲染什么样的节点，包括其子节点的描述信息。我们把这样的节点叫做：“虚拟节点（virtual node）”，也常简写为：“VNode”
+* h函数接受三个参数：
+  参数一：tag（标签名）、组件的选项对象、函数（必选）；
+  参数二：一个对象，标签的属性对应的数据，如：class、id、disabled 等等（可选）；
+  参数三：子级虚拟节点，字符串形式或数组形式，子级虚拟节点也需要使用createElement构建。
+* dom节点 bable编译前后对比：
+![Image text](/imgs/vue3-1.png)
+
+# Vue3.0 toRaw函数和markRaw函数
+* toRaw方法是把被reactive或readonly后的Proxy对象转换为原来的target对象，而markRaw则直接让target不能被reactive或readonly
+
