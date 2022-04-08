@@ -1,5 +1,5 @@
 ---
-title: git提交的格式校验
+title: git相关操作
 tag: git
 date: 2021-12-30
 ---
@@ -62,4 +62,10 @@ type(scope) : subject
 6. npx husky install 
 7. npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 
-# 提交的时候校验eslint代码规范
+# git分支相关报错
+1. 指定pull命令的更新方式
+```
+git config pull.rebase false # 默认策略
+git config pull.rebase true   
+git config pull.ff only  
+```
