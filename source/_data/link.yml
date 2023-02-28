@@ -1,11 +1,131 @@
-- class_name: 友情链接
-  class_desc: 今天你学习了么？
+- class_name: 开源框架
+  class_desc: 
   link_list:
-    - name: 江橙
-      link: https://blogs.chenghuizi.com/
-      avatar: /imgs/motuo1.jpeg
-      descr: 技术了不得
-    - name: 娄豪杰
-      link: https://louhaojie99.top/
+    - name: vue-element-plus-admin
+      link: https://element-plus-admin-doc.cn/
+      avatar: https://element-plus-admin-doc.cn/logo.png
+      descr: 一套基于vue3、element-plus、typesScript4、vite3的后台集成方案
+    - name: CodeFeve
+      link: https://github.com/PGYER/codefever
       avatar: /imgs/motuo2.jpeg
-      descr: 人生就像品茗，懂得吃苦，才能回甘啊
+      descr: 完全免费开源的 Git 代码托管服务
+    - name: AList
+      link: https://alist.nn.ci/zh/
+      avatar: https://alist.nn.ci/logo.svg
+      descr: 🗂️ 一个支持多种存储的文件列表程序，使用 Gin 和 Solidjs。
+
+- class_name: 文档地址
+  class_desc: 
+  link_list:
+    - name: vue3
+      link: https://cn.vuejs.org/
+      avatar: https://cli.vuejs.org/favicon.png
+      descr: 易学易用，性能出色，适用场景丰富的 Web 前端框架。
+    - name: Vue CLI
+      link: https://cli.vuejs.org/zh/index.html
+      avatar: https://cli.vuejs.org/favicon.png
+      descr: 🛠️ Vue.js 开发的标准工具
+    - name: Vue Router
+      link: https://router.vuejs.org/zh/
+      avatar: https://cli.vuejs.org/favicon.png
+      descr: Vue.js 的官方路由
+    - name: Vuex
+      link: https://vuex.vuejs.org/zh/index.html
+      avatar: https://cli.vuejs.org/favicon.png
+      descr: Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式 + 库
+    - name: Pinia 中文文档
+      link: https://pinia.web3doc.top/
+      avatar: https://pinia.web3doc.top/logo.svg
+      descr: vuex的替代品
+    - name: Vite
+      link: https://cn.vitejs.dev/
+      avatar: https://cn.vitejs.dev/logo-with-shadow.png
+      descr: 下一代的前端工具链
+
+- class_name: css样式库
+  class_desc:
+  link_list:
+    - name: Tailwind CSS 
+      link: https://www.tailwindcss.cn/docs
+      avatar: https://windicss.org/assets/logo.svg
+      descr: 无需离开您的HTML，即可快速建立现代网站。
+    - name: Animate.css
+      link: https://animate.style/
+      avatar: https://www.gstatic.cn/images/icons/material/system/2x/settings_grey600_24dp.png
+      descr: css动画库
+    - name: gradient-generator
+      link: https://www.minimamente.com/example/gradient-generator/
+      avatar: https://www.gstatic.cn/images/icons/material/system/2x/settings_grey600_24dp.png
+      descr: CSS渐变轮子，想做css渐变的可以看看，挺好用的
+    - name: Smooth Shadow
+      link: https://shadows.brumm.af/
+      avatar: /imgs/motuo2.jpeg
+      descr: CSS盒子阴影样式
+    - name: yopalette
+      link: https://www.minimamente.com/yopalette/
+      avatar: /imgs/motuo2.jpeg
+      descr: css色卡，个人感觉网站真的好看！
+    - name: Hover
+      link: https://ianlunn.github.io/Hover/#effects
+      avatar: /imgs/motuo2.jpeg
+      descr: 鼠标停留样式，写css困难症的建议收藏
+    - name: cssbuttons
+      link: https://uiverse.io/
+      avatar: https://uiverse.io/build/_assets/logo-OR7QQX33.svg
+      descr: 非常有创意的按钮样式
+
+- class_name: 图标库
+  class_desc:
+  link_list:
+    - name: emojiall
+      link: https://www.emojiall.com/zh-hans
+      avatar: https://www.emojiall.com/logo-white.png
+      descr: 有分类和相关推荐，以及不同国家的emoji的使用趋势和排名
+    - name: iconfont-阿里巴巴矢量图标库
+      link: https://www.iconfont.cn/
+      avatar: blob:https://www.iconfont.cn/e9c022ef-30e3-425d-813d-4b84c05bd204
+      descr: 阿里妈妈MUX倾力打造的矢量图标管理、交流平台。设计师将图标上传到 iconfont 平台，用户可以自定义下载多种格式的icon，平台也可将图标转换为字体
+    - name: khushmeen
+      link: https://khushmeen.com/icons.html
+      avatar: https://unicornicons.com/logo.svg
+      descr: 免费海量涂鸦风格的图标
+    - name: IconPark
+      link: https://iconpark.oceanengine.com/home
+      avatar: https://s3.bytecdn.cn/cdn/expire-1-M/by-design/iconpark/official_lib.svg
+      descr: 字节出品必属精品，字节跳动图标库值得拥有。
+
+- class_name: vue组件库
+  class_desc: 
+  link_list:
+    - name: Element Plus
+      link: https://element-plus.gitee.io/zh-CN/
+      avatar: https://element-plus.gitee.io/images/element-plus-logo.svg
+      descr: 基于 Vue 3，面向设计师和开发者的组件库
+    - name: Ant Design of Vue
+      link: https://1x.antdv.com/docs/vue/introduce-cn/
+      avatar: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg
+      descr: 提炼自企业级中后台产品的交互语言和视觉风格。开箱即用的高质量 Vue 组件。
+    - name: arco Design
+      link: https://arco.design/vue/docs/start
+      avatar: /imgs/motuo2.jpeg
+      descr: 飞书开源的前端Ui框架
+    - name: Vant
+      link: https://vant-contrib.gitee.io/vant/#/zh-CN
+      avatar: https://fastly.jsdelivr.net/npm/@vant/assets/logo.png
+      descr: 轻量、可定制的移动端 Vue 组件库
+    - name: vue-cropper
+      link: https://github.com/xyxiao001/vue-cropper
+      avatar: /imgs/motuo2.jpeg
+      descr: 一个优雅的图片裁剪插件
+    - name: DataV
+      link: http://datav.jiaminghi.com/
+      avatar: http://datav.jiaminghi.com/favicon.ico
+      descr: Vue 大屏数据展示组件库
+    - name: vue.draggable中文文档
+      link: https://www.itxst.com/vue-draggable/tutorial.html
+      avatar: https://www.itxst.com/img/logov31.png
+      descr: Vue.Draggable是一款基于Sortable.js实现的vue拖拽插件。支持移动设备、拖拽和选择文本、智能滚动，可以在不同列表间拖拽、不依赖jQuery为基础、vue 2过渡动画兼容、支持撤销操作，总之是一款非常优秀的vue拖拽组件。
+    - name: vue-lazyload
+      link: https://www.npmjs.com/package/vue-lazyload
+      avatar: /imgs/motuo2.jpeg
+      descr: vue图片懒加载轮子，可以单独与其他框架使用，不会发生冲突。
