@@ -1,0 +1,494 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>npm | chenMing</title><meta name="keywords" content="工程化"><meta name="author" content="chenMing"><meta name="copyright" content="chenMing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="包的安装 安装（install）即下载包由于 npm 的官方 registry 服务器位于国外，可能受网速影响导致下载缓慢或失败。因此，安装好 npm 之后，需要重新设置 registry 的地址为国内地址。目前，淘宝 https:&#x2F;&#x2F;registry.npm.taobao.org 提供了国内的 registry 地址，先设置到该地址。设置方式为npm config set registry ht">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm">
+<meta property="og:url" content="http://example.com/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/npm/index.html">
+<meta property="og:site_name" content="chenMing">
+<meta property="og:description" content="包的安装 安装（install）即下载包由于 npm 的官方 registry 服务器位于国外，可能受网速影响导致下载缓慢或失败。因此，安装好 npm 之后，需要重新设置 registry 的地址为国内地址。目前，淘宝 https:&#x2F;&#x2F;registry.npm.taobao.org 提供了国内的 registry 地址，先设置到该地址。设置方式为npm config set registry ht">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/3.jpg">
+<meta property="article:published_time" content="2023-03-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-31T02:00:03.092Z">
+<meta property="article:author" content="chenMing">
+<meta property="article:tag" content="工程化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/3.jpg"><link rel="shortcut icon" href="/img/toux.jpg"><link rel="canonical" href="http://example.com/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/npm/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'npm',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-31 10:00:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="chenMing" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/toux.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="js:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">chenMing</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="js:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">npm</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-29T16:00:00.000Z" title="发表于 2023-03-30 00:00:00">2023-03-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-31T02:00:03.092Z" title="更新于 2023-03-31 10:00:03">2023-03-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="npm"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="包的安装"><a href="#包的安装" class="headerlink" title="包的安装"></a>包的安装</h1><blockquote>
+<p>安装（install）即下载包<br>由于 npm 的官方 registry 服务器位于国外，可能受网速影响导致下载缓慢或失败。因此，安装好 npm 之后，需要重新设置 registry 的地址为国内地址。目前，淘宝 <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a> 提供了国内的 registry 地址，先设置到该地址。设置方式为<code>npm config set registry https://registry.npm.taobao.org</code>。设置好后，通过命令<code>npm config get registry</code>进行检查</p>
+<p>或者安装nrm 进行切换</p>
+</blockquote>
+<p>npm 安装一个包，分为两种安装方式：</p>
+<ol>
+<li>本地安装</li>
+<li>全局安装</li>
+</ol>
+<h2 id="本地安装"><a href="#本地安装" class="headerlink" title="本地安装"></a>本地安装</h2><p>使用命令<code>npm install 包名</code>或<code>npm i 包名</code>即可完成本地安装</p>
+<p>本地安装的包出现在当前目录下的<code>node_modules</code>目录中</p>
+<blockquote>
+<p>随着开发的进展，<code>node_modules</code>目录会变得异常庞大，目录下的内容不适合直接传输到生产环境，因此通常使用<code>.gitignore</code>文件忽略该目录中的内容<br>本地安装适用于绝大部分的包，它会在当前目录及其子目录中发挥作用<br>通常在项目的根目录中使用本地安装<br>安装一个包的时候，npm 会自动管理依赖，它会下载该包的依赖包到<code>node_modules</code>目录中<br>如果本地安装的包带有 CLI，npm 会将它的 CLI 脚本文件放置到<code>node_modules/.bin</code>下，使用命令<code>npx 命令名</code>即可调用</p>
+</blockquote>
+<h2 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h2><p>全局安装的包放置在一个特殊的全局目录，该目录可以通过命令<code>npm config get prefix</code>查看</p>
+<p>使用命令<code>npm install --global 包名</code> 或 <code>npm i -g 包名</code></p>
+<p>重要：<strong>全局安装的包并非所有工程可用，它仅提供全局的 CLI 工具</strong></p>
+<p>大部分情况下，都不需要全局安装包，除非：</p>
+<ol>
+<li>包的版本非常稳定，很少有大的更新</li>
+<li>提供的 CLI 工具在各个工程中使用的非常频繁</li>
+<li>CLI 工具仅为开发环境提供支持，而非部署环境</li>
+</ol>
+<h1 id="包配置"><a href="#包配置" class="headerlink" title="包配置"></a>包配置</h1><p>目前遇到的问题：</p>
+<ol>
+<li>拷贝工程后如何还原？</li>
+<li>如何区分开发依赖和生产依赖？</li>
+<li>如果自身的项目也是一个包，如何描述包的信息</li>
+</ol>
+<p>以上这些问题都需要通过包的<strong>配置文件</strong>解决</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>npm 将每个使用 npm 的工程本身都看作是一个包，包的信息需要通过一个名称固定的配置文件来描述</p>
+<p><strong>配置文件的名称固定为：package.json</strong></p>
+<p>可以手动创建该文件，而更多的时候，是通过命令<code>npm init</code>创建的</p>
+<p>配置文件中可以描述大量的信息，包括：</p>
+<ul>
+<li>name：包的名称，该名称必须是<strong>英文单词字符</strong>，支持连接符</li>
+<li>version：版本<ul>
+<li>版本规范：主版本号.次版本号.补丁版本号</li>
+<li>主版本号：仅当程序发生了重大变化时才会增长，如新增了重要功能、新增了大量的API、技术架构发生了重大变化</li>
+<li>次版本号：仅当程序发生了一些小变化时才会增长，如新增了一些小功能、新增了一些辅助型的API</li>
+<li>补丁版本号：仅当解决了一些 bug 或 进行了一些局部优化时更新，如修复了某个函数的 bug、提升了某个函数的运行效率</li>
+</ul>
+</li>
+<li>description：包的描述</li>
+<li>homepage：官网地址</li>
+<li>author：包的作者，必须是有效的 npm 账户名，书写规范是 <code>account &lt;mail&gt;</code>，例如：<code>zhangsan &lt;zhangsan@gmail.com&gt;</code>，不正确的账号和邮箱可能导致发布包时失败</li>
+<li>repository：包的仓储地址，通常指 git 或 svn 的地址，它是一个对象<ul>
+<li>type：仓储类型，git 或 svn</li>
+<li>url：地址</li>
+</ul>
+</li>
+<li>main：包的入口文件，使用包的人默认从该入口文件导入包的内容</li>
+<li>keywords: 搜索关键字，发布包后，可以通过该数组中的关键字搜索到包</li>
+</ul>
+<p>使用<code>npm init --yes</code>或<code>npm init -y</code>可以在生成配置文件时自动填充默认配置</p>
+<h2 id="保存依赖关系"><a href="#保存依赖关系" class="headerlink" title="保存依赖关系"></a>保存依赖关系</h2><p>大部分时候，我们仅仅是开发项目，并不会把它打包发布出去，尽管如此，我们仍然需要package.json文件</p>
+<p><strong>package.json文件最重要的作用，是记录当前工程的依赖</strong></p>
+<ul>
+<li>dependencies：生产环境的依赖包</li>
+<li>devDependencies：仅开发环境的依赖包</li>
+</ul>
+<p>配置好依赖后，使用下面的命令即可安装依赖</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">## 本地安装所有依赖 dependencies + devDependencies
+npm install
+npm i
+
+## 仅安装生产环境的依赖 dependencies
+npm install --production<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这样一来，代码移植就不是问题了，只需要移植源代码和package.json文件，不用移植node_modules目录，然后在移植之后通过命令即可重新恢复安装</p>
+<p>为了更加方便的添加依赖，npm支持在使用install命令时，加入一些额外的参数，用于将安装的依赖包保存到package.json文件中</p>
+<p>涉及的命令如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">## 安装依赖到生产环境
+npm i 包名
+npm i --save 包名
+npm i -S 包名
+
+## 安装依赖到开发环境
+npm i --save-dev 包名
+npm i -D 包名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>自动保存的依赖版本，例如<code>^15.1.3</code>，这种书写方式叫做语义版本号（semver version），具体规则后续讲解</p>
+</blockquote>
+<h1 id="包的使用"><a href="#包的使用" class="headerlink" title="包的使用"></a>包的使用</h1><p>nodejs 对 npm 支持非常良好</p>
+<p>当使用 nodejs 导入模块时，如果模块路径不是以 ./ 或 ../ 开头，则 node 会认为导入的模块来自于 node_modules 目录，例如：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> _ <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"lodash"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>它首先会从当前目录的以下位置寻找文件</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">node_modules&#x2F;lodash.js
+node_modules&#x2F;lodash&#x2F;入口文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>若当前目录没有这样的文件，则会回溯到上级目录按照同样的方式查找</p>
+<p>如果到顶级目录都无法找到文件，则抛出错误</p>
+<p>上面提到的入口文件按照以下规则确定</p>
+<ol>
+<li>查看导入包的package.json文件，读取main字段作为入口文件</li>
+<li>若不包含main字段，则使用index.js作为入口文件</li>
+</ol>
+<blockquote>
+<p>入口文件的规则同样适用于自己工程中的模块<br>在 node 中，还可以手动指定路径来导入相应的文件，这种情况比较少见</p>
+</blockquote>
+<h1 id="语义版本"><a href="#语义版本" class="headerlink" title="语义版本"></a>语义版本</h1><p>思考：如果你编写了一个包A，依赖另外一个包B，你在编写代码时，包B的版本是2.4.1，你是希望使用你包的人一定要安装包B，并且是2.4.1版本，还是希望他可以安装更高的版本，如果你希望它安装更高的版本，高的什么程度呢？</p>
+<p>回顾：版本号规则</p>
+<p>版本规范：主版本号.次版本号.补丁版本号</p>
+<ul>
+<li>主版本号：仅当程序发生了重大变化时才会增长，如新增了重要功能、新增了大量的API、技术架构发生了重大变化</li>
+<li>次版本号：仅当程序发生了一些小变化时才会增长，如新增了一些小功能、新增了一些辅助型的API</li>
+<li>补丁版本号：仅当解决了一些 bug 或 进行了一些局部优化时更新，如修复了某个函数的 bug、提升了某个函数的运行效率</li>
+</ul>
+<p>有的时候，我们希望：安装我的依赖包的时候，次版本号和补丁版本号是可以有提升的，但是主版本号不能变化</p>
+<p>有的时候，我们又希望：安装我的依赖包的时候，只有补丁版本号可以提升，其他都不能提升</p>
+<p>甚至我们希望依赖包保持固定的版本，尽管这比较少见</p>
+<p>这样一来，就需要在配置文件中描述清楚具体的依赖规则，而不是直接写上版本号那么简单。</p>
+<p>这种规则的描述，即<strong>语义版本</strong></p>
+<p>语义版本的书写规则非常丰富，下面列出了一些常见的书写方式</p>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">描述</th>
+<th align="center">示例</th>
+<th align="center">示例描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&gt;</td>
+<td align="center">大于某个版本</td>
+<td align="center">&gt;1.2.1</td>
+<td align="center">大于1.2.1版本</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于某个版本</td>
+<td align="center">&gt;=1.2.1</td>
+<td align="center">大于等于1.2.1版本</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于某个版本</td>
+<td align="center">&lt;1.2.1</td>
+<td align="center">小于1.2.1版本</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于某个版本</td>
+<td align="center">&lt;=1.2.1</td>
+<td align="center">小于等于1.2.1版本</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">介于两个版本之间</td>
+<td align="center">1.2.1 - 1.4.5</td>
+<td align="center">介于1.2.1和1.4.5之间</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">不固定的版本号</td>
+<td align="center">1.3.x</td>
+<td align="center">只要保证主版本号是1，次版本号是3即可</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td align="center">补丁版本号可增</td>
+<td align="center">~1.3.4</td>
+<td align="center">保证主版本号是1，次版本号是3，补丁版本号大于等于4</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center">此版本和补丁版本可增</td>
+<td align="center">^1.3.4</td>
+<td align="center">保证主版本号是1，次版本号可以大于等于3，补丁版本号可以大于等于4</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">最新版本</td>
+<td align="center">*</td>
+<td align="center">始终安装最新版本</td>
+</tr>
+</tbody></table>
+<h2 id="避免还原的差异"><a href="#避免还原的差异" class="headerlink" title="避免还原的差异"></a>避免还原的差异</h2><p>版本依赖控制始终是一个两难的问题</p>
+<p>如果允许版本增加，可以让依赖包的bug得以修复（补丁版本号），可以带来一些意外的惊喜（次版本号），但同样可能带来不确定的风险（新的bug）</p>
+<p>如果不允许版本增加，可以获得最好的稳定性，但失去了依赖包自我优化的能力</p>
+<p>而有的时候情况更加复杂，如果依赖包升级后，依赖也发生了变化，会有更多不确定的情况出现</p>
+<p>基于此，npm 在安装包的时候，会自动生成一个 package-lock.json 文件，该文件记录了安装包时的确切依赖关系</p>
+<p>当移植工程时，如果移植了 package-lock.json 文件，恢复安装时，会按照 package-lock.json 文件中的确切依赖进行安装，最大限度的避免了差异</p>
+<h2 id="扩展-npm的差异版本处理"><a href="#扩展-npm的差异版本处理" class="headerlink" title="[扩展]npm的差异版本处理"></a>[扩展]npm的差异版本处理</h2><p>如果两个包依赖同一个包的不同版本，如下图</p>
+<p><img src="/imgs/module/2019-12-17-15-17-47.png"> </p>
+<p>面对这种情况，在 node_modules 目录中，不会使用扁平的目录结构，而会形成嵌套的目录，如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">├── node_modules
+│   ├── a 
+│   │   ├── node_modules
+│   │   │   ├── c
+│   │   │   |   |—— c包的文件
+│   │   │── a包的文件     
+│   ├── b 
+│   │   ├── node_modules
+│   │   │   ├── c
+│   │   │   |   |—— c包的文件
+│   │   │── b包的文件           <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h1 id="npm-脚本-（npm-scripts）"><a href="#npm-脚本-（npm-scripts）" class="headerlink" title="npm 脚本 （npm scripts）"></a>npm 脚本 （npm scripts）</h1><p>在开发的过程中，我们可能会反复使用很多的 CLI 命令，例如：</p>
+<ul>
+<li>启动工程命令（node 或 一些第三方包提供的CLI命令）</li>
+<li>部署工程命令（一些第三方包提供的CLI命令）</li>
+<li>测试工程命令（一些第三方包提供的CLI命令）</li>
+</ul>
+<p>这些命令纷繁复杂，根据第三方包的不同命令也会不一样，非常难以记忆</p>
+<p>于是，npm 非常贴心的支持了脚本，只需要在 package.json 中配置 scripts 字段，即可配置各种脚本名称</p>
+<p>之后，我们就可以运行简单的指令来完成各种操作了</p>
+<p>运行方式是 <code>npm run 脚本名称</code></p>
+<p>不仅如此，npm 还对某些常用的脚本名称进行了简化，下面的脚本名称是不需要使用run的：</p>
+<ul>
+<li>start</li>
+<li>stop</li>
+<li>test</li>
+</ul>
+<p>一些细节：</p>
+<ul>
+<li>脚本中可以省略npx</li>
+<li>start脚本有默认值：node server.js</li>
+</ul>
+<h1 id="运行环境配置"><a href="#运行环境配置" class="headerlink" title="运行环境配置"></a>运行环境配置</h1><p>我们书写的代码一般有三种运行环境：</p>
+<ol>
+<li>开发环境</li>
+<li>生产环境</li>
+<li>测试环境</li>
+</ol>
+<p>有的时候，我们可能需要在 node 代码中根据不同的环境做出不同的处理</p>
+<p>如何优雅的让 node 知道处于什么环境，是极其重要的</p>
+<p>通常我们使用如下的处理方式：</p>
+<p>node中有一个全局变量 global (可以类比浏览器环境的window)，该变量是一个对象，对象中的所有属性均可以直接使用</p>
+<p>global有一个属性是process，该属性是一个对象，包含了当前运行node程序的计算机的很多信息，其中有一个信息是env，是一个对象，包含了计算机中所有的系统变量</p>
+<p>通常，我们通过系统变量 NODE_ENV 的值，来判定node程序处于何种环境</p>
+<p>有两种方式设置 NODE_ENV 的值</p>
+<ol>
+<li>永久设置</li>
+<li>临时设置</li>
+</ol>
+<p>我们一般使用临时设置</p>
+<p>因此，我们可以配置 scripts 脚本，在设置好了 NODE_ENV 后启动程序</p>
+<blockquote>
+<p>为了避免不同系统的设置方式的差异，可以使用第三方库 cross-env 对环境变量进行设置</p>
+</blockquote>
+<h2 id="在node中读取package-json"><a href="#在node中读取package-json" class="headerlink" title="在node中读取package.json"></a>在node中读取package.json</h2><p>有的时候，我们可能在 package.json 中配置一些自定义的字段，这些字段需要在node中读取</p>
+<p>在node 中，可以直接导入一个json格式的文件，它会自动将其转换为js对象</p>
+<h1 id="其他npm命令-ignore"><a href="#其他npm命令-ignore" class="headerlink" title="其他npm命令 {ignore}"></a>其他npm命令 {ignore}</h1><p>[toc]</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>精确安装最新版本</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm install --save-exact 包名 
+npm install -E 包名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>安装指定版本</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm install 包名@版本号<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><ol>
+<li>查询包安装路径</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm root [-g]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>查看包信息</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm view 包名 [子信息]
+## view aliases：v info show<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>查询安装包</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm list [-g] [--depth&#x3D;依赖深度]
+## list aliases: ls  la  ll<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><ol>
+<li>检查有哪些包需要更新</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm outdated<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>更新包</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm update [-g] [包名]
+## update 别名（aliases）：up、upgrade<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="卸载包"><a href="#卸载包" class="headerlink" title="卸载包"></a>卸载包</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm uninstall [-g] 包名
+## uninstall aliases: remove, rm, r, un, unlink<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="npm-配置"><a href="#npm-配置" class="headerlink" title="npm 配置"></a>npm 配置</h2><p>npm的配置会对其他命令产生或多或少的影响</p>
+<p>安装好npm之后，最终会产生两个配置文件，一个是用户配置，一个是系统配置，当两个文件的配置项有冲突的时候，用户配置会覆盖系统配置</p>
+<p>通常，我们不关心具体的配置文件，而只关心最终生效的配置</p>
+<p>通过下面的命令可以查询目前生效的各种配置</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm config ls [-l] [--json]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>另外，可以通过下面的命令操作配置</p>
+<ol>
+<li>获取某个配置项</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm config get 配置项<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>设置某个配置项</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm config set 配置项&#x3D;值<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="3">
+<li>移除某个配置项</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">npm config delete 配置项<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+
+<h1 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>移除淘宝镜像源</li>
+<li>到npm官网注册一个账号，并完成邮箱认证</li>
+<li>本地使用 npm cli 进行登录<ol>
+<li>使用命令<code>npm login</code>登录</li>
+<li>使用命令<code>npm whoami</code>查看当前登录的账号</li>
+<li>使用命令<code>npm logout</code>注销</li>
+</ol>
+</li>
+<li>创建工程根目录</li>
+<li>使用npm init进行初始化</li>
+</ol>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><ol>
+<li>开发</li>
+<li>确定版本</li>
+<li>使用命令<code>npm publish</code>完成发布</li>
+</ol>
+<p># 开源协议</p>
+<p><img src="/imgs/module/2019-12-18-16-03-02.png"></p>
+<p>可以通过网站 <a target="_blank" rel="noopener" href="http://choosealicense.online/appendix/">http://choosealicense.online/appendix/</a> 选择协议，并复制协议内容</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">chenMing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/npm/">http://example.com/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/npm/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">chenMing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/">工程化</a></div><div class="post_share"><div class="social-share" data-image="/imgs/3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/31/%E5%B7%A5%E7%A8%8B%E5%8C%96/less/"><img class="prev-cover" src="/imgs/4.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">less</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%E6%A6%82%E8%BF%B0/"><img class="next-cover" src="/imgs/4.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">包管理器概述</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/03/29/工程化/CommonJs/" title="CommonJs"><img class="cover" src="/imgs/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-29</div><div class="title">CommonJs</div></div></a></div><div><a href="/2023/03/29/工程化/ES module/" title="ES module"><img class="cover" src="/imgs/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-29</div><div class="title">ES module</div></div></a></div><div><a href="/2023/03/31/工程化/less/" title="less"><img class="cover" src="/imgs/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">less</div></div></a></div><div><a href="/2023/03/30/工程化/包管理器概述/" title="包管理器概述"><img class="cover" src="/imgs/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">包管理器概述</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/toux.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">chenMing</div><div class="author-info__description">技术博客</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chen2ming"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">今天你学习了吗？今天你快乐了吗？</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">包的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">本地安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">全局安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%85%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">包配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="toc-number">2.2.</span> <span class="toc-text">保存依赖关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">包的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E7%89%88%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">语义版本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E8%BF%98%E5%8E%9F%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">4.1.</span> <span class="toc-text">避免还原的差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95-npm%E7%9A%84%E5%B7%AE%E5%BC%82%E7%89%88%E6%9C%AC%E5%A4%84%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text">[扩展]npm的差异版本处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#npm-%E8%84%9A%E6%9C%AC-%EF%BC%88npm-scripts%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">npm 脚本 （npm scripts）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">运行环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8node%E4%B8%AD%E8%AF%BB%E5%8F%96package-json"><span class="toc-number">6.1.</span> <span class="toc-text">在node中读取package.json</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96npm%E5%91%BD%E4%BB%A4-ignore"><span class="toc-number">7.</span> <span class="toc-text">其他npm命令 {ignore}</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">7.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2"><span class="toc-number">7.2.</span> <span class="toc-text">查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-number">7.3.</span> <span class="toc-text">更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD%E5%8C%85"><span class="toc-number">7.4.</span> <span class="toc-text">卸载包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-%E9%85%8D%E7%BD%AE"><span class="toc-number">7.5.</span> <span class="toc-text">npm 配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%8C%85"><span class="toc-number">8.</span> <span class="toc-text">发布包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">8.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B8%83"><span class="toc-number">8.2.</span> <span class="toc-text">发布</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/31/%E5%B7%A5%E7%A8%8B%E5%8C%96/less/" title="less"><img src="/imgs/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="less"/></a><div class="content"><a class="title" href="/2023/03/31/%E5%B7%A5%E7%A8%8B%E5%8C%96/less/" title="less">less</a><time datetime="2023-03-30T16:00:00.000Z" title="发表于 2023-03-31 00:00:00">2023-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/npm/" title="npm"><img src="/imgs/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="npm"/></a><div class="content"><a class="title" href="/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/npm/" title="npm">npm</a><time datetime="2023-03-29T16:00:00.000Z" title="发表于 2023-03-30 00:00:00">2023-03-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%E6%A6%82%E8%BF%B0/" title="包管理器概述"><img src="/imgs/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="包管理器概述"/></a><div class="content"><a class="title" href="/2023/03/30/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%E6%A6%82%E8%BF%B0/" title="包管理器概述">包管理器概述</a><time datetime="2023-03-29T16:00:00.000Z" title="发表于 2023-03-30 00:00:00">2023-03-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/29/%E5%B7%A5%E7%A8%8B%E5%8C%96/CommonJs/" title="CommonJs"><img src="/imgs/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CommonJs"/></a><div class="content"><a class="title" href="/2023/03/29/%E5%B7%A5%E7%A8%8B%E5%8C%96/CommonJs/" title="CommonJs">CommonJs</a><time datetime="2023-03-28T16:00:00.000Z" title="发表于 2023-03-29 00:00:00">2023-03-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/29/%E5%B7%A5%E7%A8%8B%E5%8C%96/ES%20module/" title="ES module"><img src="/imgs/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ES module"/></a><div class="content"><a class="title" href="/2023/03/29/%E5%B7%A5%E7%A8%8B%E5%8C%96/ES%20module/" title="ES module">ES module</a><time datetime="2023-03-28T16:00:00.000Z" title="发表于 2023-03-29 00:00:00">2023-03-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By chenMing</div><div class="footer_custom_text"><div>嗨，欢迎来到我的博客，希望能帮助到您！</div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideMobileSidebar.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
