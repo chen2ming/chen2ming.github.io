@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>yarn | chenMing</title><meta name="keywords" content="前端"><meta name="author" content="chenMing"><meta name="copyright" content="chenMing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="yarn 简介 yarn 官网：https:&#x2F;&#x2F;www.yarnpkg.com&#x2F;zh-Hans&#x2F;  yarn 是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具，它仍然使用 npm 的registry，不过提供了全新 CLI 来对包进行管理 过去，yarn 的出现极大的抢夺了 npm 的市场，甚至有人戏言，npm 只剩下一个 registry">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yarn">
+<meta property="og:url" content="http://example.com/2023/05/17/%E5%B7%A5%E7%A8%8B%E5%8C%96/yarn/index.html">
+<meta property="og:site_name" content="chenMing">
+<meta property="og:description" content="yarn 简介 yarn 官网：https:&#x2F;&#x2F;www.yarnpkg.com&#x2F;zh-Hans&#x2F;  yarn 是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具，它仍然使用 npm 的registry，不过提供了全新 CLI 来对包进行管理 过去，yarn 的出现极大的抢夺了 npm 的市场，甚至有人戏言，npm 只剩下一个 registry">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/4.jpg">
+<meta property="article:published_time" content="2023-05-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-17T05:57:08.796Z">
+<meta property="article:author" content="chenMing">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/4.jpg"><link rel="shortcut icon" href="/img/toux.jpg"><link rel="canonical" href="http://example.com/2023/05/17/%E5%B7%A5%E7%A8%8B%E5%8C%96/yarn/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'yarn',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-17 13:57:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="chenMing" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/toux.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="js:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">chenMing</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="js:void(0);"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">yarn</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-16T16:00:00.000Z" title="发表于 2023-05-17 00:00:00">2023-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-17T05:57:08.796Z" title="更新于 2023-05-17 13:57:08">2023-05-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="yarn"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="yarn-简介"><a href="#yarn-简介" class="headerlink" title="yarn 简介"></a>yarn 简介</h1><blockquote>
+<p>yarn 官网：<a target="_blank" rel="noopener" href="https://www.yarnpkg.com/zh-Hans/">https://www.yarnpkg.com/zh-Hans/</a></p>
+</blockquote>
+<p>yarn 是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具，<strong>它仍然使用 npm 的registry</strong>，不过提供了全新 CLI 来对包进行管理</p>
+<p>过去，yarn 的出现极大的抢夺了 npm 的市场，甚至有人戏言，npm 只剩下一个 registry 了。</p>
+<p>之所以会出现这种情况，是因为在过去，npm 存在下面的问题：</p>
+<ul>
+<li>依赖目录嵌套层次深：过去，npm 的依赖是嵌套的，这在 windows 系统上是一个极大的问题，由于众所周知的原因，windows 系统无法支持太深的目录</li>
+<li>下载速度慢<ul>
+<li>由于嵌套层次的问题，所以npm对包的下载只能是串行的，即前一个包下载完后才会下载下一个包，导致带宽资源没有完全利用</li>
+<li>多个相同版本的包被重复的下载</li>
+</ul>
+</li>
+<li>控制台输出繁杂：过去，npm 安装包的时候，每安装一个依赖，就会输出依赖的详细信息，导致一次安装有大量的信息输出到控制台，遇到错误极难查看</li>
+<li>工程移植问题：由于 npm 的版本依赖可以是模糊的，可能会导致工程移植后，依赖的确切版本不一致。</li>
+</ul>
+<p>针对上述问题，yarn 从诞生那天就已经解决，它用到了以下的手段：</p>
+<ul>
+<li>使用扁平的目录结构</li>
+<li>并行下载</li>
+<li>使用本地缓存</li>
+<li>控制台仅输出关键信息</li>
+<li>使用yanr-lock文件记录确切依赖</li>
+</ul>
+<p>不仅如此，yarn还优化了以下内容：</p>
+<ul>
+<li>增加了某些功能强大的命令</li>
+<li>让既有的命令更加语义化</li>
+<li>本地安装的CLI工具可以使用 yarn 直接启动</li>
+<li>将全局安装的目录当作一个普通的工程，生成package.json文件，便于全局安装移植</li>
+</ul>
+<p>yarn 的出现给 npm 带来了巨大的压力，很快，npm 学习了 yarn 先进的理念，不断的对自身进行优化，到了目前的npm6版本，几乎完全解决了上面的问题：</p>
+<ul>
+<li>目录扁平化</li>
+<li>并行下载</li>
+<li>本地缓存</li>
+<li>使用package-lock记录确切依赖</li>
+<li>增加了大量的命令别名</li>
+<li>内置了npx，可以启动本地的CLI工具</li>
+<li>极大的简化了控制台输出</li>
+</ul>
+<p><strong>总结</strong></p>
+<p>npm6 之后，可以说npm已经和yarn非常接近，甚至没有差距了。很多新的项目，又重新从yarn转回到npm。</p>
+<p>这两个包管理器是目前的主流，都必须要学习。</p>
+<h1 id="yarn-的核心命令"><a href="#yarn-的核心命令" class="headerlink" title="yarn 的核心命令"></a>yarn 的核心命令</h1><ol>
+<li><strong>初始化</strong></li>
+</ol>
+<p>初始化：<code>yarn init [--yes/-y]</code></p>
+<ol start="2">
+<li><strong>安装</strong></li>
+</ol>
+<p>添加指定包：<code>yarn [global] add package-name [--dev/-D] [--exact/-E]</code></p>
+<p>安装package.json中的所有依赖：<code>yarn install [--production/--prod]</code></p>
+<ol start="3">
+<li><strong>脚本和本地CLI</strong></li>
+</ol>
+<p>运行脚本：<code>yarn run 脚本名</code> </p>
+<blockquote>
+<p>start、stop、test可以省略run</p>
+</blockquote>
+<p>运行本地安装的CLI：<code>yarn run CLI名</code></p>
+<ol start="4">
+<li><strong>查询</strong></li>
+</ol>
+<p>查看bin目录：<code>yarn [global] bin</code></p>
+<p>查询包信息：<code>yarn info 包名 [子字段]</code></p>
+<p>列举已安装的依赖：<code>yarn [global] list [--depth=依赖深度]</code></p>
+<blockquote>
+<p>yarn的list命令和npm的list不同，yarn输出的信息更加丰富，包括顶级目录结构、每个包的依赖版本号</p>
+</blockquote>
+<ol start="5">
+<li><strong>更新</strong></li>
+</ol>
+<p>列举需要更新的包：<code>yarn outdated</code></p>
+<p>更新包：<code>yarn [global] upgrade [包名]</code></p>
+<ol start="6">
+<li><strong>卸载</strong></li>
+</ol>
+<p>卸载包：<code>yarn remove 包名</code></p>
+<h1 id="yarn-的特别礼物"><a href="#yarn-的特别礼物" class="headerlink" title="yarn 的特别礼物"></a>yarn 的特别礼物</h1><p>在终端命令上，yarn不仅仅是对npm的命令做了一个改名，还增加了一些原本没有的命令，这些命令在某些时候使用起来非常方便</p>
+<ol>
+<li><strong>yarn check</strong></li>
+</ol>
+<p>使用<code>yarn check</code>命令，可以验证package.json文件的依赖记录和lock文件是否一致</p>
+<p>这对于防止篡改非常有用</p>
+<ol start="2">
+<li><strong>yarn audit</strong></li>
+</ol>
+<p>使用<code>yarn audit</code>命令，可以检查本地安装的包有哪些已知漏洞，以表格的形式列出，漏洞级别分为以下几种：</p>
+<ul>
+<li>INFO：信息级别</li>
+<li>LOW: 低级别</li>
+<li>MODERATE：中级别</li>
+<li>HIGH：高级别</li>
+<li>CRITICAL：关键级别</li>
+</ul>
+<ol start="3">
+<li><strong>yarn why</strong></li>
+</ol>
+<p>使用<code>yarn why 包名</code>命令，可以在控制台打印出为什么安装了这个包，哪些包会用到它</p>
+<ol start="4">
+<li><strong>yarn create</strong></li>
+</ol>
+<p>非常有趣的命令</p>
+<p>今后，我们会学习一些脚手架，所谓脚手架，就是使用一个命令来搭建一个工程结构</p>
+<p>过去，我们都是使用如下的做法：</p>
+<ol>
+<li>全局安装脚手架工具</li>
+<li>使用全局命令搭建脚手架</li>
+</ol>
+<p>由于大部分脚手架工具都是以<code>create-xxx</code>的方式命名的，比如react的官方脚手架名称为<code>create-react-app</code></p>
+<p>因此，可以使用<code>yarn create</code>命令来一步完成安装和搭建</p>
+<p>例如：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yarn create react-app my-app
+# 等同于下面的两条命令
+yarn global add create-react-app
+create-react-app my-app<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">chenMing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/05/17/%E5%B7%A5%E7%A8%8B%E5%8C%96/yarn/">http://example.com/2023/05/17/%E5%B7%A5%E7%A8%8B%E5%8C%96/yarn/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">chenMing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/imgs/4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/24/%E5%B7%A5%E7%A8%8B%E5%8C%96/pnpm/"><img class="prev-cover" src="/imgs/9.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">pnpm</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/04/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85%E3%80%81%E9%85%8D%E7%BD%AE%E3%80%81%E4%BD%BF%E7%94%A8/"><img class="next-cover" src="/imgs/5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/toux.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">chenMing</div><div class="author-info__description">技术博客</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">58</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chen2ming"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">今天你学习了吗？今天你快乐了吗？</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#yarn-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">yarn 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#yarn-%E7%9A%84%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">yarn 的核心命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#yarn-%E7%9A%84%E7%89%B9%E5%88%AB%E7%A4%BC%E7%89%A9"><span class="toc-number">3.</span> <span class="toc-text">yarn 的特别礼物</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/05/24/%E5%B7%A5%E7%A8%8B%E5%8C%96/pnpm/" title="pnpm"><img src="/imgs/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pnpm"/></a><div class="content"><a class="title" href="/2023/05/24/%E5%B7%A5%E7%A8%8B%E5%8C%96/pnpm/" title="pnpm">pnpm</a><time datetime="2023-05-24T01:59:55.246Z" title="发表于 2023-05-24 09:59:55">2023-05-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/17/%E5%B7%A5%E7%A8%8B%E5%8C%96/yarn/" title="yarn"><img src="/imgs/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yarn"/></a><div class="content"><a class="title" href="/2023/05/17/%E5%B7%A5%E7%A8%8B%E5%8C%96/yarn/" title="yarn">yarn</a><time datetime="2023-05-16T16:00:00.000Z" title="发表于 2023-05-17 00:00:00">2023-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/04/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85%E3%80%81%E9%85%8D%E7%BD%AE%E3%80%81%E4%BD%BF%E7%94%A8/" title="无题"><img src="/imgs/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/05/04/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85%E3%80%81%E9%85%8D%E7%BD%AE%E3%80%81%E4%BD%BF%E7%94%A8/" title="无题">无题</a><time datetime="2023-05-04T06:35:53.748Z" title="发表于 2023-05-04 14:35:53">2023-05-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/19/%E5%B7%A5%E7%A8%8B%E5%8C%96/AMD%E5%92%8CCMD/" title="AMD和CMD"><img src="/imgs/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AMD和CMD"/></a><div class="content"><a class="title" href="/2023/04/19/%E5%B7%A5%E7%A8%8B%E5%8C%96/AMD%E5%92%8CCMD/" title="AMD和CMD">AMD和CMD</a><time datetime="2023-04-18T16:00:00.000Z" title="发表于 2023-04-19 00:00:00">2023-04-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/01/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" title="构建工具"><img src="/imgs/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="构建工具"/></a><div class="content"><a class="title" href="/2023/04/01/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" title="构建工具">构建工具</a><time datetime="2023-03-31T16:00:00.000Z" title="发表于 2023-04-01 00:00:00">2023-04-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2023 By chenMing</div><div class="footer_custom_text"><div>嗨，欢迎来到我的博客，希望能帮助到您！</div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideMobileSidebar.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="false" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
