@@ -216,7 +216,7 @@ Vue.filter( id, [definition] )
   Vue.filter('my-filter', function (value) {
     // 返回处理后的值
   })
-
+  
   // getter，返回已注册的过滤器
   var myFilter = Vue.filter('my-filter')
   ```
@@ -294,10 +294,10 @@ Vue.component( id, [definition] )
   ```js
   // 注册组件，传入一个扩展过的构造器
   Vue.component('my-component', Vue.extend({ /* ... */ }))
-
+  
   // 注册组件，传入一个选项对象 (自动调用 Vue.extend)
   Vue.component('my-component', { /* ... */ })
-
+  
   // 获取注册的组件 (始终返回构造器)
   var MyComponent = Vue.component('my-component')
   ```
