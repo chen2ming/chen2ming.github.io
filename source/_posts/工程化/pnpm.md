@@ -1,6 +1,6 @@
 ---
 title: pnpm
-Date: 2023-5-24
+date: 2023-5-24
 ---
 
 # pnpm
