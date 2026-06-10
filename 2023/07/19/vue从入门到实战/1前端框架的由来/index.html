@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>前端框架的由来 | chenMing</title><meta name="author" content="chenMing"><meta name="copyright" content="chenMing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content=" vue官网：https://cn.vuejs.org/  服务端渲染 sequenceDiagram 浏览器-&gt;&gt;+服务器: http://duyi.com/news Note right of 服务器: 组装页面(服务端渲染) 服务器-&gt;&gt;-浏览器: 完整页面   前后端分离 sequen..."><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "前端框架的由来",
+  "url": "http://example.com/2023/07/19/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/1%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E7%94%B1%E6%9D%A5/",
+  "image": "http://example.com/imgs/2.jpg",
+  "datePublished": "2023-07-18T16:00:00.000Z",
+  "dateModified": "2026-06-10T09:38:25.676Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "chenMing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/toux.jpg"><link rel="canonical" href="http://example.com/2023/07/19/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/1%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E7%94%B1%E6%9D%A5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端框架的由来',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="chenMing" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/toux.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">70</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">chenMing</span></a><a class="nav-page-title" href="/"><span class="site-name">前端框架的由来</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">前端框架的由来</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-18T16:00:00.000Z" title="发表于 2023-07-19 00:00:00">2023-07-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-10T09:38:25.676Z" title="更新于 2026-06-10 17:38:25">2026-06-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><blockquote>
+<p>vue官网：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/">https://cn.vuejs.org/</a></p>
+</blockquote>
+<p><strong>服务端渲染</strong></p>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">sequenceDiagram</span>
+浏览器<span class="token arrow operator">->></span>+服务器<span class="token operator">:</span> http<span class="token operator">:</span>//duyi.com/news
+<span class="token keyword">Note right of</span> 服务器<span class="token operator">:</span> 组装页面<span class="token text string">(服务端渲染)</span>
+服务器<span class="token arrow operator">->></span>-浏览器<span class="token operator">:</span> 完整页面<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<p><strong>前后端分离</strong></p>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">sequenceDiagram</span>
+浏览器<span class="token arrow operator">->></span>服务器<span class="token operator">:</span> http<span class="token operator">:</span>//duyi.com/news
+服务器<span class="token arrow operator">->></span>浏览器<span class="token operator">:</span> 无内容的html
+<span class="token keyword">activate</span> 浏览器
+浏览器<span class="token arrow operator">-->></span>服务器<span class="token operator">:</span> ajax
+服务器<span class="token arrow operator">-->></span>浏览器<span class="token operator">:</span> 各种业务数据
+<span class="token keyword">Note left of</span> 浏览器<span class="token operator">:</span> 运行js，创建元素，渲染页面
+<span class="token keyword">deactivate</span> 浏览器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<p><strong>单页应用</strong></p>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">sequenceDiagram</span>
+浏览器<span class="token arrow operator">->></span>服务器<span class="token operator">:</span> http<span class="token operator">:</span>//duyi.com/news
+服务器<span class="token arrow operator">->></span>浏览器<span class="token operator">:</span> 无内容的html
+<span class="token keyword">activate</span> 浏览器
+<span class="token keyword">Note left of</span> 浏览器<span class="token operator">:</span> 运行js，创建元素，渲染页面
+浏览器<span class="token arrow operator">-->></span>服务器<span class="token operator">:</span> ajax
+服务器<span class="token arrow operator">-->></span>浏览器<span class="token operator">:</span> 各种业务数据
+<span class="token keyword">Note left of</span> 浏览器<span class="token operator">:</span> 跳转页面
+浏览器<span class="token arrow operator">-->></span>服务器<span class="token operator">:</span> ajax
+服务器<span class="token arrow operator">-->></span>浏览器<span class="token operator">:</span> 各种业务数据
+<span class="token keyword">Note left of</span> 浏览器<span class="token operator">:</span> JS重新构建页面元素
+<span class="token keyword">deactivate</span> 浏览器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<p><strong>vue框架</strong></p>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">sequenceDiagram</span>
+浏览器<span class="token arrow operator">->></span>服务器<span class="token operator">:</span> http<span class="token operator">:</span>//duyi.com/news
+服务器<span class="token arrow operator">->></span>浏览器<span class="token operator">:</span> 无内容的html
+<span class="token keyword">activate</span> 浏览器
+<span class="token keyword">Note left of</span> 浏览器<span class="token operator">:</span> 运行包含vue的js，使用框架渲染页面
+浏览器<span class="token arrow operator">-->></span>服务器<span class="token operator">:</span> ajax
+服务器<span class="token arrow operator">-->></span>浏览器<span class="token operator">:</span> 各种业务数据
+<span class="token keyword">Note left of</span> 浏览器<span class="token operator">:</span> 使用vue-router跳转页面
+<span class="token keyword">deactivate</span> 浏览器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">chenMing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/07/19/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/1%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E7%94%B1%E6%9D%A5/">http://example.com/2023/07/19/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/1%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E7%94%B1%E6%9D%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">chenMing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/vue/">vue</a></div><div class="post-share"><div class="social-share" data-image="/imgs/2.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/07/19/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/2%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="核心概念"><img class="cover" src="/imgs/6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">核心概念</div></div><div class="info-2"><div class="info-item-1">注入d vue会将以下配置注入到vue实例：  data：和界面相关的数据 computed：通过已有数据计算得来的数据，将来详细讲解 methods：方法   模板中可以使用vue实例中的成员  虚拟DOM树直接操作真实的DOM会引发严重的效率问题，vue使用虚拟DOM（vnode）的方式来描述要渲染的内容 vnode是一个普通的JS对象，用于描述界面上应该有什么，比如： var vnode = &#123;   tag: "h1",   children: [     &#123; tag: undefined, text: "第一个vue应用：Hello World"&#125;   ] &#125;  上面的对象描述了： 有一个标签名为h1的节点，它有一个子节点，该子节点是一个文本，内容为「第一个vue应用：Hello World」  vue模板并不是真实的DOM，它会被编译为虚拟DOM &lt;div id="app">   &lt;h1>第一个vue应用：&#123;&#123;title&#125;&#125;&lt;/h1>   &lt;p>作者：&#123;&#...</div></div></div></a><a class="pagination-related" href="/2023/05/24/%E5%B7%A5%E7%A8%8B%E5%8C%96/pnpm/" title="pnpm"><img class="cover" src="/imgs/7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">pnpm</div></div><div class="info-2"><div class="info-item-1">pnpmpnpm是一种新起的包管理器，从npm的下载量看，目前还没有超过yarn，但它的实现方式值得主流包管理器学习，某些开发者极力推荐使用pnpm 从结果上来看，它具有以下优势：  目前，安装效率高于npm和yarn的最新版 极其简洁的node_modules目录 避免了开发时使用间接依赖的问题 能极大的降低磁盘空间的占用  安装和使用全局安装pnpm npm install -g pnpm  之后在使用时，只需要把npm替换为pnpm即可 如果要执行安装在本地的CLI，可以使用pnpx，它和 npx 的功能完全一样，唯一不同的是，在使用pnpx执行一个需要安装的命令时，会使用pnpm进行安装  比如npx mocha执行本地的mocha命令时，如果mocha没有安装，则npx会自动的、临时的安装mocha，安装好后，自动运行mocha命令  pnpm原理 同 yarn 和 npm 一样，pnpm 仍然使用缓存来保存已经安装过的包，以及使用 pnpm-lock.yaml 来记录详细的依赖版本  不同于 yarn 和 npm， pnpm 使用符号链接和硬链接（可将它们想象成快捷方...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/08/10/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/7%E4%BC%98%E5%8C%96%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84/" title="优化工程结构"><img class="cover" src="/imgs/8.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-10</div><div class="info-item-2">优化工程结构</div></div><div class="info-2"><div class="info-item-1">如何使用组件？编写组件说明文档 .&#x2F;src&#x2F;components&#x2F;README.md      如何测试组件效果？https://cli.vuejs.org/zh/guide/prototyping.html </div></div></div></a><a class="pagination-related" href="/2023/08/10/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/9%E8%B7%AF%E7%94%B1/" title="路由"><img class="cover" src="/imgs/4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-10</div><div class="info-item-2">路由</div></div><div class="info-2"><div class="info-item-1"> vue-router官网：https://router.vuejs.org/zh/     如何根据地址中的路径选择不同的组件？ 把选择的组件放到哪个位置？ 如何无刷新的切换组件？  路由插件npm i vue-router  路由插件的使用 import Vue from 'vue' import VueRouter from 'vue-router'  Vue.use(VueRouter); // Vue.use(插件)  在Vue中安装插件  const router = new VueRouter(&#123;   // 路由配置 &#125;) new Vue(&#123;   ...,   router &#125;)  基本使用// 路由配置 const router = new VueRouter(&#123;   routes: [ // 路由规则     // 当匹配到路径 /foo 时，渲染 Foo 组件     &#123; path: '/foo', component: Foo &#125;,     // 当匹配到路径 /bar 时，渲染 Bar ...</div></div></div></a><a class="pagination-related" href="/2023/08/04/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/4%E6%90%AD%E5%BB%BA%E5%B7%A5%E7%A8%8B/" title="搭建工程"><img class="cover" src="/imgs/8.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-04</div><div class="info-item-2">搭建工程</div></div><div class="info-2"><div class="info-item-1"> vue-cli: https://cli.vuejs.org/zh/  vue-clivue-cli是一个脚手架工具，用于搭建vue工程 它内部使用了webpack，并预置了诸多插件（plugin）和加载器（loader），以达到开箱即用的效果 除了基本的插件和加载器外，vue-cli还预置了：  babel webpack-dev-server eslint postcss less-loader  SFC单文件组件，Single File Component，即一个文件就包含了一个组件所需的全部代码 &lt;template>   &lt;!-- 组件模板代码 --> &lt;/template>  &lt;script> export default &#123;   // 组件配置 &#125; &lt;/script>  &lt;style>   /* 组件样式 */ &lt;/style>    预编译当vue-cli进行打包时，会直接把组件中的模板转换为render函数，这叫做模板预编译 这样做的好处在于：  运行时就不再需要编译模板了，提高了运行效率 打包结果中...</div></div></div></a><a class="pagination-related" href="/2023/08/08/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/6%E7%BB%84%E4%BB%B6%E4%BA%8B%E4%BB%B6/" title="组件事件"><img class="cover" src="/imgs/1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-08</div><div class="info-item-2">组件事件</div></div><div class="info-2"><div class="info-item-1">pager组件  属性   属性名 含义 类型 必填 默认值    current 当前页码 Number 否 1   total 总数据量 Number 否 0   limit 页容量 Number 否 10   visibleNumber 可见页码数 Number 否 10   事件   事件名 含义 事件参数 参数类型    pageChange 页码变化 新的页码 Number   知识点 全局样式  v-if 和 v-show    面试题：v-if 和 v-show 有什么区别？ v-if能够控制是否生成vnode，也就间接控制了是否生成对应的dom。当v-if为true时，会生成对应的vnode，并生成对应的dom元素；当其为false时，不会生成对应的vnode，自然不会生成任何的dom元素。 v-show始终会生成vnode，也就间接导致了始终生成dom。它只是控制dom的display属性，当v-show为true时，不做任何处理；当其为false时，生成的dom的display属性为none。 使用v-if可以有效的减少树的节点和渲染量，但也会导致树的不稳定...</div></div></div></a><a class="pagination-related" href="/2023/07/19/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/2%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="核心概念"><img class="cover" src="/imgs/6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-19</div><div class="info-item-2">核心概念</div></div><div class="info-2"><div class="info-item-1">注入d vue会将以下配置注入到vue实例：  data：和界面相关的数据 computed：通过已有数据计算得来的数据，将来详细讲解 methods：方法   模板中可以使用vue实例中的成员  虚拟DOM树直接操作真实的DOM会引发严重的效率问题，vue使用虚拟DOM（vnode）的方式来描述要渲染的内容 vnode是一个普通的JS对象，用于描述界面上应该有什么，比如： var vnode = &#123;   tag: "h1",   children: [     &#123; tag: undefined, text: "第一个vue应用：Hello World"&#125;   ] &#125;  上面的对象描述了： 有一个标签名为h1的节点，它有一个子节点，该子节点是一个文本，内容为「第一个vue应用：Hello World」  vue模板并不是真实的DOM，它会被编译为虚拟DOM &lt;div id="app">   &lt;h1>第一个vue应用：&#123;&#123;title&#125;&#125;&lt;/h1>   &lt;p>作者：&#123;&#...</div></div></div></a><a class="pagination-related" href="/2023/08/12/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/12%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="组件生命周期"><img class="cover" src="/imgs/3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-12</div><div class="info-item-2">组件生命周期</div></div><div class="info-2"><div class="info-item-1">组件生命周期    常见应用 不要死记硬背，要根据具体情况灵活处理  加载远程数据export default &#123;   data()&#123;     return &#123;       news: []     &#125;   &#125;,   async created()&#123;     this.news = await getNews();   &#125; &#125;  直接操作DOMexport default &#123;   data()&#123;     return &#123;       containerWidth:0,       containerHeight:0     &#125;   &#125;,   mounted()&#123;     this.containerWidth = this.$refs.container.clientWidth;     this.containerHeight = this.$refs.container.containerHeight;   &#125; &#125;  ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/toux.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">chenMing</div><div class="author-info-description">技术博客</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">70</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chen2ming"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">今天你学习了吗？今天你快乐了吗？</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/%E5%B7%A5%E4%BD%9C%E9%A1%B9%E7%9B%AE/%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F/" title="路由模式"><img src="/imgs/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="路由模式"/></a><div class="content"><a class="title" href="/2026/06/10/%E5%B7%A5%E4%BD%9C%E9%A1%B9%E7%9B%AE/%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F/" title="路由模式">路由模式</a><time datetime="2026-06-10T09:38:25.684Z" title="发表于 2026-06-10 17:38:25">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/vue/vue-%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E7%AF%87/" title="vue实例方法"><img src="/imgs/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue实例方法"/></a><div class="content"><a class="title" href="/2026/06/10/vue/vue-%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E7%AF%87/" title="vue实例方法">vue实例方法</a><time datetime="2026-06-10T09:38:25.669Z" title="发表于 2026-06-10 17:38:25">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/js/js-addEventListener/" title="addEventListener方法使用"><img src="/imgs/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="addEventListener方法使用"/></a><div class="content"><a class="title" href="/2026/06/10/js/js-addEventListener/" title="addEventListener方法使用">addEventListener方法使用</a><time datetime="2026-06-10T09:38:25.658Z" title="发表于 2026-06-10 17:38:25">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/12/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/12%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="组件生命周期"><img src="/imgs/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="组件生命周期"/></a><div class="content"><a class="title" href="/2023/08/12/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/12%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="组件生命周期">组件生命周期</a><time datetime="2023-08-11T16:00:00.000Z" title="发表于 2023-08-12 00:00:00">2023-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/11/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/11%E8%8E%B7%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE/" title="获取远程数据"><img src="/imgs/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="获取远程数据"/></a><div class="content"><a class="title" href="/2023/08/11/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/11%E8%8E%B7%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE/" title="获取远程数据">获取远程数据</a><time datetime="2023-08-10T16:00:00.000Z" title="发表于 2023-08-11 00:00:00">2023-08-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2017 - 2026 By chenMing</span></div><div class="footer_custom_text"><div>嗨，欢迎来到我的博客，希望能帮助到您！</div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideMobileSidebar.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

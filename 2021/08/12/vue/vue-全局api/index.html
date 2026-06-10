@@ -1,0 +1,569 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>vue全局API | chenMing</title><meta name="author" content="chenMing"><meta name="copyright" content="chenMing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="与实例方法不同，实例方法是将方法挂载到Vue的原型上，而全局API是直接在Vue上挂载方法。在Vue中，全局API一共有12个，分别是Vue.extend、Vue.nextTick、Vue.set、Vue.delete、Vue.directive、Vue.filter、Vue.componen..."><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "vue全局API",
+  "url": "http://example.com/2021/08/12/vue/vue-%E5%85%A8%E5%B1%80api/",
+  "image": "http://example.com/imgs/5.jpg",
+  "datePublished": "2021-08-11T16:00:00.000Z",
+  "dateModified": "2026-06-10T09:38:25.667Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "chenMing",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/toux.jpg"><link rel="canonical" href="http://example.com/2021/08/12/vue/vue-%E5%85%A8%E5%B1%80api/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'vue全局API',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="chenMing" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/toux.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">70</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">chenMing</span></a><a class="nav-page-title" href="/"><span class="site-name">vue全局API</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-fw fa fa-book"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-fw fas fa-sitemap"></i><span> 书签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw fas fa-heart card-announcement-animation"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">vue全局API</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-11T16:00:00.000Z" title="发表于 2021-08-12 00:00:00">2021-08-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-10T09:38:25.667Z" title="更新于 2026-06-10 17:38:25">2026-06-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>与实例方法不同，实例方法是将方法挂载到Vue的原型上，而全局API是直接在Vue上挂载方法。<br>在Vue中，全局API一共有12个，分别是Vue.extend、Vue.nextTick、Vue.set、Vue.delete、Vue.directive、Vue.filter、Vue.component、Vue.use、Vue.mixin、Vue.observable、Vue.version。这12个API中有的是我们在日常业务开发中经常会用到的，有的是对Vue内部或外部插件提供的，我们在日常业务开发中几乎用不到。</p>
+<h1 id="Vue-extend"><a href="#Vue-extend" class="headerlink" title="Vue.extend"></a>Vue.extend</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span> options <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<br>{Object} options</li>
+<li>作用<br>使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。<br>data 选项是特例，需要注意 - 在 Vue.extend() 中它必须是函数<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"mount-point"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 创建构造器</span>
+<span class="token keyword">var</span> Profile <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">template</span><span class="token operator">:</span> <span class="token string">'&lt;p>&#123;&#123;firstName&#125;&#125; &#123;&#123;lastName&#125;&#125; aka &#123;&#123;alias&#125;&#125;&lt;/p>'</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">data</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">firstName</span><span class="token operator">:</span> <span class="token string">'Walter'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">lastName</span><span class="token operator">:</span> <span class="token string">'White'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">alias</span><span class="token operator">:</span> <span class="token string">'Heisenberg'</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token comment">// 创建 Profile 实例，并挂载到一个元素上。</span>
+<span class="token keyword">new</span> <span class="token class-name">Profile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'##mount-point'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>p<span class="token operator">></span>Walter White aka Heisenberg<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2>Vue.extend的作用是创建一个继承自Vue类的子类，可接收的参数是一个包含组件选项的对象。</li>
+</ul>
+<p>既然是Vue类的子类，那么除了它本身独有的一些属性方法，还有一些是从Vue类中继承而来，所以创建子类的过程其实就是一边给子类上添加上独有的属性，一边将父类的公共属性复制到子类上</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function-variable function">extend</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">extendOptions</span><span class="token operator">:</span> Object</span><span class="token punctuation">)</span><span class="token operator">:</span> Function <span class="token punctuation">&#123;</span>
+    extendOptions <span class="token operator">=</span> extendOptions <span class="token operator">||</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">const</span> Super <span class="token operator">=</span> <span class="token keyword">this</span>
+    <span class="token keyword">const</span> SuperId <span class="token operator">=</span> Super<span class="token punctuation">.</span>cid
+    <span class="token keyword">const</span> cachedCtors <span class="token operator">=</span> extendOptions<span class="token punctuation">.</span>_Ctor <span class="token operator">||</span> <span class="token punctuation">(</span>extendOptions<span class="token punctuation">.</span>_Ctor <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>cachedCtors<span class="token punctuation">[</span>SuperId<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> cachedCtors<span class="token punctuation">[</span>SuperId<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">const</span> name <span class="token operator">=</span> extendOptions<span class="token punctuation">.</span>name <span class="token operator">||</span> Super<span class="token punctuation">.</span>options<span class="token punctuation">.</span>name
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span> <span class="token operator">&amp;&amp;</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">validateComponentName</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">const</span> <span class="token function-variable function">Sub</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">VueComponent</span> <span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_init</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">Sub</span><span class="token punctuation">.</span>prototype <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">Super</span><span class="token punctuation">.</span>prototype<span class="token punctuation">)</span>
+    <span class="token class-name">Sub</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructor <span class="token operator">=</span> Sub
+    Sub<span class="token punctuation">.</span>cid <span class="token operator">=</span> cid<span class="token operator">++</span>
+    Sub<span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span>
+        Super<span class="token punctuation">.</span>options<span class="token punctuation">,</span>
+        extendOptions
+    <span class="token punctuation">)</span>
+    Sub<span class="token punctuation">[</span><span class="token string">'super'</span><span class="token punctuation">]</span> <span class="token operator">=</span> Super
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Sub<span class="token punctuation">.</span>options<span class="token punctuation">.</span>props<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">initProps</span><span class="token punctuation">(</span>Sub<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Sub<span class="token punctuation">.</span>options<span class="token punctuation">.</span>computed<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">initComputed</span><span class="token punctuation">(</span>Sub<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// allow further extension/mixin/plugin usage</span>
+    Sub<span class="token punctuation">.</span>extend <span class="token operator">=</span> Super<span class="token punctuation">.</span>extend
+    Sub<span class="token punctuation">.</span>mixin <span class="token operator">=</span> Super<span class="token punctuation">.</span>mixin
+    Sub<span class="token punctuation">.</span>use <span class="token operator">=</span> Super<span class="token punctuation">.</span>use
+
+    <span class="token comment">// create asset registers, so extended classes</span>
+    <span class="token comment">// can have their private assets too.</span>
+    <span class="token constant">ASSET_TYPES</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">type</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        Sub<span class="token punctuation">[</span>type<span class="token punctuation">]</span> <span class="token operator">=</span> Super<span class="token punctuation">[</span>type<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token comment">// enable recursive self-lookup</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        Sub<span class="token punctuation">.</span>options<span class="token punctuation">.</span>components<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> Sub
+    <span class="token punctuation">&#125;</span>
+
+    Sub<span class="token punctuation">.</span>superOptions <span class="token operator">=</span> Super<span class="token punctuation">.</span>options
+    Sub<span class="token punctuation">.</span>extendOptions <span class="token operator">=</span> extendOptions
+    Sub<span class="token punctuation">.</span>sealedOptions <span class="token operator">=</span> <span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> Sub<span class="token punctuation">.</span>options<span class="token punctuation">)</span>
+
+    <span class="token comment">// cache constructor</span>
+    cachedCtors<span class="token punctuation">[</span>SuperId<span class="token punctuation">]</span> <span class="token operator">=</span> Sub
+    <span class="token keyword">return</span> Sub
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol>
+<li>首先，该函数内部定义了几个变量</li>
+</ol>
+<ul>
+<li>extendOptions：用户传入的一个包含组件选项的对象参数；</li>
+<li>Super：指向父类，即基础 Vue类；</li>
+<li>SuperId：父类的cid属性，无论是基础 Vue类还是从基础 Vue类继承而来的类，都有一个cid属性，作为该类的唯一标识；</li>
+<li>cachedCtors：缓存池，用于缓存创建出来的类；</li>
+</ul>
+<ol start="2">
+<li>接着，在缓存池中先尝试获取是否之前已经创建过的该子类，如果之前创建过，则直接返回之前创建的。之所以有这一步，是因为Vue为了性能考虑，反复调用Vue.extend其实应该返回同一个结果，只要返回结果是固定的，就可以将结果缓存，再次调用时，只需从缓存中取出结果即可。在API方法定义的最后，当创建完子类后，会使用父类的cid作为key，创建好的子类作为value，存入缓存池cachedCtors中。</li>
+<li>接着，获取到传入的选项参数中的name字段，并且在开发环境下校验name字段是否合法，</li>
+<li>创建一个类Sub，这个类就是将要继承基础Vue类的子类</li>
+<li>到这里，我们已经把类创建好了，接下来的工作就是让该类去继承基础Vue类，让其具备一些基础Vue类的能力</li>
+<li>首先，将父类的原型继承到子类中，并且为子类添加唯一标识cid</li>
+<li>将父类的options与子类的options进行合并，将合并结果赋给子类的options属性</li>
+<li>将父类保存到子类的super属性中，以确保在子类中能够拿到父类</li>
+<li>如果选项中存在props属性，则初始化它</li>
+<li>初始化props属性其实就是把参数中传入的props选项代理到原型的_props中</li>
+<li>如果选项中存在computed属性，则初始化它</li>
+<li>初始化props属性就是遍历参数中传入的computed选项，将每一项都调用defineComputed函数定义到子类原型上。此处的defineComputed函数与我们之前在生命周期初始化阶段initState中所介绍的defineComputed函数是一样的。</li>
+<li>将父类中的一些属性复制到子类中</li>
+<li>给子类新增三个独有的属性</li>
+<li>使用父类的cid作为key，创建好的子类Sub作为value，存入缓存池cachedCtors中</li>
+<li>最终将创建好的子类Sub返回</li>
+</ol>
+<blockquote>
+<p>其实总体来讲，整个过程就是先创建一个类Sub，接着通过原型继承的方式将该类继承基础Vue类，然后给Sub类添加一些属性以及将父类的某些属性复制到Sub类上，最后将Sub类返回</p>
+</blockquote>
+<h1 id="Vue-nextTick"><a href="#Vue-nextTick" class="headerlink" title="Vue.nextTick"></a>Vue.nextTick</h1><p>该API的原理同实例方法 $nextTick原理一样，此处不再重复。唯一不同的是实例方法 $nextTick 中回调的 this 绑定在调用它的实例上</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span> <span class="token punctuation">[</span>callback<span class="token punctuation">,</span> context<span class="token punctuation">]</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数：<ul>
+<li>{Function} [callback]</li>
+<li>{Object} [context]</li>
+</ul>
+</li>
+<li>作用：<br>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。</li>
+</ul>
+<h1 id="Vue-set"><a href="#Vue-set" class="headerlink" title="Vue.set"></a>Vue.set</h1><p>原理同实例方法 $set原理一样。</p>
+<ul>
+<li>参数：<ul>
+<li>{Object | Array} target</li>
+<li>{string | number} propertyName/index</li>
+<li>{any} value</li>
+</ul>
+</li>
+<li>返回值：设置的值。</li>
+<li>作用：<br>向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为 Vue 无法探测普通的新增属性 (比如 this.myObject.newProperty = ‘hi’)</li>
+</ul>
+<h1 id="Vue-delete"><a href="#Vue-delete" class="headerlink" title="Vue.delete"></a>Vue.delete</h1><p>原理同实例方法 $delete原理一样</p>
+<ul>
+<li>参数：<ul>
+<li>{Object | Array} target</li>
+<li>{string | number} propertyName/index</li>
+<li>仅在 2.2.0+ 版本中支持 Array + index 用法。</li>
+</ul>
+</li>
+<li>作用：<br>删除对象的属性。如果对象是响应式的，确保删除能触发更新视图。这个方法主要用于避开 Vue 不能检测到属性被删除的限制。</li>
+</ul>
+<h1 id="Vue-directive"><a href="#Vue-directive" class="headerlink" title="Vue.directive"></a>Vue.directive</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">directive</span><span class="token punctuation">(</span> id<span class="token punctuation">,</span> <span class="token punctuation">[</span>definition<span class="token punctuation">]</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<ul>
+<li>{string} id</li>
+<li>{Function | Object} [definition]</li>
+</ul>
+</li>
+<li>作用<br>注册或获取全局指令。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 注册</span>
+Vue<span class="token punctuation">.</span><span class="token function">directive</span><span class="token punctuation">(</span><span class="token string">'my-directive'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">bind</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">inserted</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">update</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">componentUpdated</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">unbind</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 注册 (指令函数)</span>
+Vue<span class="token punctuation">.</span><span class="token function">directive</span><span class="token punctuation">(</span><span class="token string">'my-directive'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 这里将会被 `bind` 和 `update` 调用</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// getter，返回已注册的指令</span>
+<span class="token keyword">var</span> myDirective <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">directive</span><span class="token punctuation">(</span><span class="token string">'my-directive'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="原理分析-1"><a href="#原理分析-1" class="headerlink" title="原理分析"></a>原理分析</h2>该API是用来注册或获取全局指令的，接收两个参数：指令id和指令的定义。这里需要注意一点的是：注册指令是将定义好的指令存放在某个位置，获取指令是根据指令id从存放指令的位置来读取指令<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span>options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'directives'</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+
+Vue<span class="token punctuation">.</span><span class="token function-variable function">directive</span><span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">id<span class="token punctuation">,</span>definition</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>definition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'directives'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'directive'</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> definition <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            definition <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">bind</span><span class="token operator">:</span> definition<span class="token punctuation">,</span> <span class="token literal-property property">update</span><span class="token operator">:</span> definition <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'directives'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> definition
+        <span class="token keyword">return</span> definition
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<ol>
+<li>可以看到，我们在Vue类上创建了options属性，其属性值为一个空对象，并且在options属性中添加了directives属性，其值也是一个空对象，这个directives属性就是用来存放指令的位置。</li>
+<li>该API可以用来注册或获取全局指令，这两种功能的切换取决于是否传入了definition参数。如果没有传入definition参数，则表示为获取指令，那么就从存放指令的地方根据指令id来读取指令并返回</li>
+<li>如果传入了definition参数，则表示为注册指令，那么继续判断definition参数是否是一个函数，如果是函数，则默认监听bind和update两个事件，即将definition函数分别赋给bind和update两个属性。</li>
+<li>如果definition参数不是一个函数，那么即认为它是用户自定义的指令对象，直接将其保存在this.options[‘directives’]中</li>
+</ol>
+<h1 id="Vue-filter"><a href="#Vue-filter" class="headerlink" title="Vue.filter"></a>Vue.filter</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span> id<span class="token punctuation">,</span> <span class="token punctuation">[</span>definition<span class="token punctuation">]</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<ul>
+<li>{string} id</li>
+<li>{Function} [definition]</li>
+</ul>
+</li>
+<li>作用<br>注册或获取全局过滤器。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 注册</span>
+Vue<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token string">'my-filter'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 返回处理后的值</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// getter，返回已注册的过滤器</span>
+<span class="token keyword">var</span> myFilter <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token string">'my-filter'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="原理分析-2"><a href="#原理分析-2" class="headerlink" title="原理分析"></a>原理分析</h2><p>该API是用来注册或获取全局过滤器的，接收两个参数：过滤器id和过滤器的定义。同全局指令一样，注册过滤器是将定义好的过滤器存放在某个位置，获取过滤器是根据过滤器id从存放过滤器的位置来读取过滤器。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span>options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'filters'</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+
+Vue<span class="token punctuation">.</span><span class="token function-variable function">filter</span><span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">id<span class="token punctuation">,</span>definition</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>definition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'filters'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'filters'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> definition
+        <span class="token keyword">return</span> definition
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，同全局指令一样，Vue.options[‘filters’]是用来存放全局过滤器的地方。还是根据是否传入了definition参数来决定本次操作是注册过滤器还是获取过滤器。如果没有传入definition参数，则表示本次操作为获取过滤器，那么就从存放过滤器的地方根据过滤器id来读取过滤器并返回；如果传入了definition参数，则表示本次操作为注册过滤器，那就直接将其保存在this.options[‘filters’]中</p>
+<h2 id="使用过滤器"><a href="#使用过滤器" class="headerlink" title="使用过滤器"></a>使用过滤器</h2><p>过滤器有两种使用方式：在双花括号插值中和在 v-bind 表达式中 (后者从 2.1.0+ 开始支持)。过滤器应该被添加在 JavaScript 表达式的尾部，由“|”符号指示：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 在双花括号中 <span class="token operator">--</span><span class="token operator">></span>
+<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> message <span class="token operator">|</span> capitalize <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 在 <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">v-bind</span><span class="token template-punctuation string">`</span></span> 中 <span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>div v<span class="token operator">-</span>bind<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">"rawId | formatId"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="过滤器的定义"><a href="#过滤器的定义" class="headerlink" title="过滤器的定义"></a>过滤器的定义</h2><p>你可以在一个组件的选项中定义本地的过滤器：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">capitalize</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>value<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">''</span>
+    value <span class="token operator">=</span> value<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> value<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> value<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>也可以在创建 Vue 实例之前使用全局APIVue.filter来定义全局过滤器:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>value<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">''</span>
+  value <span class="token operator">=</span> value<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> value<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> value<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="串联过滤器"><a href="#串联过滤器" class="headerlink" title="串联过滤器"></a>串联过滤器</h2><p>过滤器函数总接收表达式的值 (之前的操作链的结果) 作为第一个参数。在上述例子中，capitalize 过滤器函数将会收到 message 的值作为第一个参数。<br>过滤器可以串联：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> message <span class="token operator">|</span> filterA <span class="token operator">|</span> filterB <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在这个例子中，filterA 被定义为接收单个参数的过滤器函数，表达式 message 的值将作为参数传入到函数中。然后继续调用同样被定义为接收单个参数的过滤器函数 filterB，将 filterA 的结果传递到 filterB 中。</p>
+<p>过滤器是 JavaScript 函数，因此可以接收参数：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> message <span class="token operator">|</span> <span class="token function">filterA</span><span class="token punctuation">(</span><span class="token string">'arg1'</span><span class="token punctuation">,</span> arg2<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里，filterA 被定义为接收三个参数的过滤器函数。其中 message 的值作为第一个参数，普通字符串 ‘arg1’ 作为第二个参数，表达式 arg2 的值作为第三个参数</p>
+<h1 id="Vue-component"><a href="#Vue-component" class="headerlink" title="Vue.component"></a>Vue.component</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span> id<span class="token punctuation">,</span> <span class="token punctuation">[</span>definition<span class="token punctuation">]</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<ul>
+<li>{string} id</li>
+<li>{Function | Object} [definition]</li>
+</ul>
+</li>
+<li>作用<br>注册或获取全局组件。注册还会自动使用给定的id设置组件的名称<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 注册组件，传入一个扩展过的构造器</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> Vue<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 注册组件，传入一个选项对象 (自动调用 Vue.extend)</span>
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 获取注册的组件 (始终返回构造器)</span>
+<span class="token keyword">var</span> MyComponent <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="原理分析-3"><a href="#原理分析-3" class="headerlink" title="原理分析"></a>原理分析</h2>该API是用来注册或获取全局组件的，接收两个参数：组件id和组件的定义。 同全局指令一样，注册全局组件是将定义好的组件存放在某个位置，获取组件是根据组件id从存放组件的位置来读取组件。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span>options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+Vue<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'components'</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+
+Vue<span class="token punctuation">.</span><span class="token function-variable function">filter</span><span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">id<span class="token punctuation">,</span>definition</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>definition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'components'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span> <span class="token operator">&amp;&amp;</span> type <span class="token operator">===</span> <span class="token string">'component'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">validateComponentName</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'component'</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isPlainObject</span><span class="token punctuation">(</span>definition<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            definition<span class="token punctuation">.</span>name <span class="token operator">=</span> definition<span class="token punctuation">.</span>name <span class="token operator">||</span> id
+            definition <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>_base<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span>definition<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token string">'components'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> definition
+        <span class="token keyword">return</span> definition
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<ol>
+<li>可以看到，同全局指令一样，Vue.options[‘components’]是用来存放全局组件的地方。还是根据是否传入了definition参数来决定本次操作是注册组件还是获取组件。如果没有传入definition参数，则表示本次操作为获取组件，那么就从存放组件的地方根据组件id来读取组件并返回；如果传入了definition参数，则表示本次操作为注册组件，如果是注册组件，那么在非生产环境下首先会校验组件的name值是否合法.</li>
+<li>接着，判断传入的definition参数是否是一个对象，如果是对象，则使用Vue.extend方法将其变为Vue的子类，同时如果definition对象中不存在name属性时，则使用组件id作为组件的name属性。</li>
+<li>将注册好的组件保存在this.options[‘components’]中</li>
+</ol>
+<h1 id="directive、filter、component小结"><a href="#directive、filter、component小结" class="headerlink" title="directive、filter、component小结"></a>directive、filter、component小结</h1><p>通过对Vue.directive、Vue.filter和Vue.component这三个API的分析，细心的你肯定会发现这三个API的代码实现非常的相似，是的，这是我们为了便于理解故意拆开的，其实在源码中这三个API的实现是写在一起的，位于源码的src/core/global-api/index,js和src/core/global-api/assets,js中</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">ASSET_TYPES</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token string">'component'</span><span class="token punctuation">,</span>
+  <span class="token string">'directive'</span><span class="token punctuation">,</span>
+  <span class="token string">'filter'</span>
+<span class="token punctuation">]</span>
+
+Vue<span class="token punctuation">.</span>options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+<span class="token constant">ASSET_TYPES</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">type</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    Vue<span class="token punctuation">.</span>options<span class="token punctuation">[</span>type <span class="token operator">+</span> <span class="token string">'s'</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token constant">ASSET_TYPES</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">type</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    Vue<span class="token punctuation">[</span>type<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">id<span class="token punctuation">,</span>definition</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>definition<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span>type <span class="token operator">+</span> <span class="token string">'s'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span> <span class="token operator">&amp;&amp;</span> type <span class="token operator">===</span> <span class="token string">'component'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">validateComponentName</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'component'</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isPlainObject</span><span class="token punctuation">(</span>definition<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                definition<span class="token punctuation">.</span>name <span class="token operator">=</span> definition<span class="token punctuation">.</span>name <span class="token operator">||</span> id
+                definition <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>_base<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span>definition<span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'directive'</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> definition <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                definition <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">bind</span><span class="token operator">:</span> definition<span class="token punctuation">,</span> <span class="token literal-property property">update</span><span class="token operator">:</span> definition <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">[</span>type <span class="token operator">+</span> <span class="token string">'s'</span><span class="token punctuation">]</span><span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> definition
+            <span class="token keyword">return</span> definition
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="Vue-use"><a href="#Vue-use" class="headerlink" title="Vue.use"></a>Vue.use</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span> plugin <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<ul>
+<li>{Object | Function} plugin</li>
+</ul>
+</li>
+<li>作用<br>安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。<br>该方法需要在调用 new Vue() 之前被调用。<br>当 install 方法被同一个插件多次调用，插件将只会被安装一次</li>
+</ul>
+<p>该API是用来安装Vue.js插件的。并且我们知道了，该API内部会调用插件提供的install 方法，同时将Vue 作为参数传入。另外，由于插件只会被安装一次，所以该API内部还应该防止 install 方法被同一个插件多次调用。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function-variable function">use</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">plugin</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> installedPlugins <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_installedPlugins <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_installedPlugins <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>installedPlugins<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>plugin<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// additional parameters</span>
+    <span class="token keyword">const</span> args <span class="token operator">=</span> <span class="token function">toArray</span><span class="token punctuation">(</span>arguments<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    args<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> plugin<span class="token punctuation">.</span>install <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        plugin<span class="token punctuation">.</span><span class="token function">install</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>plugin<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> plugin <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">plugin</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    installedPlugins<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>plugin<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol>
+<li>首先定义了一个变量installedPlugins,该变量初始值是一个空数组，用来存储已安装过的插件。首先判断传入的插件是否存在于installedPlugins数组中（即已被安装过），如果存在的话，则直接返回，防止重复安装。</li>
+<li>接下来获取到传入的其余参数，并且使用toArray方法将其转换成数组，同时将Vue插入到该数组的第一个位置，这是因为在后续调用install方法时，Vue必须作为第一个参数传入。</li>
+<li>传入的插件可以是一个提供了 install 方法的对象。也可以是一个函数，那么这个函数会被作为 install 方法。所以在接下来会根据这两种不同的情况分别处理。</li>
+</ol>
+<ul>
+<li>首先，判断传入的插件如果是一个提供了 install 方法的对象，那么就执行该对象中提供的 install 方法并传入参数完成插件安装。</li>
+<li>如果传入的插件是一个函数，那么就把这个函数当作install方法执行，同时传入参数完成插件安装。</li>
+</ul>
+<ol start="4">
+<li>插件安装完成之后，将该插件添加进已安装插件列表中，防止重复安装。</li>
+</ol>
+<h1 id="Vue-mixin"><a href="#Vue-mixin" class="headerlink" title="Vue.mixin"></a>Vue.mixin</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">mixin</span><span class="token punctuation">(</span> mixin <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<ul>
+<li>{Object} mixin</li>
+</ul>
+</li>
+<li>作用<br>全局注册一个混入，影响注册之后所有创建的每个 Vue 实例。插件作者可以使用混入，向组件注入自定义的行为。<strong>不推荐在应用代码中使用。</strong></li>
+</ul>
+<h2 id="原理分析-4"><a href="#原理分析-4" class="headerlink" title="原理分析"></a>原理分析</h2><p>该API是用来向全局注册一个混入，即可以修改Vue.options属性，并且会影响之后的所有Vue实例，这个API虽然在日常的业务开发中几乎用不到，但是在编写Vue插件时用处非常大。下面我们就来看一下该API的内部实现原理。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function-variable function">mixin</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">mixin</span><span class="token operator">:</span> Object</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token function">mergeOptions</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">,</span> mixin<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>该API就是通过修改Vue.options属性进而影响之后的所有Vue实例。所以我们只需将传入的mixin对象与this.options合并即可，然后将合并后的新对象作为this.options传给之后的所有Vue实例，从而达到改变其原有特性的效果。</p>
+<h1 id="Vue-compile"><a href="#Vue-compile" class="headerlink" title="Vue.compile"></a>Vue.compile</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span> template <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<ul>
+<li>{string} template</li>
+</ul>
+</li>
+<li>作用<br>在 render 函数中编译模板字符串。<strong>只在独立构建时有效</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> res <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span><span class="token string">'&lt;div>&lt;span>&#123;&#123; msg &#125;&#125;&lt;/span>&lt;/div>'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">msg</span><span class="token operator">:</span> <span class="token string">'hello'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">render</span><span class="token operator">:</span> res<span class="token punctuation">.</span>render<span class="token punctuation">,</span>
+  <span class="token literal-property property">staticRenderFns</span><span class="token operator">:</span> res<span class="token punctuation">.</span>staticRenderFns
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="原理分析-5"><a href="#原理分析-5" class="headerlink" title="原理分析"></a>原理分析</h2><p>该API是用来编译模板字符串的，我们在日常业务开发中几乎用不到，它内部是调用了compileToFunctions方法</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span>compile <span class="token operator">=</span> compileToFunctions<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="Vue-observable"><a href="#Vue-observable" class="headerlink" title="Vue.observable"></a>Vue.observable</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">observable</span><span class="token punctuation">(</span> object <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>参数<ul>
+<li>{Object} object</li>
+</ul>
+</li>
+<li>用法<br>让一个对象可响应。Vue 内部会用它来处理 data 函数返回的对象。<br>返回的对象可以直接用于渲染函数和计算属性内，并且会在发生改变时触发相应的更新。也可以作为最小化的跨组件状态存储器，用于简单的场景：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> state <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">count</span><span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> Demo <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">h</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">h</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">on</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token function-variable function">click</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span> state<span class="token punctuation">.</span>count<span class="token operator">++</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">count is: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>state<span class="token punctuation">.</span>count<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="原理分析-6"><a href="#原理分析-6" class="headerlink" title="原理分析"></a>原理分析</h2>从用法回顾中可以知道，该API是用来将一个普通对象转化成响应式对象。在日常业务开发中也几乎用不到，它内部是调用了observe方法，关于该方法在数据变化侦测篇已经做了非常详细的介绍，此处不再重复。</li>
+</ul>
+<h1 id="Vue-version"><a href="#Vue-version" class="headerlink" title="Vue.version"></a>Vue.version</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span>version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>细节: 提供字符串形式的 Vue 安装版本号。这对社区的插件和组件来说非常有用，你可以根据不同的版本号采取不同的策略。</li>
+<li>用法<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> version <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>Vue<span class="token punctuation">.</span>version<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>version <span class="token operator">===</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// Vue v2.x.x</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>version <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// Vue v1.x.x</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// Unsupported versions of Vue</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+从用法回顾中可以知道，该API是用来标识当前构建的Vue.js的版本号，对于日常业务开发几乎用不到，但是对于插件编写非常有用，可以根据Vue版本的不同从而做一些不同的事情。</li>
+</ul>
+<p>该API是在构建时读取了package.json中的version字段，然后将其赋值给Vue.version。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">chenMing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/08/12/vue/vue-%E5%85%A8%E5%B1%80api/">http://example.com/2021/08/12/vue/vue-%E5%85%A8%E5%B1%80api/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">chenMing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/vue2-0/">vue2.0</a></div><div class="post-share"><div class="social-share" data-image="/imgs/5.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/08/26/vue/vue-%E5%86%85%E7%BD%AE%E7%BB%84%E4%BB%B6/" title="vue内置组件"><img class="cover" src="/imgs/2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">vue内置组件</div></div><div class="info-2"><div class="info-item-1"> 是 Vue 实现的一个内置组件，也就是说 Vue 源码不仅实现了一套组件化的机制，也实现了一些内置组件，关于组件，官网如下介绍： 是Vue中内置的一个抽象组件，它自身不会渲染一个 DOM 元素，也不会出现在父组件链中。当它包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。 这句话的意思简单来说：就是我们可以把一些不常变动的组件或者需要缓存的组件用包裹起来，这样就会帮我们把组件保存在内存中，而不是直接的销毁，这样做可以保留组件的状态或避免多次重新渲染，以提高页面性能。 &lt;div id="app">   &lt;button @click="switchComp('child1')">组件1&lt;/button>   &lt;button @click="switchComp('child2')">组件2&lt;/button>   &lt;component :is="chooseComponent">&lt;/component> &lt;/div> &lt;body>   &lt;script src="https://cdn.jsdelivr.net/npm/...</div></div></div></a><a class="pagination-related" href="/2021/08/01/vue/vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%94%80%E6%AF%81%E9%98%B6%E6%AE%B5/" title="vue生命周期销毁阶段"><img class="cover" src="/imgs/3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">vue生命周期销毁阶段</div></div><div class="info-2"><div class="info-item-1">当调用了vm.$destroy方法，Vue实例就进入了销毁阶段，该阶段所做的主要工作是将当前的Vue实例从其父级实例中删除，取消当前实例上的所有依赖追踪并且移除实例上的所有事件监听器。也就是说，当这个阶段完成之后，当前的Vue实例的整个生命流程就全部走完了 销毁阶段分析当调用了实例的$destroy方法之后，当前实例就进入了销毁阶段。所以分析销毁阶段就是分析$destroy方法的内部实现。该方法的定义位于源码的src/core/instance.lifecycle.js中，如下： Vue.prototype.$destroy = function () &#123;   const vm: Component = this   if (vm._isBeingDestroyed) &#123;     return   &#125;   callHook(vm, 'beforeDestroy')   vm._isBeingDestroyed = true   // remove self from parent   const parent = vm.$parent   if (p...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/07/22/vue/vue-%E8%99%9A%E6%8B%9Fdom/" title="vue虚拟dom"><img class="cover" src="/imgs/1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-22</div><div class="info-item-2">vue虚拟dom</div></div><div class="info-2"><div class="info-item-1">虚拟DOM简介什么是虚拟dom所谓虚拟DOM，就是用一个JS对象来描述一个DOM节点，像如下示例: &lt;div class="a" id="b">我是内容&lt;/div>  &#123;   tag:'div',        // 元素标签   attrs:&#123;           // 属性     class:'a',     id:'b'   &#125;,   text:'我是内容',  // 文本内容   children:[]       // 子元素 &#125; 为什么要有虚拟DOM？我们知道，Vue是数据驱动视图的，数据发生变化视图就要随之更新，在更新视图的时候难免要操作DOM,而操作真实DOM又是非常耗费性能的，这是因为浏览器的标准就把 DOM 设计的非常复杂，所以一个真正的 DOM 元素是非常庞大的，如下所示： let div = document.createElement('div') let str = '' for (const key in div) &#123;   str += key + '' &#125; console.l...</div></div></div></a><a class="pagination-related" href="/2021/07/21/vue/vue-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/" title="vue双向绑定原理"><img class="cover" src="/imgs/4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-21</div><div class="info-item-2">vue双向绑定原理</div></div><div class="info-2"><div class="info-item-1"> Vue双向绑定分为两个部分：对象和数组  object双向绑定原理实现方式 通过Object.defineProperty()定义一个observer类，将正常的object转换成一个可观测的object，并且加上了_ob_属性，如果读取了会通过触发get，如果改变了会触发set   // 源码位置：src/core/observer/index.js  /**  * Observer类会通过递归的方式把一个对象的所有属性都转化成可观测对象  */ export class Observer &#123;   constructor (value) &#123;     this.value = value     // 给value新增一个__ob__属性，值为该value的Observer实例     // 相当于为value打上标记，表示它已经被转化成响应式了，避免重复操作     def(value,'__ob__',this)     if (Array.isArray(value)) &#123;       // 当value为数组时的逻辑       // .....</div></div></div></a><a class="pagination-related" href="/2021/08/01/vue/vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E9%94%80%E6%AF%81%E9%98%B6%E6%AE%B5/" title="vue生命周期销毁阶段"><img class="cover" src="/imgs/3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-01</div><div class="info-item-2">vue生命周期销毁阶段</div></div><div class="info-2"><div class="info-item-1">当调用了vm.$destroy方法，Vue实例就进入了销毁阶段，该阶段所做的主要工作是将当前的Vue实例从其父级实例中删除，取消当前实例上的所有依赖追踪并且移除实例上的所有事件监听器。也就是说，当这个阶段完成之后，当前的Vue实例的整个生命流程就全部走完了 销毁阶段分析当调用了实例的$destroy方法之后，当前实例就进入了销毁阶段。所以分析销毁阶段就是分析$destroy方法的内部实现。该方法的定义位于源码的src/core/instance.lifecycle.js中，如下： Vue.prototype.$destroy = function () &#123;   const vm: Component = this   if (vm._isBeingDestroyed) &#123;     return   &#125;   callHook(vm, 'beforeDestroy')   vm._isBeingDestroyed = true   // remove self from parent   const parent = vm.$parent   if (p...</div></div></div></a><a class="pagination-related" href="/2021/07/23/vue/vue-diff%E7%AE%97%E6%B3%95/" title="diff算法"><img class="cover" src="/imgs/8.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-23</div><div class="info-item-2">diff算法</div></div><div class="info-2"><div class="info-item-1"> 创建节点 删除节点 更新节点  patch在Vue中，把 DOM-Diff过程叫做patch过程。patch,意为“补丁”，即指对旧的VNode修补，打补丁从而得到新的VNode，非常形象哈。那不管叫什么，其本质都是把对比新旧两份VNode的过程。我们在下面研究patch过程的时候，一定把握住这样一个思想：所谓旧的VNode(即oldVNode)就是数据变化之前视图所对应的虚拟DOM节点，而新的VNode是数据变化之后将要渲染的新的视图所对应的虚拟DOM节点，所以我们要以生成的新的VNode为基准，对比旧的oldVNode，如果新的VNode上有的节点而旧的oldVNode上没有，那么就在旧的oldVNode上加上去；如果新的VNode上没有的节点而旧的oldVNode上有，那么就在旧的oldVNode上去掉；如果某些节点在新的VNode和旧的oldVNode上都有，那么就以新的VNode为准，更新旧的oldVNode，从而让新旧VNode相同。总体来说就是以新的标准，多的加上去，少的删掉，将老的改成新的 创建节点 判断是否为元素节点只需判断该VNode节点是否有tag标签即可...</div></div></div></a><a class="pagination-related" href="/2021/07/27/vue/vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91/" title="vue生命周期-模板编译"><img class="cover" src="/imgs/2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="info-item-2">vue生命周期-模板编译</div></div><div class="info-2"><div class="info-item-1">前言在初始化阶段各项工作做完之后调用了vm.$mount方法，该方法的调用标志着初始化阶段的结束和进入下一个阶段，从官方文档给出的生命周期流程图中可以看到，下一个阶段就进入了模板编译阶段，该阶段所做的主要工作是获取到用户传入的模板内容并将其编译成渲染函数。 模板编译阶段并不是存在于Vue的所有构建版本中，它只存在于完整版（即vue.js）中。在只包含运行时版本（即vue.runtime.js）中并不存在该阶段，这是因为当使用vue-loader或vueify时，*.vue文件内部的模板会在构建时预编译成渲染函数，所以是不需要编译的，从而不存在模板编译阶段，由上一步的初始化阶段直接进入下一阶段的挂载阶段。 vue基于源码构建的有两个版本，一个是runtime only(一个只包含运行时的版本)，另一个是runtime + compiler(一个同时包含编译器和运行时的完整版本)。而两个版本的区别仅在于后者包含了一个编译器。  完整版本一个完整的Vue版本是包含编译器的，我们可以使用template选项进行模板编写。编译器会自动将template选项中的模板字符串编译成渲染函数的代码...</div></div></div></a><a class="pagination-related" href="/2021/07/26/vue/vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%98%B6%E6%AE%B5/" title="vue生命周期-初始化阶段"><img class="cover" src="/imgs/4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-26</div><div class="info-item-2">vue生命周期-初始化阶段</div></div><div class="info-2"><div class="info-item-1">new Vue()初始化阶段所做的第一件事就是new Vue()创建一个Vue实例，那么new Vue()的内部都干了什么呢？ 我们知道，new 关键字在 JS中表示从一个类中实例化出一个对象来，由此可见， Vue 实际上是一个类。所以new Vue()实际上是执行了Vue类的构造函数 做了什么function Vue (options) &#123;   if (process.env.NODE_ENV !== 'production' &amp;&amp;     !(this instanceof Vue)   ) &#123;     warn('Vue is a constructor and should be called with the `new` keyword')   &#125;   this._init(options) &#125; 可以看到，Vue类的定义非常简单，其构造函数核心就一行代码：this._init(options) 调用原型上的_init(options)方法并把用户所写的选项options传入。那这个_init方法是从哪来的呢？ in...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/toux.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">chenMing</div><div class="author-info-description">技术博客</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">70</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/chen2ming"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">今天你学习了吗？今天你快乐了吗？</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-extend"><span class="toc-number">1.</span> <span class="toc-text">Vue.extend</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">原理分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-nextTick"><span class="toc-number">2.</span> <span class="toc-text">Vue.nextTick</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-set"><span class="toc-number">3.</span> <span class="toc-text">Vue.set</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-delete"><span class="toc-number">4.</span> <span class="toc-text">Vue.delete</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-directive"><span class="toc-number">5.</span> <span class="toc-text">Vue.directive</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90-1"><span class="toc-number">5.1.</span> <span class="toc-text">原理分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-filter"><span class="toc-number">6.</span> <span class="toc-text">Vue.filter</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90-2"><span class="toc-number">6.1.</span> <span class="toc-text">原理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">6.2.</span> <span class="toc-text">使用过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">6.3.</span> <span class="toc-text">过滤器的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E8%81%94%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">6.4.</span> <span class="toc-text">串联过滤器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-component"><span class="toc-number">7.</span> <span class="toc-text">Vue.component</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90-3"><span class="toc-number">7.1.</span> <span class="toc-text">原理分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#directive%E3%80%81filter%E3%80%81component%E5%B0%8F%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">directive、filter、component小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-use"><span class="toc-number">9.</span> <span class="toc-text">Vue.use</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-mixin"><span class="toc-number">10.</span> <span class="toc-text">Vue.mixin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90-4"><span class="toc-number">10.1.</span> <span class="toc-text">原理分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-compile"><span class="toc-number">11.</span> <span class="toc-text">Vue.compile</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90-5"><span class="toc-number">11.1.</span> <span class="toc-text">原理分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-observable"><span class="toc-number">12.</span> <span class="toc-text">Vue.observable</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90-6"><span class="toc-number">12.1.</span> <span class="toc-text">原理分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-version"><span class="toc-number">13.</span> <span class="toc-text">Vue.version</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/%E5%B7%A5%E4%BD%9C%E9%A1%B9%E7%9B%AE/%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F/" title="路由模式"><img src="/imgs/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="路由模式"/></a><div class="content"><a class="title" href="/2026/06/10/%E5%B7%A5%E4%BD%9C%E9%A1%B9%E7%9B%AE/%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F/" title="路由模式">路由模式</a><time datetime="2026-06-10T09:38:25.684Z" title="发表于 2026-06-10 17:38:25">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/vue/vue-%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E7%AF%87/" title="vue实例方法"><img src="/imgs/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue实例方法"/></a><div class="content"><a class="title" href="/2026/06/10/vue/vue-%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E7%AF%87/" title="vue实例方法">vue实例方法</a><time datetime="2026-06-10T09:38:25.669Z" title="发表于 2026-06-10 17:38:25">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/10/js/js-addEventListener/" title="addEventListener方法使用"><img src="/imgs/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="addEventListener方法使用"/></a><div class="content"><a class="title" href="/2026/06/10/js/js-addEventListener/" title="addEventListener方法使用">addEventListener方法使用</a><time datetime="2026-06-10T09:38:25.658Z" title="发表于 2026-06-10 17:38:25">2026-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/12/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/12%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="组件生命周期"><img src="/imgs/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="组件生命周期"/></a><div class="content"><a class="title" href="/2023/08/12/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/12%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="组件生命周期">组件生命周期</a><time datetime="2023-08-11T16:00:00.000Z" title="发表于 2023-08-12 00:00:00">2023-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/11/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/11%E8%8E%B7%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE/" title="获取远程数据"><img src="/imgs/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="获取远程数据"/></a><div class="content"><a class="title" href="/2023/08/11/vue%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/11%E8%8E%B7%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE/" title="获取远程数据">获取远程数据</a><time datetime="2023-08-10T16:00:00.000Z" title="发表于 2023-08-11 00:00:00">2023-08-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2017 - 2026 By chenMing</span></div><div class="footer_custom_text"><div>嗨，欢迎来到我的博客，希望能帮助到您！</div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideMobileSidebar.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
